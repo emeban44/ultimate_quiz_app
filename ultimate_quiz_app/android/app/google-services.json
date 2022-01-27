@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "724167574579",
+    "project_id": "ultimatequizapp",
+    "storage_bucket": "ultimatequizapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724167574579:android:393236070871e6103bcf46",
+        "android_client_info": {
+          "package_name": "com.emeraldhig.ultimate_quiz_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "724167574579-r5adaeqtao4vg9dedlnoqc09nnst6r6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYTKa9wzdywUmI4sxEC0H6wrEKNvpyHeY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "724167574579-r5adaeqtao4vg9dedlnoqc09nnst6r6s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "724167574579-3s7akt46tokmnl1htneedhrcemv83irv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.emeraldhig.ultimateQuizApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
