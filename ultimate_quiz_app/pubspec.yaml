@@ -92,6 +92,12 @@ flutter:
     - family: RetroLight
       fonts:
         - asset: fonts/Retrolight.ttf
+    - family: Dongle
+      fonts:
+        - asset: fonts/Dongle-Regular.ttf
+    - family: Lato
+      fonts:
+        - asset: fonts/Lato-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
