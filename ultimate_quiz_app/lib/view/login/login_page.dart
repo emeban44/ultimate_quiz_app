@@ -1,11 +1,27 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:ultimate_quiz_app/widgets/custom_text_field.dart';
 import 'package:ultimate_quiz_app/widgets/quiz_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _loginKey = GlobalKey<FormState>();
+
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _username = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
+
+  bool didClickLogin = false;
+
+  bool isSignUp = false;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -36,7 +52,7 @@ class LoginPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(bottom: 25),
+                    margin: const EdgeInsets.only(bottom: 50),
                     child: Text(
                       "Ko ne zna,\n znat ce poslije!",
                       textAlign: TextAlign.center,
@@ -59,34 +75,41 @@ class LoginPage extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 10),
                             child: CustomTextField(
+                              controller: _email,
                               hint: "Email",
                               validation: (email) {},
                             ),
                           ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            child: CustomTextField(
-                              hint: "Username",
-                              onChange: (promjena) {
-                                _loginKey.currentState!.validate();
-                              },
-                              validation: (username) {
-                                if (username!.length < 4) {
-                                  return "Username mora imati minimalno 4 znaka";
-                                }
-                                return null;
-                              },
+                          if (isSignUp)
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 10),
+                              child: CustomTextField(
+                                hint: "Username",
+                                controller: _username,
+                                onChange: didClickLogin
+                                    ? (promjena) {
+                                        _loginKey.currentState!.validate();
+                                      }
+                                    : null,
+                                validation: (username) {
+                                  if (username!.length < 4) {
+                                    return "Username mora imati minimalno 4 znaka";
+                                  }
+                                  return null;
+                                },
+                              ),
                             ),
-                          ),
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 10),
                             child: CustomTextField(
                               hint: "Password",
                               controller: _password,
                               isObscure: true,
-                              onChange: (promjena) {
-                                _loginKey.currentState!.validate();
-                              },
+                              onChange: didClickLogin
+                                  ? (promjena) {
+                                      _loginKey.currentState!.validate();
+                                    }
+                                  : null,
                               validation: (pass) {
                                 if (pass!.length < 8) {
                                   return "Password mora imati minimalno 8 znakova";
@@ -95,89 +118,235 @@ class LoginPage extends StatelessWidget {
                               },
                             ),
                           ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            child: CustomTextField(
-                              hint: "Confirm Password",
-                              isObscure: true,
-                              controller: _confirmPass,
-                              validation: (confirmPass) {
-                                if (confirmPass != _password.text) {
-                                  return "Password se ne podudara";
-                                }
-                                return null;
-                              },
+                          if (isSignUp)
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 10),
+                              child: CustomTextField(
+                                hint: "Confirm Password",
+                                isObscure: true,
+                                controller: _confirmPass,
+                                onChange: didClickLogin
+                                    ? (confirmPass) {
+                                        _loginKey.currentState!.validate();
+                                      }
+                                    : null,
+                                validation: (confirmPass) {
+                                  if (confirmPass != _password.text) {
+                                    return "Password se ne podudara";
+                                  }
+                                  return null;
+                                },
+                              ),
                             ),
-                          ),
-                          Container(
-                            height: 50,
-                            width: 150,
-                            margin: const EdgeInsets.only(top: 20),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                // showDialog<void>(
-                                //   context: context,
-                                //   barrierDismissible: true,
-                                //   builder: (context) {
-                                //     return QuizDialog();
-                                //   },
-                                // );
-                                _loginKey.currentState!.validate();
-                              },
-                              child: Text(
-                                'LOG IN',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  //fontSize: 17,
+                          if (isSignUp)
+                            Container(
+                              height: 50,
+                              width: 175,
+                              margin: const EdgeInsets.only(top: 20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  // showDialog<void>(
+                                  //   context: context,
+                                  //   barrierDismissible: true,
+                                  //   builder: (context) {
+                                  //     return QuizDialog();
+                                  //   },
+                                  // );
+                                  if (didClickLogin == false) {
+                                    setState(() {
+                                      didClickLogin = true;
+                                    });
+                                  }
+                                  final bool isValid =
+                                      _loginKey.currentState!.validate();
+                                  if (isValid) {
+                                    try {
+                                      await FirebaseAuth.instance
+                                          .createUserWithEmailAndPassword(
+                                              email: _email.text,
+                                              password: _password.text)
+                                          .then((value) {});
+                                    } catch (error) {
+                                      log(error.toString());
+                                    }
+                                  }
+                                },
+                                child: Text(
+                                  'REGISTRUJ SE',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    //fontSize: 17,
+                                  ),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 10,
+                                  primary: Colors.purple.shade600,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.5),
+                                    side: BorderSide(
+                                      color: Colors.white,
+                                      width: 0.6,
+                                    ),
+                                  ),
                                 ),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                elevation: 10,
-                                primary: Colors.purple.shade600,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.5),
-                                  side: BorderSide(
-                                    color: Colors.white,
-                                    width: 0.6,
+                            )
+                          else
+                            Container(
+                              height: 50,
+                              width: 175,
+                              margin: const EdgeInsets.only(top: 20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  // showDialog<void>(
+                                  //   context: context,
+                                  //   barrierDismissible: true,
+                                  //   builder: (context) {
+                                  //     return QuizDialog();
+                                  //   },
+                                  // );
+                                  if (didClickLogin == false) {
+                                    setState(() {
+                                      didClickLogin = true;
+                                    });
+                                  }
+                                  final bool isValid =
+                                      _loginKey.currentState!.validate();
+                                  if (isValid) {
+                                    try {
+                                      await FirebaseAuth.instance
+                                          .createUserWithEmailAndPassword(
+                                              email: _email.text,
+                                              password: _password.text)
+                                          .then((value) {});
+                                    } catch (error) {
+                                      log(error.toString());
+                                    }
+                                  }
+                                },
+                                child: Text(
+                                  'PRIJAVI SE',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    //fontSize: 17,
+                                  ),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 10,
+                                  primary: Colors.purple.shade600,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.5),
+                                    side: BorderSide(
+                                      color: Colors.white,
+                                      width: 0.6,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(top: 16, bottom: 10),
-                            height: 40,
-                            width: 100,
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              child: Text(
-                                "SIGN UP",
-                                style: TextStyle(
-                                  color: Colors.black,
+                          if (isSignUp)
+                            Container(
+                              margin:
+                                  const EdgeInsets.only(top: 16, bottom: 10),
+                              height: 40,
+                              width: 100,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  setState(() {
+                                    isSignUp = false;
+                                  });
+                                  _loginKey.currentState!.reset();
+                                  // await FirebaseAuth.instance.currentUser!
+                                  //     .reload();
+                                  // User? user = FirebaseAuth.instance.currentUser;
+                                  // log(user.toString());
+                                  // log(user!.emailVerified.toString());
+                                  // await FirebaseAuth.instance
+                                  //     .sendPasswordResetEmail(email: user.email!);
+                                  // await user
+                                  //     ?.sendEmailVerification()
+                                  //     .whenComplete(() => log("poslano"));
+                                },
+                                child: Text(
+                                  "PRIJAVA",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.blue.shade100,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.5),
+                                    side: BorderSide(
+                                      color: Colors.lightBlue,
+                                      width: 1,
+                                    ),
+                                  ),
                                 ),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.blue.shade100,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.5),
-                                  side: BorderSide(
-                                    color: Colors.lightBlue,
-                                    width: 1,
+                            )
+                          else
+                            Container(
+                              margin:
+                                  const EdgeInsets.only(top: 16, bottom: 10),
+                              height: 40,
+                              width: 140,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  setState(() {
+                                    isSignUp = true;
+                                  });
+                                  _loginKey.currentState!.reset();
+                                  // await FirebaseAuth.instance.currentUser!
+                                  //     .reload();
+                                  // User? user = FirebaseAuth.instance.currentUser;
+                                  // log(user.toString());
+                                  // log(user!.emailVerified.toString());
+                                  // await FirebaseAuth.instance
+                                  //     .sendPasswordResetEmail(email: user.email!);
+                                  // await user
+                                  //     ?.sendEmailVerification()
+                                  //     .whenComplete(() => log("poslano"));
+                                },
+                                child: Text(
+                                  "REGISTRACIJA",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.blue.shade100,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.5),
+                                    side: BorderSide(
+                                      color: Colors.lightBlue,
+                                      width: 1,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          )
                         ],
                       ),
                     ),
                   ),
-                  Image.asset(
-                    "assets/images/higlogo.png",
-                    height: 45,
+                  GestureDetector(
+                    onTap: () {
+                      print(_password.text);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: isSignUp ? 0 : 25),
+                      child: Image.asset(
+                        "assets/images/higlogo.png",
+                        height: isSignUp ? 45 : 125,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 25)
                 ],

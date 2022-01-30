@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
+class CustomTextField extends StatefulWidget {
+  CustomTextField({
     Key? key,
     this.hint,
     this.isObscure = false,
@@ -10,10 +10,17 @@ class CustomTextField extends StatelessWidget {
     this.controller,
   }) : super(key: key);
   final String? hint;
-  final bool isObscure;
+  bool isObscure;
   final String? Function(String?)? validation;
   final String? Function(String?)? onChange;
   final TextEditingController? controller;
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  bool showPass = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,10 +37,14 @@ class CustomTextField extends StatelessWidget {
       padding: const EdgeInsets.only(left: 25, top: 10, bottom: 10),
       child: TextFormField(
         autocorrect: false,
-        controller: controller,
-        obscureText: isObscure ? true : false,
-        onChanged: onChange ?? (String? value) {},
-        validator: validation ??
+        controller: widget.controller,
+        obscureText: showPass
+            ? false
+            : widget.isObscure
+                ? true
+                : false,
+        onChanged: widget.onChange ?? (String? value) {},
+        validator: widget.validation ??
             (String? value) {
               if (value!.isEmpty) {
                 return 'error';
@@ -45,13 +56,33 @@ class CustomTextField extends StatelessWidget {
           color: Colors.black,
           fontFamily: 'Lato',
           fontSize: 16.5,
-          fontWeight: isObscure ? FontWeight.w600 : FontWeight.w500,
+          fontWeight: widget.isObscure ? FontWeight.w600 : FontWeight.w500,
         ),
         //obscureText: true,
         decoration: InputDecoration(
-          hintText: hint,
+          hintText: widget.hint,
+          suffixIcon: widget.isObscure
+              ? GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      //widget.isObscure = !widget.isObscure;
+                      showPass = !showPass;
+                    });
+                  },
+                  child: showPass
+                      ? Icon(
+                          Icons.visibility,
+                          size: 28,
+                        )
+                      : Icon(
+                          Icons.visibility_off,
+                          size: 28,
+                        ),
+                )
+              : null,
           hintStyle: TextStyle(
             fontFamily: 'Lato',
+
             fontSize: 16,
             fontWeight: FontWeight.normal,
             //fontWeight: FontWeight.bold,
