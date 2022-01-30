@@ -40,7 +40,7 @@ dependencies:
 flutter_icons:
   android: false
   ios: true
-  image_path: "assets/images/icon/quiz_icon_simple.jpg"
+  image_path: "assets/images/icon/quiz_app_icon_hig.jpg"
   # flutter pub run flutter_launcher_icons:main
 
 

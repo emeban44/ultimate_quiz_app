@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/cool_neon_wall.jpeg"),
+            image: AssetImage("assets/images/neon_red_blue.jpeg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -118,6 +118,19 @@ class _LoginPageState extends State<LoginPage> {
                               },
                             ),
                           ),
+                          if (!isSignUp)
+                            TextButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.lock,
+                                color: Colors.white,
+                                size: 22,
+                              ),
+                              label: Text(
+                                'Forgot password?',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
                           if (isSignUp)
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 10),
@@ -183,12 +196,13 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   elevation: 10,
-                                  primary: Colors.purple.shade600,
+                                  primary: Colors
+                                      .pink.shade900, // Colors.purple.shade600,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12.5),
                                     side: BorderSide(
                                       color: Colors.white,
-                                      width: 0.6,
+                                      width: 1,
                                     ),
                                   ),
                                 ),
@@ -239,12 +253,13 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   elevation: 10,
-                                  primary: Colors.purple.shade600,
+                                  primary: Colors
+                                      .pink.shade900, //Colors.purple.shade600,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12.5),
                                     side: BorderSide(
                                       color: Colors.white,
-                                      width: 0.6,
+                                      width: 1,
                                     ),
                                   ),
                                 ),
@@ -276,15 +291,16 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Text(
                                   "PRIJAVA",
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  primary: Colors.blue.shade100,
+                                  primary: Colors
+                                      .indigo.shade800, //Colors.blue.shade100,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12.5),
                                     side: BorderSide(
-                                      color: Colors.lightBlue,
+                                      color: Colors.white,
                                       width: 1,
                                     ),
                                   ),
@@ -317,15 +333,17 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Text(
                                   "REGISTRACIJA",
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  primary: Colors.blue.shade100,
+                                  //elevation: 20,
+                                  primary: Colors
+                                      .indigo.shade800, //Colors.blue.shade100,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12.5),
                                     side: BorderSide(
-                                      color: Colors.lightBlue,
+                                      color: Colors.white, //Colors.lightBlue,
                                       width: 1,
                                     ),
                                   ),
@@ -336,16 +354,11 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      print(_password.text);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(top: isSignUp ? 0 : 25),
-                      child: Image.asset(
-                        "assets/images/higlogo.png",
-                        height: isSignUp ? 45 : 125,
-                      ),
+                  Container(
+                    margin: EdgeInsets.only(top: isSignUp ? 5 : 25),
+                    child: Image.asset(
+                      "assets/images/higlogo_whitestrongest.png",
+                      height: isSignUp ? 45 : 125,
                     ),
                   ),
                   const SizedBox(height: 25)

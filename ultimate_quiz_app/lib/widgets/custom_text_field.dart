@@ -27,8 +27,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white),
         gradient: LinearGradient(colors: [
-          Colors.purple.shade100,
+          //Colors.purple.shade100,
           Colors.blue.shade200,
+          Colors.purple.shade100,
           // Colors.purple.shade400,
           Colors.purple.shade300,
         ]),
