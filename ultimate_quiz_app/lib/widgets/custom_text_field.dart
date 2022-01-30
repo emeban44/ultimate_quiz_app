@@ -5,9 +5,15 @@ class CustomTextField extends StatelessWidget {
     Key? key,
     this.hint,
     this.isObscure = false,
+    this.validation,
+    this.onChange,
+    this.controller,
   }) : super(key: key);
   final String? hint;
   final bool isObscure;
+  final String? Function(String?)? validation;
+  final String? Function(String?)? onChange;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,13 +28,24 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       padding: const EdgeInsets.only(left: 25, top: 10, bottom: 10),
-      child: TextField(
+      child: TextFormField(
         autocorrect: false,
+        controller: controller,
         obscureText: isObscure ? true : false,
+        onChanged: onChange ?? (String? value) {},
+        validator: validation ??
+            (String? value) {
+              if (value!.isEmpty) {
+                return 'error';
+              } else {
+                return null;
+              }
+            },
         style: TextStyle(
           color: Colors.black,
           fontFamily: 'Lato',
-          fontSize: 16,
+          fontSize: 16.5,
+          fontWeight: isObscure ? FontWeight.w600 : FontWeight.w500,
         ),
         //obscureText: true,
         decoration: InputDecoration(
@@ -36,7 +53,7 @@ class CustomTextField extends StatelessWidget {
           hintStyle: TextStyle(
             fontFamily: 'Lato',
             fontSize: 16,
-
+            fontWeight: FontWeight.normal,
             //fontWeight: FontWeight.bold,
           ),
           border: InputBorder.none,
