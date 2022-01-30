@@ -1,6 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:ultimate_quiz_app/view/login/widgets/forgot_password_button.dart';
+import 'package:ultimate_quiz_app/view/login/widgets/hig_logo.dart';
+import 'package:ultimate_quiz_app/view/login/widgets/login_quiz_headline.dart';
+import 'package:ultimate_quiz_app/view/login/widgets/main_button.dart';
+import 'package:ultimate_quiz_app/view/login/widgets/secondary_button.dart';
 import 'package:ultimate_quiz_app/widgets/custom_text_field.dart';
 import 'package:ultimate_quiz_app/widgets/quiz_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,6 +27,13 @@ class _LoginPageState extends State<LoginPage> {
 
   bool isSignUp = false;
 
+  void toggleSignUp(bool value) {
+    setState(() {
+      isSignUp = value;
+    });
+    _loginKey.currentState!.reset();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,329 +50,56 @@ class _LoginPageState extends State<LoginPage> {
         child: Scaffold(
           resizeToAvoidBottomInset: true,
           backgroundColor: Colors.transparent,
-          //extendBodyBehindAppBar: true,
           body: SingleChildScrollView(
             physics: const ClampingScrollPhysics(),
             child: Container(
-              padding: const EdgeInsets.only(
-                top: 100,
-                right: 25,
-                left: 25,
-              ),
+              padding: signUpBodyPadding,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 50),
-                    child: Text(
-                      "Ko ne zna,\n znat ce poslije!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: "Retrolight",
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        //color: Colors.white.withOpacity(0.75),
-                        //borderRadius: BorderRadius.circular(15),
-                        ),
-                    child: Form(
-                      key: _loginKey,
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            child: CustomTextField(
-                              controller: _email,
-                              hint: "Email",
-                              validation: (email) {},
-                            ),
+                  LoginQuizHeadline(),
+                  Form(
+                    key: _loginKey,
+                    child: Column(
+                      children: [
+                        _buildEmailField(),
+                        if (isSignUp) _buildUsernameField(),
+                        _buildPasswordField(),
+                        if (!isSignUp) ForgotPasswordButton(),
+                        if (isSignUp) _buildConfirmPasswordField(),
+                        if (isSignUp)
+                          MainButton(
+                            buttonTitle: 'REGISTRUJ SE',
+                            onPress: () {},
+                          )
+                        else
+                          MainButton(
+                            buttonTitle: 'PRIJAVI SE',
+                            onPress: () {
+                              if (didClickLogin == false) {
+                                setState(() {
+                                  didClickLogin = true;
+                                });
+                              }
+                              final bool isValid =
+                                  _loginKey.currentState!.validate();
+                            },
                           ),
-                          if (isSignUp)
-                            Container(
-                              margin: const EdgeInsets.symmetric(vertical: 10),
-                              child: CustomTextField(
-                                hint: "Username",
-                                controller: _username,
-                                onChange: didClickLogin
-                                    ? (promjena) {
-                                        _loginKey.currentState!.validate();
-                                      }
-                                    : null,
-                                validation: (username) {
-                                  if (username!.length < 4) {
-                                    return "Username mora imati minimalno 4 znaka";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            child: CustomTextField(
-                              hint: "Password",
-                              controller: _password,
-                              isObscure: true,
-                              onChange: didClickLogin
-                                  ? (promjena) {
-                                      _loginKey.currentState!.validate();
-                                    }
-                                  : null,
-                              validation: (pass) {
-                                if (pass!.length < 8) {
-                                  return "Password mora imati minimalno 8 znakova";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          if (!isSignUp)
-                            TextButton.icon(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.lock,
-                                color: Colors.white,
-                                size: 22,
-                              ),
-                              label: Text(
-                                'Forgot password?',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          if (isSignUp)
-                            Container(
-                              margin: const EdgeInsets.symmetric(vertical: 10),
-                              child: CustomTextField(
-                                hint: "Confirm Password",
-                                isObscure: true,
-                                controller: _confirmPass,
-                                onChange: didClickLogin
-                                    ? (confirmPass) {
-                                        _loginKey.currentState!.validate();
-                                      }
-                                    : null,
-                                validation: (confirmPass) {
-                                  if (confirmPass != _password.text) {
-                                    return "Password se ne podudara";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          if (isSignUp)
-                            Container(
-                              height: 50,
-                              width: 175,
-                              margin: const EdgeInsets.only(top: 20),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  // showDialog<void>(
-                                  //   context: context,
-                                  //   barrierDismissible: true,
-                                  //   builder: (context) {
-                                  //     return QuizDialog();
-                                  //   },
-                                  // );
-                                  if (didClickLogin == false) {
-                                    setState(() {
-                                      didClickLogin = true;
-                                    });
-                                  }
-                                  final bool isValid =
-                                      _loginKey.currentState!.validate();
-                                  if (isValid) {
-                                    try {
-                                      await FirebaseAuth.instance
-                                          .createUserWithEmailAndPassword(
-                                              email: _email.text,
-                                              password: _password.text)
-                                          .then((value) {});
-                                    } catch (error) {
-                                      log(error.toString());
-                                    }
-                                  }
-                                },
-                                child: Text(
-                                  'REGISTRUJ SE',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    //fontSize: 17,
-                                  ),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  elevation: 10,
-                                  primary: Colors
-                                      .pink.shade900, // Colors.purple.shade600,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12.5),
-                                    side: BorderSide(
-                                      color: Colors.white,
-                                      width: 1,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          else
-                            Container(
-                              height: 50,
-                              width: 175,
-                              margin: const EdgeInsets.only(top: 20),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  // showDialog<void>(
-                                  //   context: context,
-                                  //   barrierDismissible: true,
-                                  //   builder: (context) {
-                                  //     return QuizDialog();
-                                  //   },
-                                  // );
-                                  if (didClickLogin == false) {
-                                    setState(() {
-                                      didClickLogin = true;
-                                    });
-                                  }
-                                  final bool isValid =
-                                      _loginKey.currentState!.validate();
-                                  if (isValid) {
-                                    try {
-                                      await FirebaseAuth.instance
-                                          .createUserWithEmailAndPassword(
-                                              email: _email.text,
-                                              password: _password.text)
-                                          .then((value) {});
-                                    } catch (error) {
-                                      log(error.toString());
-                                    }
-                                  }
-                                },
-                                child: Text(
-                                  'PRIJAVI SE',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    //fontSize: 17,
-                                  ),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  elevation: 10,
-                                  primary: Colors
-                                      .pink.shade900, //Colors.purple.shade600,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12.5),
-                                    side: BorderSide(
-                                      color: Colors.white,
-                                      width: 1,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          if (isSignUp)
-                            Container(
-                              margin:
-                                  const EdgeInsets.only(top: 16, bottom: 10),
-                              height: 40,
-                              width: 100,
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  setState(() {
-                                    isSignUp = false;
-                                  });
-                                  _loginKey.currentState!.reset();
-                                  // await FirebaseAuth.instance.currentUser!
-                                  //     .reload();
-                                  // User? user = FirebaseAuth.instance.currentUser;
-                                  // log(user.toString());
-                                  // log(user!.emailVerified.toString());
-                                  // await FirebaseAuth.instance
-                                  //     .sendPasswordResetEmail(email: user.email!);
-                                  // await user
-                                  //     ?.sendEmailVerification()
-                                  //     .whenComplete(() => log("poslano"));
-                                },
-                                child: Text(
-                                  "PRIJAVA",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors
-                                      .indigo.shade800, //Colors.blue.shade100,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12.5),
-                                    side: BorderSide(
-                                      color: Colors.white,
-                                      width: 1,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          else
-                            Container(
-                              margin:
-                                  const EdgeInsets.only(top: 16, bottom: 10),
-                              height: 40,
-                              width: 140,
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  setState(() {
-                                    isSignUp = true;
-                                  });
-                                  _loginKey.currentState!.reset();
-                                  // await FirebaseAuth.instance.currentUser!
-                                  //     .reload();
-                                  // User? user = FirebaseAuth.instance.currentUser;
-                                  // log(user.toString());
-                                  // log(user!.emailVerified.toString());
-                                  // await FirebaseAuth.instance
-                                  //     .sendPasswordResetEmail(email: user.email!);
-                                  // await user
-                                  //     ?.sendEmailVerification()
-                                  //     .whenComplete(() => log("poslano"));
-                                },
-                                child: Text(
-                                  "REGISTRACIJA",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  //elevation: 20,
-                                  primary: Colors
-                                      .indigo.shade800, //Colors.blue.shade100,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12.5),
-                                    side: BorderSide(
-                                      color: Colors.white, //Colors.lightBlue,
-                                      width: 1,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
+                        if (isSignUp)
+                          SecondaryButton(
+                            buttonTitle: 'PRIJAVA',
+                            onPress: () => toggleSignUp(false),
+                          )
+                        else
+                          SecondaryButton(
+                            buttonTitle: 'REGISTRACIJA',
+                            onPress: () => toggleSignUp(true),
+                          )
+                      ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: isSignUp ? 5 : 25),
-                    child: Image.asset(
-                      "assets/images/higlogo_whitestrongest.png",
-                      height: isSignUp ? 45 : 125,
-                    ),
-                  ),
+                  HigLoginLogo(isSignUp),
                   const SizedBox(height: 25)
                 ],
               ),
@@ -370,4 +109,86 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  Widget _buildEmailField() {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      child: CustomTextField(
+        controller: _email,
+        hint: "Email",
+        validation: (email) {},
+      ),
+    );
+  }
+
+  Widget _buildUsernameField() {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      child: CustomTextField(
+        hint: "Username",
+        controller: _username,
+        onChange: didClickLogin
+            ? (promjena) {
+                _loginKey.currentState!.validate();
+              }
+            : null,
+        validation: (username) {
+          if (username!.length < 4) {
+            return "Username mora imati minimalno 4 znaka";
+          }
+          return null;
+        },
+      ),
+    );
+  }
+
+  Widget _buildPasswordField() {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      child: CustomTextField(
+        hint: "Password",
+        controller: _password,
+        isObscure: true,
+        onChange: didClickLogin
+            ? (promjena) {
+                _loginKey.currentState!.validate();
+              }
+            : null,
+        validation: (pass) {
+          if (pass!.length < 8) {
+            return "Password mora imati minimalno 8 znakova";
+          }
+          return null;
+        },
+      ),
+    );
+  }
+
+  Widget _buildConfirmPasswordField() {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      child: CustomTextField(
+        hint: "Confirm Password",
+        isObscure: true,
+        controller: _confirmPass,
+        onChange: didClickLogin
+            ? (confirmPass) {
+                _loginKey.currentState!.validate();
+              }
+            : null,
+        validation: (confirmPass) {
+          if (confirmPass != _password.text) {
+            return "Password se ne podudara";
+          }
+          return null;
+        },
+      ),
+    );
+  }
+
+  EdgeInsets signUpBodyPadding = const EdgeInsets.only(
+    top: 100,
+    right: 25,
+    left: 25,
+  );
 }

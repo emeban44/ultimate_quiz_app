@@ -1,53 +1,49 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
-// class MainButton extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: 50,
-//       width: 175,
-//       margin: const EdgeInsets.only(top: 20),
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(25),
-//       ),
-//       child: ElevatedButton(
-//         onPressed: () async {
-//           if (didClickLogin == false) {
-//             setState(() {
-//               didClickLogin = true;
-//             });
-//           }
-//           final bool isValid = _loginKey.currentState!.validate();
-//           if (isValid) {
-//             try {
-//               await FirebaseAuth.instance
-//                   .createUserWithEmailAndPassword(
-//                       email: _email.text, password: _password.text)
-//                   .then((value) {});
-//             } catch (error) {
-//               log(error.toString());
-//             }
-//           }
-//         },
-//         child: Text(
-//           'REGISTRUJ SE',
-//           style: TextStyle(
-//             fontWeight: FontWeight.w800,
-//             //fontSize: 17,
-//           ),
-//         ),
-//         style: ElevatedButton.styleFrom(
-//           elevation: 10,
-//           primary: Colors.purple.shade600,
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(12.5),
-//             side: BorderSide(
-//               color: Colors.white,
-//               width: 0.6,
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+class MainButton extends StatelessWidget {
+  const MainButton({
+    this.buttonTitle,
+    this.onPress,
+  });
+  final String? buttonTitle;
+  final Function? onPress;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      width: 175,
+      margin: const EdgeInsets.only(top: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+      ),
+      child: ElevatedButton(
+        onPressed: () => onPress!()
+        // if (didClickLogin == false) {
+        //   setState(() {
+        //     didClickLogin = true;
+        //   });
+        // }
+        // final bool isValid = _loginKey.currentState!.validate();
+        ,
+        child: Text(
+          buttonTitle!,
+          style: const TextStyle(
+            fontWeight: FontWeight.w800,
+            //fontSize: 17,
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+          elevation: 10,
+          primary: Colors.pink.shade900,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.5),
+            side: const BorderSide(
+              color: Colors.white,
+              width: 0.6,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
