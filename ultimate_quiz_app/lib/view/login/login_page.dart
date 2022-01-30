@@ -28,10 +28,13 @@ class _LoginPageState extends State<LoginPage> {
   bool isSignUp = false;
 
   void toggleSignUp(bool value) {
+    final String email = _email.text;
     setState(() {
       isSignUp = value;
     });
+    _password.clear();
     _loginKey.currentState!.reset();
+    _email.text = email;
   }
 
   @override
@@ -70,9 +73,10 @@ class _LoginPageState extends State<LoginPage> {
                         if (isSignUp) _buildConfirmPasswordField(),
                         if (isSignUp)
                           MainButton(
-                            buttonTitle: 'REGISTRUJ SE',
-                            onPress: () {},
-                          )
+                              buttonTitle: 'REGISTRUJ SE',
+                              onPress: () {
+                                _loginKey.currentState!.validate();
+                              })
                         else
                           MainButton(
                             buttonTitle: 'PRIJAVI SE',

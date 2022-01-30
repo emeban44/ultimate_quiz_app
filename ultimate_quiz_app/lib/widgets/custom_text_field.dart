@@ -71,22 +71,20 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     });
                   },
                   child: showPass
-                      ? Icon(
-                          Icons.visibility,
-                          size: 28,
-                        )
-                      : Icon(
-                          Icons.visibility_off,
-                          size: 28,
-                        ),
+                      ? const Icon(Icons.visibility, size: 28)
+                      : const Icon(Icons.visibility_off, size: 28),
                 )
               : null,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             fontFamily: 'Lato',
-
             fontSize: 16,
             fontWeight: FontWeight.normal,
-            //fontWeight: FontWeight.bold,
+          ),
+          errorStyle: TextStyle(
+            fontFamily: 'Lato',
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
+            color: Colors.red.shade800,
           ),
           border: InputBorder.none,
         ),
