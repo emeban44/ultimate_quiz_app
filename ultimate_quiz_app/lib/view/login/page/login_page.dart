@@ -1,12 +1,15 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/providers/auth_provider.dart';
 import 'package:ultimate_quiz_app/view/login/widgets/forgot_password_button.dart';
 import 'package:ultimate_quiz_app/view/login/widgets/hig_logo.dart';
 import 'package:ultimate_quiz_app/view/login/widgets/login_quiz_headline.dart';
 import 'package:ultimate_quiz_app/view/login/widgets/main_button.dart';
 import 'package:ultimate_quiz_app/view/login/widgets/secondary_button.dart';
 import 'package:ultimate_quiz_app/widgets/custom_text_field.dart';
+import 'package:ultimate_quiz_app/widgets/loader_dialog.dart';
 import 'package:ultimate_quiz_app/widgets/quiz_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,9 +21,11 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _loginKey = GlobalKey<FormState>();
 
-  final TextEditingController _email = TextEditingController();
+  final TextEditingController _email =
+      TextEditingController(text: 'emeban.97@gmail.com');
   final TextEditingController _username = TextEditingController();
-  final TextEditingController _password = TextEditingController();
+  final TextEditingController _password =
+      TextEditingController(text: 'sadsdasdasdasd');
   final TextEditingController _confirmPass = TextEditingController();
 
   bool didClickLogin = false;
@@ -39,6 +44,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthProvider authProvider =
+        Provider.of<AuthProvider>(context, listen: false);
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -74,13 +81,39 @@ class _LoginPageState extends State<LoginPage> {
                         if (isSignUp)
                           MainButton(
                               buttonTitle: 'REGISTRUJ SE',
-                              onPress: () {
-                                _loginKey.currentState!.validate();
+                              onPress: () async {
+                                if (didClickLogin == false) {
+                                  setState(() {
+                                    didClickLogin = true;
+                                  });
+                                }
+                                final bool isValid =
+                                    _loginKey.currentState!.validate();
+                                if (isValid) {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return LoaderDialog();
+                                      });
+                                  try {
+                                    await authProvider
+                                        .registerUser(
+                                            _email.text, _password.text)
+                                        .whenComplete(
+                                            () => Navigator.pop(context));
+                                  } catch (error) {
+                                    log(error.toString());
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => QuizDialog(),
+                                    );
+                                  }
+                                }
                               })
                         else
                           MainButton(
                             buttonTitle: 'PRIJAVI SE',
-                            onPress: () {
+                            onPress: () async {
                               if (didClickLogin == false) {
                                 setState(() {
                                   didClickLogin = true;
@@ -88,6 +121,25 @@ class _LoginPageState extends State<LoginPage> {
                               }
                               final bool isValid =
                                   _loginKey.currentState!.validate();
+                              if (isValid) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return LoaderDialog();
+                                    });
+                                try {
+                                  await authProvider
+                                      .loginUser(_email.text, _password.text)
+                                      .whenComplete(
+                                          () => Navigator.pop(context));
+                                } catch (error) {
+                                  log(error.toString());
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => QuizDialog(),
+                                  );
+                                }
+                              }
                             },
                           ),
                         if (isSignUp)
@@ -191,7 +243,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   EdgeInsets signUpBodyPadding = const EdgeInsets.only(
-    top: 100,
+    top: 90,
     right: 25,
     left: 25,
   );

@@ -4,7 +4,7 @@ class LoginQuizHeadline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 50),
+      margin: const EdgeInsets.only(bottom: 35),
       child: const Text(
         "Ko ne zna,\n znat ce poslije!",
         textAlign: TextAlign.center,

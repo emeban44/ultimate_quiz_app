@@ -1,17 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
-import 'package:ultimate_quiz_app/view/login/login_page.dart';
+import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/providers/auth_provider.dart';
+import 'package:ultimate_quiz_app/view/home/page/home_page.dart';
+import 'package:ultimate_quiz_app/view/login/page/login_page.dart';
+
+import 'view/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarBrightness: Brightness.dark,
     statusBarIconBrightness: Brightness.dark,
   ));
 
-  await Firebase.initializeApp();
+  //await Firebase.initializeApp();
 
   runApp(const MyApp());
 }
@@ -22,14 +28,36 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Ko ne zna, znat ce poslije',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-        fontFamily: "Lato",
-      ),
-      home: LoginPage(),
-    );
+    final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+    return FutureBuilder(
+        future: _initialization,
+        builder: (context, appSnapshot) {
+          return ChangeNotifierProvider(
+            create: (context) => AuthProvider(),
+            child: MaterialApp(
+              title: 'Ko ne zna, znat ce poslije',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                primarySwatch: Colors.purple,
+                fontFamily: "Lato",
+              ),
+              home: appSnapshot.connectionState != ConnectionState.done
+                  ? SplashScreen()
+                  : StreamBuilder(
+                      stream: FirebaseAuth.instance.authStateChanges(),
+                      builder: (ctx, userSnapshot) {
+                        if (userSnapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return SplashScreen();
+                        }
+                        if (userSnapshot.hasData) {
+                          return HomePage();
+                        }
+                        return LoginPage();
+                      }),
+              routes: const {},
+            ),
+          );
+        });
   }
 }
