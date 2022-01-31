@@ -23,11 +23,10 @@ class _LoginPageState extends State<LoginPage> {
 
   final TextEditingController _email =
       TextEditingController(text: 'emeban.97@gmail.com');
-  final TextEditingController _username = TextEditingController(text: 'emko');
+  final TextEditingController _username = TextEditingController();
   final TextEditingController _password =
-      TextEditingController(text: '12345678');
-  final TextEditingController _confirmPass =
-      TextEditingController(text: '12345678');
+      TextEditingController(text: "12345678");
+  final TextEditingController _confirmPass = TextEditingController();
 
   bool didClickLogin = false;
 
@@ -196,8 +195,8 @@ class _LoginPageState extends State<LoginPage> {
               }
             : null,
         validation: (username) {
-          if (username!.length < 2) {
-            return "Username mora imati minimalno 2 znaka";
+          if (username!.length < 3) {
+            return "Username mora imati minimalno 3 znaka";
           }
           return null;
         },

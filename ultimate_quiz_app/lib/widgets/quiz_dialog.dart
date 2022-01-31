@@ -7,9 +7,9 @@ class QuizErrorDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: 250,
+        height: 200,
         width: 250,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
@@ -18,7 +18,7 @@ class QuizErrorDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              "GREŠKA",
+              "ERROR",
               style: Theme.of(context).textTheme.headline5,
             ),
             Text(
@@ -37,7 +37,13 @@ class QuizErrorDialog extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('OK'),
+                child: const Text(
+                  'OK',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.pink.shade900,
+                ),
               ),
             )
           ],

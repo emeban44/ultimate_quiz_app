@@ -10,38 +10,57 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(17),
+            topRight: Radius.circular(17),
+          ),
+          gradient: LinearGradient(colors: [
+            Colors.blue.shade400,
+            Colors.purple.shade500,
+            Colors.pink.shade900,
+          ])),
       child: BottomNavigationBar(
+        backgroundColor: Colors.transparent,
         onTap: selectPage,
         currentIndex: selectedIndex,
-        items: const [
+        elevation: 50,
+        type: BottomNavigationBarType.shifting,
+        selectedLabelStyle: TextStyle(),
+        items: [
           BottomNavigationBarItem(
+            backgroundColor: Colors.transparent,
             activeIcon: Icon(
-              Icons.home,
+              Icons.home_rounded,
               size: 40,
-              color: Colors.pink,
+              color: Colors.blue.shade300, //Colors.pink.shade700,
             ),
             icon: Icon(
-              Icons.home,
-              size: 30,
+              Icons.home_rounded,
+              size: 35,
+              color: Colors.white,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.transparent,
             icon: CircleAvatar(
-              radius: 35,
+              radius: 25,
               backgroundImage: AssetImage("assets/images/home_center_play.jpg"),
             ),
-            label: 'PLAY',
+            label: '',
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.transparent,
             icon: Icon(
               Icons.person,
-              size: 30,
+              size: 35,
+              color: Colors.white,
             ),
             activeIcon: Icon(
               Icons.person,
               size: 40,
-              color: Colors.pink,
+              color: Colors.pink.shade200,
             ),
             label: '',
           ),

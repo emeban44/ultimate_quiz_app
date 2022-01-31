@@ -6,12 +6,10 @@ class HomeTabBody extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(
-            height: 1500,
-          ),
           Icon(
-            Icons.ac_unit,
+            Icons.home_filled,
             size: 200,
+            color: Colors.white,
           )
         ],
       ),

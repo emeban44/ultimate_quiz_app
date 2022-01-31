@@ -7,6 +7,17 @@ class CustomTheme {
     scaffoldBackgroundColor: Colors.black,
     iconTheme: const IconThemeData(color: Colors.white),
     textTheme: const TextTheme(
+      headline1: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontFamily: 'Lato',
+        fontWeight: FontWeight.w600,
+      ),
+      headline2: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.w800,
+        fontSize: 12,
+      ),
       headline6: TextStyle(
         color: Colors.black,
         fontSize: 12,
