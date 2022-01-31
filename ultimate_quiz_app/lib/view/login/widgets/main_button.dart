@@ -17,14 +17,7 @@ class MainButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
       ),
       child: ElevatedButton(
-        onPressed: () => onPress!()
-        // if (didClickLogin == false) {
-        //   setState(() {
-        //     didClickLogin = true;
-        //   });
-        // }
-        // final bool isValid = _loginKey.currentState!.validate();
-        ,
+        onPressed: () => onPress!(),
         child: Text(
           buttonTitle!,
           style: const TextStyle(
@@ -39,7 +32,7 @@ class MainButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.5),
             side: const BorderSide(
               color: Colors.white,
-              width: 0.6,
+              width: 1,
             ),
           ),
         ),

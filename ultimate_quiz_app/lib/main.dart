@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:ultimate_quiz_app/providers/auth_provider.dart';
+import 'package:ultimate_quiz_app/routes/route_generator.dart';
 import 'package:ultimate_quiz_app/view/home/page/home_page.dart';
 import 'package:ultimate_quiz_app/view/login/page/login_page.dart';
 
@@ -55,7 +56,12 @@ class MyApp extends StatelessWidget {
                         }
                         return LoginPage();
                       }),
-              routes: const {},
+              //initialRoute: SplashScreen.routeName,
+              onGenerateRoute: (settings) =>
+                  RouteGenerator.generateRoute(settings),
+              // routes: {
+              //   SplashScreen.routeName: (ctx) => SplashScreen(),
+              // },
             ),
           );
         });

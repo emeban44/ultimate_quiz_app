@@ -8,7 +8,6 @@ class LoaderDialog extends StatelessWidget {
       child: SpinKitCircle(
         //color: Colors.pink,
         size: 100,
-
         itemBuilder: (context, index) =>
             Image.asset('assets/images/higlogo.png'),
       ),

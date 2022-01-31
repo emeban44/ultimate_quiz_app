@@ -4,15 +4,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AuthProvider extends ChangeNotifier {
-  final FirebaseAuth database = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<void> registerUser(String email, String password) async {
     try {
-      await database
+      await auth
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then(
-            (value) => log(value.toString()),
-          );
+          .then((value) {
+        log(value.toString());
+        sendEmailVerification(auth.currentUser!);
+      });
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<void> sendEmailVerification(User user) async {
+    try {
+      await user.sendEmailVerification();
     } catch (error) {
       rethrow;
     }
@@ -20,7 +29,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> loginUser(String email, String password) async {
     try {
-      await database
+      await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then(
             (value) => log(value.toString()),
@@ -32,7 +41,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> logoutUser() async {
     try {
-      await database.signOut();
+      await auth.signOut();
     } catch (error) {
       rethrow;
     }

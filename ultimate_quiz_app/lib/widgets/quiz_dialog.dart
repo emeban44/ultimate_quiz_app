@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class QuizDialog extends StatelessWidget {
+  QuizDialog(this.errorMessage);
+  final String errorMessage;
   @override
   Widget build(BuildContext context) {
     return Center(

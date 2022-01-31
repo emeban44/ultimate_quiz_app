@@ -23,10 +23,11 @@ class _LoginPageState extends State<LoginPage> {
 
   final TextEditingController _email =
       TextEditingController(text: 'emeban.97@gmail.com');
-  final TextEditingController _username = TextEditingController();
+  final TextEditingController _username = TextEditingController(text: 'emko');
   final TextEditingController _password =
-      TextEditingController(text: 'sadsdasdasdasd');
-  final TextEditingController _confirmPass = TextEditingController();
+      TextEditingController(text: '12345678');
+  final TextEditingController _confirmPass =
+      TextEditingController(text: '12345678');
 
   bool didClickLogin = false;
 
@@ -105,7 +106,8 @@ class _LoginPageState extends State<LoginPage> {
                                     log(error.toString());
                                     showDialog(
                                       context: context,
-                                      builder: (context) => QuizDialog(),
+                                      builder: (context) =>
+                                          QuizDialog(error.toString()),
                                     );
                                   }
                                 }
@@ -130,13 +132,15 @@ class _LoginPageState extends State<LoginPage> {
                                 try {
                                   await authProvider
                                       .loginUser(_email.text, _password.text)
-                                      .whenComplete(
-                                          () => Navigator.pop(context));
+                                      .whenComplete(() {
+                                    Navigator.pop(context);
+                                  });
                                 } catch (error) {
                                   log(error.toString());
                                   showDialog(
                                     context: context,
-                                    builder: (context) => QuizDialog(),
+                                    builder: (context) =>
+                                        QuizDialog(error.toString()),
                                   );
                                 }
                               }
