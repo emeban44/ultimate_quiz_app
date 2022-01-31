@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _loginKey = GlobalKey<FormState>();
 
   final TextEditingController _email =
-      TextEditingController(text: 'emeban.97@gmail.comm');
+      TextEditingController(text: 'emeban.97@gmail.com');
   final TextEditingController _username = TextEditingController(text: 'emko');
   final TextEditingController _password =
       TextEditingController(text: '12345678');
@@ -174,7 +174,12 @@ class _LoginPageState extends State<LoginPage> {
       child: CustomTextField(
         controller: _email,
         hint: "Email",
-        validation: (email) {},
+        validation: (email) {
+          if (email!.isEmpty) {
+            return "Molimo popunite prazno polje";
+          }
+          return null;
+        },
       ),
     );
   }
@@ -191,8 +196,8 @@ class _LoginPageState extends State<LoginPage> {
               }
             : null,
         validation: (username) {
-          if (username!.length < 4) {
-            return "Username mora imati minimalno 4 znaka";
+          if (username!.length < 2) {
+            return "Username mora imati minimalno 2 znaka";
           }
           return null;
         },
