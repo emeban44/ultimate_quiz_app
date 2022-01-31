@@ -14,7 +14,7 @@ class AuthProvider extends ChangeNotifier {
         log(value.toString());
         sendEmailVerification(auth.currentUser!);
       });
-    } catch (error) {
+    } on FirebaseAuthException {
       rethrow;
     }
   }
@@ -34,7 +34,7 @@ class AuthProvider extends ChangeNotifier {
           .then(
             (value) => log(value.toString()),
           );
-    } catch (error) {
+    } on FirebaseAuthException {
       rethrow;
     }
   }

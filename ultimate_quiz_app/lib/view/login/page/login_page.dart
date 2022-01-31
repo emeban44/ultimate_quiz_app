@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _loginKey = GlobalKey<FormState>();
 
   final TextEditingController _email =
-      TextEditingController(text: 'emeban.97@gmail.com');
+      TextEditingController(text: 'emeban.97@gmail.comm');
   final TextEditingController _username = TextEditingController(text: 'emko');
   final TextEditingController _password =
       TextEditingController(text: '12345678');
@@ -82,69 +82,11 @@ class _LoginPageState extends State<LoginPage> {
                         if (isSignUp)
                           MainButton(
                               buttonTitle: 'REGISTRUJ SE',
-                              onPress: () async {
-                                if (didClickLogin == false) {
-                                  setState(() {
-                                    didClickLogin = true;
-                                  });
-                                }
-                                final bool isValid =
-                                    _loginKey.currentState!.validate();
-                                if (isValid) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return LoaderDialog();
-                                      });
-                                  try {
-                                    await authProvider
-                                        .registerUser(
-                                            _email.text, _password.text)
-                                        .whenComplete(
-                                            () => Navigator.pop(context));
-                                  } catch (error) {
-                                    log(error.toString());
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) =>
-                                          QuizDialog(error.toString()),
-                                    );
-                                  }
-                                }
-                              })
+                              onPress: () => tryRegisterUser(authProvider))
                         else
                           MainButton(
                             buttonTitle: 'PRIJAVI SE',
-                            onPress: () async {
-                              if (didClickLogin == false) {
-                                setState(() {
-                                  didClickLogin = true;
-                                });
-                              }
-                              final bool isValid =
-                                  _loginKey.currentState!.validate();
-                              if (isValid) {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return LoaderDialog();
-                                    });
-                                try {
-                                  await authProvider
-                                      .loginUser(_email.text, _password.text)
-                                      .whenComplete(() {
-                                    Navigator.pop(context);
-                                  });
-                                } catch (error) {
-                                  log(error.toString());
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) =>
-                                        QuizDialog(error.toString()),
-                                  );
-                                }
-                              }
-                            },
+                            onPress: () => tryLoginUser(authProvider),
                           ),
                         if (isSignUp)
                           SecondaryButton(
@@ -168,6 +110,62 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future<void> tryRegisterUser(AuthProvider authProvider) async {
+    if (didClickLogin == false) {
+      setState(() {
+        didClickLogin = true;
+      });
+    }
+    final bool isValid = _loginKey.currentState!.validate();
+    if (isValid) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return LoaderDialog();
+          });
+      try {
+        await authProvider
+            .registerUser(_email.text, _password.text)
+            .whenComplete(() => Navigator.pop(context));
+      } on FirebaseAuthException catch (error) {
+        log(error.message!);
+        showDialog(
+          context: context,
+          builder: (context) => QuizErrorDialog(error.message!),
+        );
+      }
+    }
+  }
+
+  Future<void> tryLoginUser(AuthProvider authProvider) async {
+    if (didClickLogin == false) {
+      setState(() {
+        didClickLogin = true;
+      });
+    }
+    final bool isValid = _loginKey.currentState!.validate();
+    if (isValid) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return LoaderDialog();
+          });
+      try {
+        await authProvider
+            .loginUser(_email.text, _password.text)
+            .whenComplete(() {
+          Navigator.pop(context);
+        });
+      } on FirebaseAuthException catch (error) {
+        log(error.message!);
+        showDialog(
+          context: context,
+          builder: (context) => QuizErrorDialog(error.message!),
+        );
+      }
+    }
   }
 
   Widget _buildEmailField() {

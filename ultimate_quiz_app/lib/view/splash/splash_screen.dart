@@ -9,18 +9,12 @@ class SplashScreen extends StatelessWidget {
     return Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/neon_lights.jpeg"),
+            image: AssetImage("assets/images/splash_screen.png"),
             fit: BoxFit.cover,
           ),
         ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          body: Center(
-            child: Image.asset(
-              "assets/images/higlogo.png",
-              height: 50,
-            ),
-          ),
         ));
   }
 }

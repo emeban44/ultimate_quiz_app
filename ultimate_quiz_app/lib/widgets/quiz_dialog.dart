@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class QuizDialog extends StatelessWidget {
-  QuizDialog(this.errorMessage);
+class QuizErrorDialog extends StatelessWidget {
+  QuizErrorDialog(this.errorMessage);
   final String errorMessage;
   @override
   Widget build(BuildContext context) {
@@ -9,24 +9,37 @@ class QuizDialog extends StatelessWidget {
       child: Container(
         height: 250,
         width: 250,
-        color: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              'Email nije pravilan, molimo ukucajte opet',
+              "GREŠKA",
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            Text(
+              errorMessage,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontFamily: 'Lato',
                 fontSize: 15,
                 inherit: false,
               ),
             ),
-            ElevatedButton(
+            SizedBox(
+              width: 100,
+              child: ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('OK'))
+                child: const Text('OK'),
+              ),
+            )
           ],
         ),
       ),

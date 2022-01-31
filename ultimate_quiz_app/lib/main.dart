@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:ultimate_quiz_app/providers/auth_provider.dart';
 import 'package:ultimate_quiz_app/routes/route_generator.dart';
+import 'package:ultimate_quiz_app/theme/theme_data.dart';
 import 'package:ultimate_quiz_app/view/home/page/home_page.dart';
 import 'package:ultimate_quiz_app/view/login/page/login_page.dart';
 
@@ -38,10 +39,7 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
               title: 'Ko ne zna, znat ce poslije',
               debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primarySwatch: Colors.purple,
-                fontFamily: "Lato",
-              ),
+              theme: CustomTheme.themeData,
               home: appSnapshot.connectionState != ConnectionState.done
                   ? SplashScreen()
                   : StreamBuilder(
@@ -59,9 +57,6 @@ class MyApp extends StatelessWidget {
               //initialRoute: SplashScreen.routeName,
               onGenerateRoute: (settings) =>
                   RouteGenerator.generateRoute(settings),
-              // routes: {
-              //   SplashScreen.routeName: (ctx) => SplashScreen(),
-              // },
             ),
           );
         });
