@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
                           return SplashScreen();
                         }
                         if (userSnapshot.hasData) {
-                          return HomePage();
+                          return const HomePage();
                         }
                         return LoginPage();
                       }),
