@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_avatar.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_rank_widget.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_username.dart';
+import 'package:ultimate_quiz_app/view/home/widgets/profile/rank_system_dialog.dart';
+import 'package:ultimate_quiz_app/widgets/quiz_dialog.dart';
 
 class ProfileTabBody extends StatefulWidget {
   @override
@@ -26,6 +28,13 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
         imageBytes = bytes;
       });
     }
+  }
+
+  void showRankSystem(BuildContext ctx) {
+    showDialog(
+        context: ctx,
+        barrierDismissible: true,
+        builder: (context) => RankSystemDialog());
   }
 
   @override
@@ -53,7 +62,11 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ProfileUsername('@biom237'),
-                        ProfileRankWidget(rank: 'gold', numberOfGames: '5'),
+                        GestureDetector(
+                          onTap: () => showRankSystem(context),
+                          child: ProfileRankWidget(
+                              rank: 'panj', numberOfGames: '5'),
+                        ),
                       ],
                     ),
                   ),
@@ -61,9 +74,101 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
               ],
             ),
           ),
-          // Expanded(
-          //   child: Container(color: Colors.white12),
-          // )
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Broj pobjeda:',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(fontWeight: FontWeight.normal),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '123🏆',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(fontSize: 30),
+                        ),
+                        // Icon(
+                        //   Icons.accessibility_sharp,
+                        //   color: Colors.yellow.shade700,
+                        // ),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Broj vezanih pobjeda:',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(fontWeight: FontWeight.normal),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '7🔥',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(fontSize: 30),
+                        ),
+                        // Icon(
+                        //   Icons.fireplace_outlined,
+                        //   color: Colors.orange,
+                        // ),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Favorit kategorija:',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(fontWeight: FontWeight.normal),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Sport🎾',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(fontSize: 30),
+                        ),
+                        // Icon(
+                        //   Icons.sports_baseball_rounded,
+                        //   color: Colors.yellow,
+                        // ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Divider(
+            color: Colors.white,
+            thickness: 0.7,
+          ),
         ],
       ),
     );

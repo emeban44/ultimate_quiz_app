@@ -26,7 +26,14 @@ class CustomBottomNavBar extends StatelessWidget {
         currentIndex: selectedIndex,
         elevation: 50,
         type: BottomNavigationBarType.shifting,
-        selectedLabelStyle: TextStyle(),
+        selectedLabelStyle: const TextStyle(
+          color: Colors.black,
+          fontFamily: 'Acme',
+          fontWeight: FontWeight.bold,
+        ),
+        selectedItemColor:
+            selectedIndex == 2 ? Colors.pink.shade100 : Colors.blue.shade100,
+        selectedFontSize: 13,
         items: [
           BottomNavigationBarItem(
             backgroundColor: Colors.transparent,
@@ -35,24 +42,24 @@ class CustomBottomNavBar extends StatelessWidget {
               size: 40,
               color: Colors.blue.shade300, //Colors.pink.shade700,
             ),
-            icon: Icon(
+            icon: const Icon(
               Icons.home_rounded,
               size: 35,
               color: Colors.white,
             ),
-            label: '',
+            label: 'HOME',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             backgroundColor: Colors.transparent,
             icon: CircleAvatar(
-              radius: 25,
+              radius: 26,
               backgroundImage: AssetImage("assets/images/home_center_play.jpg"),
             ),
-            label: '',
+            label: 'PLAY',
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.transparent,
-            icon: Icon(
+            icon: const Icon(
               Icons.person,
               size: 35,
               color: Colors.white,
@@ -62,7 +69,7 @@ class CustomBottomNavBar extends StatelessWidget {
               size: 40,
               color: Colors.pink.shade200,
             ),
-            label: '',
+            label: 'PROFIL',
           ),
         ],
       ),

@@ -10,6 +10,14 @@ class ProfileAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(2, 2.5), // changes position of shadow
+          ),
+        ],
         border: Border.all(color: Colors.white, width: 1.5),
         borderRadius: BorderRadius.circular(50),
       ),

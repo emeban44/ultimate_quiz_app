@@ -49,7 +49,7 @@ class RankStyleData {
       case 'platinum':
         return Colors.teal.shade50;
       case 'diamond':
-        return Colors.deepPurple.shade900;
+        return Colors.blue.shade900;
       default:
         return Colors.black;
     }

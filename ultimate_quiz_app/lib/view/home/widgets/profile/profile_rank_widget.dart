@@ -17,20 +17,26 @@ class ProfileRankWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 7.5),
         decoration: BoxDecoration(
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.black.withOpacity(0.5),
+                spreadRadius: 0.5,
+                blurRadius: 5,
+                offset: const Offset(2, 2), // changes position of shadow
+              ),
+            ],
             gradient: RankStyleData.getGradient(rank),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-                color: rank == 'diamond' ? Colors.black : Colors.white,
+                color: rank == 'panj' ? Colors.white : Colors.black,
                 width: rank == 'diamond' ? 1 : 0.5)),
-        child: Container(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RankIconTextRow(rank),
-              _buildNumberOfGamesText(numberOfGames),
-            ],
-          ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            RankIconTextRow(rank),
+            _buildNumberOfGamesText(numberOfGames),
+          ],
         ),
       ),
     );
@@ -38,7 +44,7 @@ class ProfileRankWidget extends StatelessWidget {
 
   Widget _buildNumberOfGamesText(String numberOfGames) {
     return Padding(
-      padding: const EdgeInsets.only(right: 0, top: 1),
+      padding: const EdgeInsets.only(right: 0, top: 0),
       child: Text(
         '$numberOfGames igara',
         style: TextStyle(
