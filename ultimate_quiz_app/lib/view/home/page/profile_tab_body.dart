@@ -52,8 +52,8 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ProfileUsername('@NikolaJovanovic'),
-                        ProfileRankWidget(rank: 'panj', numberOfGames: '5'),
+                        ProfileUsername('@biom237'),
+                        ProfileRankWidget(rank: 'gold', numberOfGames: '5'),
                       ],
                     ),
                   ),

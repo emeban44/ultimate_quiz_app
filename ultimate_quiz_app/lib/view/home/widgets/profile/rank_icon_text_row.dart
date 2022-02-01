@@ -18,9 +18,9 @@ class RankIconTextRow extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 4.0, top: 2),
           child: Text(
-            'PANJ',
+            rank.toUpperCase(),
             style: TextStyle(
-              color: Colors.brown.shade50.withOpacity(1),
+              color: RankStyleData.getRankTextColor(rank),
               fontFamily: 'Acme',
               fontWeight: FontWeight.w600,
               fontSize: 17,

@@ -23,7 +23,7 @@ class ProfileAvatar extends StatelessWidget {
             : Icon(
                 Icons.camera_alt_rounded,
                 size: 30,
-                color: Colors.purple.shade900,
+                color: Colors.purple.shade800,
               ),
       ),
     );

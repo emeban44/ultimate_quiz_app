@@ -28,9 +28,30 @@ class RankStyleData {
       case 'platinum':
         return 'assets/images/platinum.png';
       case 'diamond':
-        return 'assets/images/diamond.png';
+        return 'assets/images/diamond_alt.png';
       default:
         return 'assets/images/higlogo.png';
+    }
+  }
+
+  static Color getRankTextColor(String rank) {
+    switch (rank) {
+      case 'panj':
+        return Colors.brown.shade50;
+      case 'bronze':
+        return Colors.deepOrange.shade50; //Colors.deepOrange.shade100;
+      case 'silver':
+        return Colors.grey.shade900;
+      case 'gold':
+        return Colors.yellow.shade50; //Color.fromRGBO(153, 101, 21, 1);
+      case 'emerald':
+        return Colors.green.shade100;
+      case 'platinum':
+        return Colors.teal.shade50;
+      case 'diamond':
+        return Colors.deepPurple.shade900;
+      default:
+        return Colors.black;
     }
   }
 
@@ -44,45 +65,51 @@ class RankStyleData {
           ],
         );
       case 'bronze':
-        return LinearGradient(
+        return const LinearGradient(
           colors: [
-            Colors.brown,
-            Colors.brown.shade900,
+            Color.fromRGBO(210, 105, 30, 0.6),
+            Color.fromRGBO(210, 105, 30, 0.9),
+            Color.fromRGBO(210, 105, 30, 0.85),
           ],
         );
       case 'silver':
-        return LinearGradient(
+        return const LinearGradient(
           colors: [
-            Colors.brown,
-            Colors.brown.shade900,
+            Color.fromRGBO(220, 220, 220, 0.65),
+            Color.fromRGBO(220, 220, 220, 0.9),
+            Color.fromRGBO(220, 220, 220, 0.75),
           ],
         );
       case 'gold':
-        return LinearGradient(
+        return const LinearGradient(
           colors: [
-            Colors.brown,
-            Colors.brown.shade900,
+            Color.fromRGBO(229, 183, 59, 0.8),
+            Color.fromRGBO(229, 183, 59, 0.9),
+            Color.fromRGBO(229, 183, 59, 0.75),
           ],
         );
       case 'emerald':
-        return LinearGradient(
+        return const LinearGradient(
           colors: [
-            Colors.brown,
-            Colors.brown.shade900,
+            Color.fromRGBO(28, 172, 120, 0.8),
+            Color.fromRGBO(28, 172, 120, 0.9),
+            Color.fromRGBO(28, 172, 120, 0.75),
           ],
         );
       case 'platinum':
         return LinearGradient(
           colors: [
-            Colors.brown,
-            Colors.brown.shade900,
+            Colors.cyan.shade800,
+            Colors.cyan.shade700,
+            Colors.cyan.shade500,
+            Colors.cyan.shade700,
           ],
         );
       case 'diamond':
         return LinearGradient(
           colors: [
-            Colors.brown,
-            Colors.brown.shade900,
+            Colors.pink.shade100,
+            Colors.blue.shade100,
           ],
         );
       default:

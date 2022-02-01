@@ -19,7 +19,9 @@ class ProfileRankWidget extends StatelessWidget {
         decoration: BoxDecoration(
             gradient: RankStyleData.getGradient(rank),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.white, width: 0.5)),
+            border: Border.all(
+                color: rank == 'diamond' ? Colors.black : Colors.white,
+                width: rank == 'diamond' ? 1 : 0.5)),
         child: Container(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,10 +42,14 @@ class ProfileRankWidget extends StatelessWidget {
       child: Text(
         '$numberOfGames igara',
         style: TextStyle(
-          color: Colors.white,
+          color: rank == 'silver'
+              ? Colors.black
+              : rank == 'diamond'
+                  ? Colors.black
+                  : Colors.white,
           fontFamily: 'Acme',
           fontWeight: FontWeight.w500,
-          fontSize: 17,
+          fontSize: 16,
         ),
       ),
     );
