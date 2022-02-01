@@ -65,7 +65,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
                         GestureDetector(
                           onTap: () => showRankSystem(context),
                           child: ProfileRankWidget(
-                              rank: 'panj', numberOfGames: '5'),
+                              rank: 'diamond', numberOfGames: '5'),
                         ),
                       ],
                     ),
@@ -84,19 +84,19 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
                   children: [
                     Text(
                       'Broj pobjeda:',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(fontWeight: FontWeight.normal),
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            fontWeight: FontWeight.w400,
+                            //fontFamily: 'Retrolight',
+                          ),
                     ),
                     Row(
                       children: [
                         Text(
-                          '123🏆',
+                          '123 🏆',
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!
-                              .copyWith(fontSize: 30),
+                              .copyWith(fontSize: 20),
                         ),
                         // Icon(
                         //   Icons.accessibility_sharp,
@@ -120,11 +120,11 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
                     Row(
                       children: [
                         Text(
-                          '7🔥',
+                          '7 🔥',
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!
-                              .copyWith(fontSize: 30),
+                              .copyWith(fontSize: 20),
                         ),
                         // Icon(
                         //   Icons.fireplace_outlined,
@@ -148,11 +148,11 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
                     Row(
                       children: [
                         Text(
-                          'Sport🎾',
+                          'Geografija 🌍',
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!
-                              .copyWith(fontSize: 30),
+                              .copyWith(fontSize: 20),
                         ),
                         // Icon(
                         //   Icons.sports_baseball_rounded,

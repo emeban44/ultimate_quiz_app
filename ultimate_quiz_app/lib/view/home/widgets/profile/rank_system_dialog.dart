@@ -10,7 +10,7 @@ class RankSystemDialog extends StatelessWidget {
       insetPadding: const EdgeInsets.symmetric(horizontal: 22.5),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
-        height: MediaQuery.of(context).size.height - 225,
+        height: MediaQuery.of(context).size.height - 195,
         padding: const EdgeInsets.all(10),
         width: double.infinity,
         //width: 200,
@@ -18,20 +18,24 @@ class RankSystemDialog extends StatelessWidget {
           physics: const ClampingScrollPhysics(),
           child: Column(
             children: [
-              Text(
-                'RANKING SISTEM',
-                style: TextStyle(
-                  fontFamily: 'Acme',
-                  color: Colors.black,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(top: 9.0, bottom: 20),
+                child: Text(
+                  'RANKING SISTEM',
+                  style: TextStyle(
+                    fontFamily: 'Alata',
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 30, right: 30, top: 25, bottom: 15),
+                    left: 30, right: 30, top: 0, bottom: 15),
                 child: Column(
                   children: [
+                    RankDialogBox('strucnjak'),
                     RankDialogBox('diamond'),
                     RankDialogBox('platinum'),
                     RankDialogBox('emerald'),
@@ -46,11 +50,11 @@ class RankSystemDialog extends StatelessWidget {
                 padding:
                     const EdgeInsets.only(left: 11.0, right: 11, bottom: 12.5),
                 child: Text(
-                  'Ovo što vidiš je rank sistem. Da bi se rank prešao, moraš vezati 3 rank pobjede zaredom. Svaki rank poraz, vraća te jedan korak unazad.',
+                  'Ovo što vidiš je rank sistem. Kako bi napredovao, moraš vezati 3 rank pobjede zaredom. Svaki rank poraz, vraća te jedan korak unazad.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 15,
+                    fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

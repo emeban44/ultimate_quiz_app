@@ -28,7 +28,9 @@ class RankStyleData {
       case 'platinum':
         return 'assets/images/platinum.png';
       case 'diamond':
-        return 'assets/images/diamond_alt.png';
+        return 'assets/images/diamond.png';
+      case 'strucnjak':
+        return 'assets/images/strucnjak.png';
       default:
         return 'assets/images/higlogo.png';
     }
@@ -49,7 +51,9 @@ class RankStyleData {
       case 'platinum':
         return Colors.teal.shade50;
       case 'diamond':
-        return Colors.blue.shade900;
+        return Colors.deepPurple.shade50;
+      case 'strucnjak':
+        return Colors.red.shade50;
       default:
         return Colors.black;
     }
@@ -108,8 +112,23 @@ class RankStyleData {
       case 'diamond':
         return LinearGradient(
           colors: [
-            Colors.pink.shade100,
-            Colors.blue.shade100,
+            Colors.deepPurple.shade900,
+            Colors.deepPurple.shade700,
+            Colors.blue.shade400,
+            Colors.deepPurple.shade100,
+          ],
+        );
+      case 'strucnjak':
+        return LinearGradient(
+          colors: [
+            Color.fromRGBO(56, 0, 0, 1),
+            // Colors.black.withOpacity(0.5),
+            // Colors.black26,
+            Color.fromRGBO(127, 23, 52, 1),
+            Color.fromRGBO(97, 0, 0, 0.75),
+            Color.fromRGBO(56, 0, 0, 0.8)
+            // Colors.pink.shade800,
+            // Colors.pink.shade900,
           ],
         );
       default:

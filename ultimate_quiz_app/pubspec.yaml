@@ -127,6 +127,18 @@ flutter:
     - family: Concert
       fonts:
         - asset: fonts/ConcertOne-Regular.ttf
+    - family: Amarant
+      fonts:
+        - asset: fonts/Amaranth-Regular.ttf
+    - family: Carter
+      fonts:
+        - asset: fonts/CarterOne-Regular.ttf
+    - family: Lexend
+      fonts:
+        - asset: fonts/Lexend.ttf
+    - family: Viga
+      fonts:
+        - asset: fonts/Viga-Regular.ttf
     - family: Lato
       fonts:
         - asset: fonts/Lato-Regular.ttf

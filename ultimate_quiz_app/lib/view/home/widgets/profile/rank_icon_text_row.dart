@@ -9,8 +9,8 @@ class RankIconTextRow extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          height: 20,
-          width: 20,
+          height: 21,
+          width: 21,
           child: Image.asset(
             RankStyleData.getImage(rank),
           ),

@@ -28,7 +28,9 @@ class ProfileRankWidget extends StatelessWidget {
             gradient: RankStyleData.getGradient(rank),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-                color: rank == 'panj' ? Colors.white : Colors.black,
+                color: rank == 'panj' || rank == 'strucnjak'
+                    ? Colors.white
+                    : Colors.black,
                 width: rank == 'diamond' ? 1 : 0.5)),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
