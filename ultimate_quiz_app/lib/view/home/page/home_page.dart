@@ -45,9 +45,9 @@ class _HomePageState extends State<HomePage> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          opacity: _selectedPageIndex == 1 ? 0.75 : 0.5,
+          opacity: _selectedPageIndex == 1 ? 0.45 : 0.5,
           image: _selectedPageIndex == 1
-              ? const AssetImage("assets/images/smoke.jpeg")
+              ? const AssetImage("assets/images/neon_smoke_light.jpeg")
               : const AssetImage("assets/images/neon_lights_upside.jpeg"),
           fit: BoxFit.cover,
         ),
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
             _titles[_selectedPageIndex],
             style: Theme.of(context).textTheme.headline1,
           ),
-          elevation: 1,
+          elevation: 0,
           backgroundColor: Colors.transparent, //Colors.deepPurple.shade900,
           actions: [
             IconButton(

@@ -14,7 +14,7 @@ class PlayButton extends StatelessWidget {
           colors: [
             Colors.pink.shade900,
             Colors.purple.shade500,
-            Colors.blue.shade400,
+            Colors.blue.shade600,
           ],
         ),
       ),
