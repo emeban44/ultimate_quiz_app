@@ -21,6 +21,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
   void selectImage() async {
     final ImagePicker _picker = ImagePicker();
     final XFile? file = await _picker.pickImage(source: ImageSource.gallery);
+
     if (file != null) {
       final Uint8List bytes = await file.readAsBytes();
       setState(() {
@@ -65,7 +66,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
                         GestureDetector(
                           onTap: () => showRankSystem(context),
                           child: ProfileRankWidget(
-                              rank: 'diamond', numberOfGames: '5'),
+                              rank: 'platinum', rankLevel: '1'),
                         ),
                       ],
                     ),
@@ -75,97 +76,19 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Broj pobjeda:',
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            fontWeight: FontWeight.w400,
-                            //fontFamily: 'Retrolight',
-                          ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '123 🏆',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1!
-                              .copyWith(fontSize: 20),
-                        ),
-                        // Icon(
-                        //   Icons.accessibility_sharp,
-                        //   color: Colors.yellow.shade700,
-                        // ),
-                      ],
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Broj vezanih pobjeda:',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(fontWeight: FontWeight.normal),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '7 🔥',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1!
-                              .copyWith(fontSize: 20),
-                        ),
-                        // Icon(
-                        //   Icons.fireplace_outlined,
-                        //   color: Colors.orange,
-                        // ),
-                      ],
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Favorit kategorija:',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(fontWeight: FontWeight.normal),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Geografija 🌍',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1!
-                              .copyWith(fontSize: 20),
-                        ),
-                        // Icon(
-                        //   Icons.sports_baseball_rounded,
-                        //   color: Colors.yellow,
-                        // ),
-                      ],
-                    ),
-                  ],
-                ),
+                _statRowWidget(title: 'Broj igara:', stat: '1024 🎲'),
+                _statRowWidget(stat: '123 🏆', title: 'Broj pobjeda:'),
+                _statRowWidget(title: 'Procenat pobjeda:', stat: '57 💯'),
+                _statRowWidget(title: 'Broj vezanih pobjeda:', stat: '7 🔥'),
+                _statRowWidget(
+                    title: 'Favorit kategorija:', stat: 'Filmovi 🎬'),
               ],
             ),
           ),
-          Divider(
+          const Divider(
             color: Colors.white,
             thickness: 0.7,
           ),
@@ -182,6 +105,54 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
         Colors.pink.shade900,
         Colors.blue.shade900,
       ]),
+    );
+  }
+
+  Widget _statTitle(String title) {
+    return Text(
+      title,
+      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+            fontWeight: FontWeight.w400,
+          ),
+    );
+  }
+
+  Widget _actualStat(String stat, [bool changeFont = false]) {
+    return Row(
+      children: [
+        Text(
+          stat,
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                fontSize: changeFont ? 18 : 20,
+                fontFamily: changeFont ? 'Viga' : 'Acme',
+              ),
+        ),
+      ],
+    );
+  }
+
+  Widget _statRowWidget({required String title, required String stat}) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 1),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          _statTitle(title),
+          Row(
+            children: [
+              if (title == 'Favorit kategorija:')
+                _actualStat(stat, true)
+              else
+                _actualStat(stat),
+              // Icon(
+              //   Icons.accessibility_sharp,
+              //   color: Colors.yellow.shade700,
+              // ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

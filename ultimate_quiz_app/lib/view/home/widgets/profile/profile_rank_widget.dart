@@ -6,10 +6,10 @@ import 'rank_icon_text_row.dart';
 class ProfileRankWidget extends StatelessWidget {
   ProfileRankWidget({
     required this.rank,
-    required this.numberOfGames,
+    required this.rankLevel,
   });
   final String rank;
-  final String numberOfGames;
+  final String rankLevel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,26 +38,26 @@ class ProfileRankWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             RankIconTextRow(rank),
-            _buildNumberOfGamesText(numberOfGames),
+            _rankLevel(rankLevel),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNumberOfGamesText(String numberOfGames) {
+  Widget _rankLevel(String rankLevel) {
     return Padding(
       padding: const EdgeInsets.only(right: 0, top: 0),
       child: Text(
-        '$numberOfGames igara',
+        'LVL $rankLevel',
         style: TextStyle(
           color: rank == 'silver'
               ? Colors.black
               : rank == 'diamond'
                   ? Colors.white
                   : Colors.white,
-          fontFamily: 'Acme',
-          fontWeight: FontWeight.w500,
+          fontFamily: 'Carter',
+          fontWeight: FontWeight.w400,
           fontSize: 16,
         ),
       ),

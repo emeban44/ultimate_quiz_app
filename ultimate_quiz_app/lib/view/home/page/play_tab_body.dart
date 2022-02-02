@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ultimate_quiz_app/view/classic/pages/classic_start_page.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/play/play_button.dart';
 
 class PlayTabBody extends StatelessWidget {
@@ -17,12 +18,15 @@ class PlayTabBody extends StatelessWidget {
               'Izaberi vrstu igre:',
               style: TextStyle(
                 fontFamily: 'Acme',
+                fontSize: 30,
               ),
             ),
           ),
-          PlayButton('CLASSIC'),
-          PlayButton('RANKED'),
-          PlayButton('MINI IGRE')
+          PlayButton('CLASSIC', () {
+            Navigator.pushNamed(context, ClassicStartPage.routeName);
+          }),
+          PlayButton('RANKED', () {}),
+          PlayButton('MINI IGRE', () {}),
         ],
       ),
     );

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PlayButton extends StatelessWidget {
-  PlayButton(this.title);
+  PlayButton(this.title, this.onPress);
   final String title;
+  final Function onPress;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +20,7 @@ class PlayButton extends StatelessWidget {
         ),
       ),
       height: 70,
-      width: 200,
+      width: 250,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: Colors.transparent,
@@ -28,7 +29,9 @@ class PlayButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            onPress();
+          },
           child: Text(
             title,
             style: TextStyle(
@@ -36,7 +39,7 @@ class PlayButton extends StatelessWidget {
               fontFamily: 'Acme',
               letterSpacing: 0.75,
               fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontSize: 22,
             ),
           )),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_quiz_app/utils/navigation_animations.dart';
+import 'package:ultimate_quiz_app/view/classic/pages/classic_start_page.dart';
+
 import 'package:ultimate_quiz_app/view/splash/splash_screen.dart';
 
 mixin RouteGenerator {
@@ -9,6 +11,11 @@ mixin RouteGenerator {
         return SlideAnimationTween(
           widget: SplashScreen(),
         );
+      case ClassicStartPage.routeName:
+        return SlideAnimationTween(
+          widget: ClassicStartPage(),
+        );
+
       default:
         return _errorRoute();
     }

@@ -139,6 +139,11 @@ flutter:
     - family: Viga
       fonts:
         - asset: fonts/Viga-Regular.ttf
+    - family: Sarala
+      fonts:
+        - asset: fonts/Sarala-Regular.ttf
+        - asset: fonts/Sarala-Bold.ttf
+          weight: 700
     - family: Lato
       fonts:
         - asset: fonts/Lato-Regular.ttf
