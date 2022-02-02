@@ -41,44 +41,51 @@ class JoinPrivateGameDialog extends StatelessWidget {
                 ),
               ],
             ),
-            Form(
-              key: _formKey,
-              child: ClassicTextFormField('ŠIFRA IGRE', () {
-                _formKey.currentState!.validate();
-              }),
-            ),
-            Container(
-              height: 45,
-              width: 140,
-              decoration: BoxDecoration(
-                color: Colors.blue.shade900,
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: Colors.black),
-              ),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.transparent,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    )
-                    //elevation: 10,
-                    ),
-                onPressed: () {
-                  final bool isValid = _formKey.currentState!.validate();
-                  if (isValid) {
-                    Navigator.pop(context);
-                    showStartGameDialog(context, 'Učitavanje igre...');
-                  }
-                },
-                child: Text(
-                  'PRIDRUŽI SE',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
+            Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 11),
+                  child: Form(
+                    key: _formKey,
+                    child: ClassicTextFormField('ŠIFRA IGRE', () {
+                      _formKey.currentState!.validate();
+                    }),
                   ),
                 ),
-              ),
+                Container(
+                  height: 45,
+                  width: 140,
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade900,
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: Colors.black),
+                  ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.transparent,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        )
+                        //elevation: 10,
+                        ),
+                    onPressed: () {
+                      final bool isValid = _formKey.currentState!.validate();
+                      if (isValid) {
+                        Navigator.pop(context);
+                        showStartGameDialog(context, 'Učitavanje igre...');
+                      }
+                    },
+                    child: Text(
+                      'PRIDRUŽI SE',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
