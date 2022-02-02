@@ -5,6 +5,10 @@ class CustomTheme {
     primarySwatch: Colors.purple,
     fontFamily: "Lato",
     scaffoldBackgroundColor: Colors.black,
+    // elevatedButtonTheme: ElevatedButtonThemeData(
+    //     style: ElevatedButton.styleFrom(
+    //         shape: RoundedRectangleBorder(
+    //             borderRadius: BorderRadius.circular(15)))),
     iconTheme: const IconThemeData(color: Colors.white),
     textTheme: const TextTheme(
       headline1: TextStyle(
@@ -37,9 +41,15 @@ class CustomTheme {
       bodyText2: TextStyle(
         color: Colors.white,
         fontSize: 28,
-        fontFamily: 'Acme',
+        //fontFamily: 'Acme',
         fontWeight: FontWeight.normal,
       ),
     ),
+    // button: TextStyle(
+    //   fontWeight: FontWeight.bold,
+    //   fontFamily: 'Lato',
+    //   color: Colors.white,
+    //   fontSize: 20,
+    // )),
   );
 }

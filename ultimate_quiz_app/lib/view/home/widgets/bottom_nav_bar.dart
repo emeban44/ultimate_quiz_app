@@ -31,8 +31,11 @@ class CustomBottomNavBar extends StatelessWidget {
           fontFamily: 'Acme',
           fontWeight: FontWeight.bold,
         ),
-        selectedItemColor:
-            selectedIndex == 2 ? Colors.pink.shade100 : Colors.blue.shade100,
+        selectedItemColor: selectedIndex == 2
+            ? Colors.pink.shade100
+            : selectedIndex == 1
+                ? Colors.purple.shade100
+                : Colors.blue.shade100,
         selectedFontSize: 13,
         items: [
           BottomNavigationBarItem(

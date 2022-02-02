@@ -27,6 +27,7 @@ class SecondaryButton extends StatelessWidget {
           buttonTitle!,
           style: const TextStyle(
             color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
         style: ElevatedButton.styleFrom(

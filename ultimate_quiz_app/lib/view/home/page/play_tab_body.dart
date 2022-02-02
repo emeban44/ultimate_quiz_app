@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:ultimate_quiz_app/view/home/widgets/play/play_button.dart';
 
 class PlayTabBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Icon(
-        Icons.play_arrow,
-        color: Colors.white,
-        size: 300,
+    return Container(
+      //height: 400,
+      padding: const EdgeInsets.only(bottom: 50),
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(bottom: 15),
+            child: Text(
+              'Izaberi vrstu igre:',
+              style: TextStyle(
+                fontFamily: 'Acme',
+              ),
+            ),
+          ),
+          PlayButton('CLASSIC'),
+          PlayButton('RANKED'),
+          PlayButton('MINI IGRE')
+        ],
       ),
     );
   }

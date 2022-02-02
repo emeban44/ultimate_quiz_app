@@ -28,10 +28,11 @@ class ProfileRankWidget extends StatelessWidget {
             gradient: RankStyleData.getGradient(rank),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-                color: rank == 'panj' || rank == 'strucnjak'
-                    ? Colors.white
-                    : Colors.black,
-                width: rank == 'diamond' ? 1 : 0.5)),
+                color:
+                    rank == 'panj' || rank == 'strucnjak' || rank == 'diamond'
+                        ? Colors.white
+                        : Colors.black,
+                width: rank == 'diamond' ? 0.75 : 0.5)),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,7 +54,7 @@ class ProfileRankWidget extends StatelessWidget {
           color: rank == 'silver'
               ? Colors.black
               : rank == 'diamond'
-                  ? Colors.black
+                  ? Colors.white
                   : Colors.white,
           fontFamily: 'Acme',
           fontWeight: FontWeight.w500,

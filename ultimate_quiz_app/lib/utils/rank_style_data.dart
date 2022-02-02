@@ -114,8 +114,8 @@ class RankStyleData {
           colors: [
             Colors.deepPurple.shade900,
             Colors.deepPurple.shade700,
-            Colors.blue.shade400,
-            Colors.deepPurple.shade100,
+            Colors.deepPurple.shade500,
+            Colors.deepPurple.shade900,
           ],
         );
       case 'strucnjak':

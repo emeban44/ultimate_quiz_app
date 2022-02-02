@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     "PROFILE",
   ];
 
-  int _selectedPageIndex = 2;
+  int _selectedPageIndex = 1;
 
   void _selectPage(int index) {
     setState(() {
@@ -43,10 +43,12 @@ class _HomePageState extends State<HomePage> {
     final AuthProvider authProvider =
         Provider.of<AuthProvider>(context, listen: false);
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          opacity: 0.4,
-          image: AssetImage("assets/images/neon_lights_upside.jpeg"),
+          opacity: _selectedPageIndex == 1 ? 0.75 : 0.5,
+          image: _selectedPageIndex == 1
+              ? const AssetImage("assets/images/smoke.jpeg")
+              : const AssetImage("assets/images/neon_lights_upside.jpeg"),
           fit: BoxFit.cover,
         ),
       ),
