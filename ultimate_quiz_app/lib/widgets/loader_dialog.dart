@@ -6,28 +6,10 @@ class LoaderDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SpinKitCircle(
-        //color: Colors.pink,
         size: 120,
         itemBuilder: (context, index) =>
             Image.asset('assets/images/higlogo.png'),
-        //Image.asset('assets/images/question_mark_loading_pink.png'),
       ),
-      // child: SpinKitSquareCircle(
-      //   //color: Colors.blue,
-      //   itemBuilder: (context, index) {
-      //     if (index == 0) {
-      //       return Container(
-      //         child: Image.asset("assets/images/higlogo.png"),
-      //       );
-      //     } else {
-      //       return Icon(
-      //         Icons.hourglass_bottom,
-      //         size: 100,
-      //       );
-      //     }
-      //   },
-      //   size: 100,
-      // ),
     );
   }
 }

@@ -7,7 +7,7 @@ class CreateJoinClassicButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12.5, right: 30, left: 30),
+      margin: const EdgeInsets.only(bottom: 10, right: 30, left: 30),
       width: double.infinity,
       height: 70,
       decoration: BoxDecoration(

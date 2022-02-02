@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ultimate_quiz_app/view/classic/widgets/create_join_classic_button.dart';
 import 'package:ultimate_quiz_app/view/classic/widgets/create_private_game_dialog.dart';
 import 'package:ultimate_quiz_app/view/classic/widgets/join_private_game_dialog.dart';
+import 'package:ultimate_quiz_app/widgets/loader_dialog.dart';
+import 'package:ultimate_quiz_app/widgets/start_game_loading_dialog.dart';
 
 class ClassicStartPage extends StatelessWidget {
   static const String routeName = '/classic-start';
@@ -29,7 +31,14 @@ class ClassicStartPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CreateJoinClassicButton('KREIRAJ JAVNU IGRU', () {}),
+              CreateJoinClassicButton('ZAPOČNI IGRU', () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return StartGameLoaderDialog('Tražimo protivnika...');
+                    });
+              }),
+              Divider(),
               CreateJoinClassicButton('KREIRAJ PRIVATNU IGRU', () {
                 showDialog(
                     context: context,
@@ -37,7 +46,7 @@ class ClassicStartPage extends StatelessWidget {
                       return CreatePrivateGameDialog();
                     });
               }),
-              CreateJoinClassicButton('PRIDRUŽI SE JAVNOJ IGRI', () {}),
+              //CreateJoinClassicButton('PRIDRUŽI SE JAVNOJ IGRI', () {}),
               CreateJoinClassicButton('PRIDRUŽI SE PRIVATNOJ IGRI', () {
                 showDialog(
                     context: context,
