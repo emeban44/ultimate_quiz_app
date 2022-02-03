@@ -12,7 +12,7 @@ class CreateJoinClassicButton extends StatelessWidget {
       height: 70,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white, width: 1.5),
-        gradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
+        gradient: const LinearGradient(colors: [Colors.blue, Colors.purple]),
         borderRadius: BorderRadius.circular(20),
       ),
       child: ElevatedButton(
@@ -28,7 +28,7 @@ class CreateJoinClassicButton extends StatelessWidget {
         child: Text(
           title,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w900,
             letterSpacing: 0.5,

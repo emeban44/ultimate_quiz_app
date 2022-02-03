@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ClassicTextFormField extends StatelessWidget {
-  ClassicTextFormField(this.hint, this.onChange);
+class PrivateGamePasswordField extends StatelessWidget {
+  PrivateGamePasswordField(this.hint, this.onChange);
   final String hint;
   final Function onChange;
   @override
@@ -43,7 +43,7 @@ class ClassicTextFormField extends StatelessWidget {
               color: Colors.redAccent.shade700,
             ),
             border: InputBorder.none,
-            contentPadding: EdgeInsets.only(left: 17.5),
+            contentPadding: const EdgeInsets.only(left: 17.5),
             hintStyle: TextStyle(
               fontFamily: 'Sarala',
               fontSize: 19,

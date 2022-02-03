@@ -7,10 +7,8 @@ class JoinPrivateGameDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Container(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: SizedBox(
         height: 240,
         width: 300,
         //padding: const EdgeInsets.symmetric(vertical: 15),
@@ -19,72 +17,14 @@ class JoinPrivateGameDialog extends StatelessWidget {
           children: [
             Column(
               children: [
-                Text(
-                  'PRIDRUŽI SE PRIVATNOJ IGRI:',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontFamily: 'Sarala',
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Text(
-                  'Ukucaj šifru koju ti je proslijedio prijatelj😄',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    inherit: false,
-                    color: Colors.black,
-                    fontFamily: 'Lato',
-                    fontSize: 11.5,
-                  ),
-                ),
+                _buildDialogTitle(context),
+                _buildDialogHint(context),
               ],
             ),
             Column(
               children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 11),
-                  child: Form(
-                    key: _formKey,
-                    child: ClassicTextFormField('ŠIFRA IGRE', () {
-                      _formKey.currentState!.validate();
-                    }),
-                  ),
-                ),
-                Container(
-                  height: 45,
-                  width: 140,
-                  decoration: BoxDecoration(
-                    color: Colors.blue.shade900,
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: Colors.black),
-                  ),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.transparent,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        )
-                        //elevation: 10,
-                        ),
-                    onPressed: () {
-                      final bool isValid = _formKey.currentState!.validate();
-                      if (isValid) {
-                        Navigator.pop(context);
-                        showStartGameDialog(context, 'Učitavanje igre...');
-                      }
-                    },
-                    child: Text(
-                      'PRIDRUŽI SE',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                ),
+                _buildGamePasswordField(context),
+                _buildJoinGameButton(context),
               ],
             ),
           ],
@@ -92,4 +32,86 @@ class JoinPrivateGameDialog extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildDialogTitle(BuildContext context) {
+    return const Text(
+      'PRIDRUŽI SE PRIVATNOJ IGRI:',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 18,
+        fontFamily: 'Sarala',
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget _buildDialogHint(BuildContext context) {
+    return const Text(
+      'Ukucaj šifru koju ti je proslijedio prijatelj😄',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        inherit: false,
+        color: Colors.black,
+        fontFamily: 'Lato',
+        fontSize: 11.5,
+      ),
+    );
+  }
+
+  Widget _buildJoinGameButton(BuildContext context) {
+    return Container(
+      height: 45,
+      width: 140,
+      decoration: BoxDecoration(
+        color: Colors.blue.shade900,
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(color: Colors.black),
+      ),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            primary: Colors.transparent,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            )
+            //elevation: 10,
+            ),
+        onPressed: () {
+          final bool isValid = _formKey.currentState!.validate();
+          if (isValid) {
+            Navigator.pop(context);
+            showStartGameDialog(context, 'Učitavanje igre...');
+          }
+        },
+        child: const Text(
+          'PRIDRUŽI SE',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGamePasswordField(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 11),
+      child: Form(
+        key: _formKey,
+        child: PrivateGamePasswordField('ŠIFRA IGRE', () {
+          _formKey.currentState!.validate();
+        }),
+      ),
+    );
+  }
+}
+
+void showJoinPrivateGameDialog(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return JoinPrivateGameDialog();
+      });
 }

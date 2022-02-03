@@ -6,9 +6,10 @@ class StartGameLoaderDialog extends StatelessWidget {
   final String loadingText;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 83.0),
+    return Container(
+      padding: const EdgeInsets.only(bottom: 65.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SpinKitCircle(
@@ -30,6 +31,7 @@ class StartGameLoaderDialog extends StatelessWidget {
 
 void showStartGameDialog(BuildContext context, String loadingText) {
   showDialog(
+      barrierDismissible: true,
       context: context,
       builder: (context) {
         return StartGameLoaderDialog(loadingText);

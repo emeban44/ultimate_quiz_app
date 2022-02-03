@@ -7,10 +7,8 @@ class CreatePrivateGameDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Container(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: SizedBox(
         height: 240,
         width: 300,
         //padding: const EdgeInsets.symmetric(vertical: 15),
@@ -19,74 +17,15 @@ class CreatePrivateGameDialog extends StatelessWidget {
           children: [
             Column(
               children: [
-                const Text(
-                  'KREIRAJ PRIVATNU IGRU:',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Sarala',
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Text(
-                  'Postavi šifru koju ćeš proslijediti svom prijatelju😄',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    inherit: false,
-                    color: Colors.black,
-                    fontFamily: 'Lato',
-                    fontSize: 11.5,
-                  ),
-                ),
+                _buildDialogTitle(context),
+                _buildDialogHint(context),
               ],
             ),
             Column(
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 11),
-                  child: Form(
-                    key: _formKey,
-                    child: ClassicTextFormField('ŠIFRA IGRE', () {
-                      _formKey.currentState!.validate();
-                    }),
-                  ),
-                ),
-                Container(
-                  height: 45,
-                  width: 125,
-                  decoration: BoxDecoration(
-                    color: Colors.blue.shade900,
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: Colors.black),
-                  ),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.transparent,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        )
-                        //elevation: 10,
-                        ),
-                    onPressed: () {
-                      final bool isValid = _formKey.currentState!.validate();
-                      if (isValid) {
-                        Navigator.pop(context);
-                        // POZIV NA SERVER DA SE KREIRA IGRA
-                        showStartGameDialog(context, 'Kreiranje igre...');
-                      }
-                    },
-                    child: Text(
-                      'KREIRAJ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                ),
+                _buildGamePasswordField(context),
+                _buildCreateGameButton(context),
               ],
             ),
           ],
@@ -94,4 +33,87 @@ class CreatePrivateGameDialog extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildDialogTitle(BuildContext context) {
+    return const Text(
+      'KREIRAJ PRIVATNU IGRU:',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 20,
+        fontFamily: 'Sarala',
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget _buildDialogHint(BuildContext context) {
+    return const Text(
+      'Postavi šifru koju ćeš proslijediti svom prijatelju😄',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        inherit: false,
+        color: Colors.black,
+        fontFamily: 'Lato',
+        fontSize: 11.5,
+      ),
+    );
+  }
+
+  Widget _buildGamePasswordField(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 11),
+      child: Form(
+        key: _formKey,
+        child: PrivateGamePasswordField('ŠIFRA IGRE', () {
+          _formKey.currentState!.validate();
+        }),
+      ),
+    );
+  }
+
+  Widget _buildCreateGameButton(BuildContext context) {
+    return Container(
+      height: 45,
+      width: 125,
+      decoration: BoxDecoration(
+        color: Colors.blue.shade900,
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(color: Colors.black),
+      ),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            primary: Colors.transparent,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            )
+            //elevation: 10,
+            ),
+        onPressed: () {
+          final bool isValid = _formKey.currentState!.validate();
+          if (isValid) {
+            Navigator.pop(context);
+            // POZIV NA SERVER DA SE KREIRA IGRA
+            showStartGameDialog(context, 'Kreiranje igre...');
+          }
+        },
+        child: const Text(
+          'KREIRAJ',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+void showCreatePrivateGameDialog(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return CreatePrivateGameDialog();
+      });
 }
