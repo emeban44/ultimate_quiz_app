@@ -46,15 +46,14 @@ class RankSystemDialog extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
+              const Padding(
+                padding: EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
                 child: Text(
                   'Ovo što vidiš je rank sistem. Kako bi napredovao, moraš vezati 3 rank pobjede zaredom. Svaki rank poraz, vraća te jedan korak unazad.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 14,
+                    fontSize: 13,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -63,7 +62,7 @@ class RankSystemDialog extends StatelessWidget {
                 width: 125,
                 child: ElevatedButton(
                   onPressed: () => Navigator.pop(context),
-                  child: Text(
+                  child: const Text(
                     'OK',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),

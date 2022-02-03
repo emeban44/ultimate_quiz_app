@@ -27,7 +27,7 @@ class ClassicStartPage extends StatelessWidget {
         ),
         body: Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.only(top: 130),
+          padding: const EdgeInsets.only(top: 135),
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.center,
             children: [

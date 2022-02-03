@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ultimate_quiz_app/view/classic/widgets/classic_text_form_field.dart';
+import 'package:ultimate_quiz_app/view/classic/widgets/private_game_password_field.dart';
 import 'package:ultimate_quiz_app/widgets/start_game_loading_dialog.dart';
 
 class CreatePrivateGameDialog extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  bool didClickButton = false;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -66,7 +67,9 @@ class CreatePrivateGameDialog extends StatelessWidget {
       child: Form(
         key: _formKey,
         child: PrivateGamePasswordField('ŠIFRA IGRE', () {
-          _formKey.currentState!.validate();
+          if (didClickButton) {
+            _formKey.currentState!.validate();
+          }
         }),
       ),
     );
@@ -91,6 +94,7 @@ class CreatePrivateGameDialog extends StatelessWidget {
             //elevation: 10,
             ),
         onPressed: () {
+          didClickButton = true;
           final bool isValid = _formKey.currentState!.validate();
           if (isValid) {
             Navigator.pop(context);
