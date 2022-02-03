@@ -34,7 +34,7 @@ class PlayButton extends StatelessWidget {
           },
           child: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontFamily: 'Acme',
               letterSpacing: 0.75,

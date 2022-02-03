@@ -22,7 +22,7 @@ class ClassicStartPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          elevation: 0,
+          elevation: 1,
           backgroundColor: Colors.transparent,
         ),
         body: Container(

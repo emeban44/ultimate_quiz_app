@@ -7,7 +7,7 @@ class StartGameLoaderDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 65.0),
+      padding: const EdgeInsets.only(bottom: 70.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         // mainAxisAlignment: MainAxisAlignment.center,
