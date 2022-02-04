@@ -4,11 +4,11 @@ class PlayerLobbyStats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
       child: Column(
         children: [
           _statRowWidget(title: 'Broj igara:', stat: '1024 🎲'),
-          // _statRowWidget(stat: '123 🏆', title: 'Broj pobjeda:'),
+          _statRowWidget(stat: '123 🏆', title: 'Broj pobjeda:'),
           _statRowWidget(title: 'Procenat pobjeda:', stat: '57/💯'),
           _statRowWidget(title: 'Rekordni niz pobjeda:', stat: '7 🔥'),
           // _statRowWidget(title: 'Favorit kategorija:', stat: 'Filmovi 🎬'),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_quiz_app/utils/navigation_animations.dart';
 import 'package:ultimate_quiz_app/view/classic/pages/classic_start_page.dart';
+import 'package:ultimate_quiz_app/view/game1_odd_one_out/page/odd_one_out_page.dart';
 import 'package:ultimate_quiz_app/view/game_start_lobby/page/game_start_lobby_page.dart';
 
 import 'package:ultimate_quiz_app/view/splash/splash_screen.dart';
@@ -19,6 +20,10 @@ mixin RouteGenerator {
       case GameStartLobbyPage.routeName:
         return SlideAnimationTween(
           widget: GameStartLobbyPage(),
+        );
+      case OddOneOutPage.routeName:
+        return SlideAnimationTween(
+          widget: OddOneOutPage(),
         );
       default:
         return _errorRoute();

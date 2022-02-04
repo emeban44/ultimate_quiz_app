@@ -28,10 +28,10 @@ class CreateJoinClassicButton extends StatelessWidget {
         child: Text(
           title,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 18,
+          style: TextStyle(
+            fontSize: title == 'PLAY' ? 25 : 18,
             fontWeight: FontWeight.w900,
-            letterSpacing: 0.5,
+            letterSpacing: title == 'PLAY' ? 2 : 0.5,
             fontFamily: 'Sarala',
           ),
         ),

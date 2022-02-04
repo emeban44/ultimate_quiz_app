@@ -6,6 +6,7 @@ import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_avatar.dart'
 import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_rank_widget.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_username.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/profile/rank_system_dialog.dart';
+import 'package:ultimate_quiz_app/widgets/loader_dialog.dart';
 import 'package:ultimate_quiz_app/widgets/quiz_dialog.dart';
 
 class ProfileTabBody extends StatefulWidget {
@@ -15,6 +16,8 @@ class ProfileTabBody extends StatefulWidget {
 
 class _ProfileTabBodyState extends State<ProfileTabBody> {
   bool didTakePicture = false;
+
+  bool test = false;
 
   Uint8List? imageBytes;
 
@@ -29,6 +32,23 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
         imageBytes = bytes;
       });
     }
+  }
+
+  @override
+  void initState() {
+    if (test == false) {
+      print('x');
+      setState(() {
+        test = true;
+      });
+    }
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    print('xxx');
+    super.didChangeDependencies();
   }
 
   @override
@@ -94,7 +114,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
   BoxDecoration _profileBoxDecoration() {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(12),
-      border: Border.all(color: Colors.white, width: 0.4),
+      border: Border.all(color: Colors.white, width: 0.6),
       gradient: LinearGradient(colors: [
         Colors.pink.shade900,
         Colors.blue.shade900,

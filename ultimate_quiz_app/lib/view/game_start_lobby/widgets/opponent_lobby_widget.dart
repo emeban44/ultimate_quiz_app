@@ -18,6 +18,7 @@ class OpponentLobbyWidget extends StatelessWidget {
           children: [
             if (!shouldShowOpponent)
               Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   LoaderDialog(),
                   Text(
@@ -48,7 +49,17 @@ class OpponentLobbyWidget extends StatelessWidget {
                   const Divider(
                     color: Colors.white,
                     thickness: 0.7,
-                  )
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 3),
+                    child: Text(
+                      'PROTIVNIK',
+                      style: TextStyle(
+                        fontFamily: 'Acme',
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
                 ],
               ),
           ],

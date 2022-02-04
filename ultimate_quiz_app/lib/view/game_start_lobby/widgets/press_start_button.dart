@@ -14,8 +14,8 @@ class PressStartButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
-      margin: const EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+      height: 62.5,
+      margin: const EdgeInsets.symmetric(horizontal: 35, vertical: 12),
       width: double.infinity,
       decoration: isHomePlayerReady
           ? BoxDecoration(
@@ -47,7 +47,7 @@ class PressStartButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             )),
         child: isHomePlayerReady && !shouldShowOpponent
-            ? const Icon(Icons.check)
+            ? const Icon(Icons.check, size: 32)
             : Text(
                 shouldShowOpponent
                     ? '$countdownNumber'

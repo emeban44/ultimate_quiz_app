@@ -17,7 +17,7 @@ class PrivateGamePasswordField extends StatelessWidget {
       margin: const EdgeInsets.only(left: 25, right: 25, bottom: 15),
       decoration: BoxDecoration(
         //color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(15),
         border: Border.all(color: Colors.black, width: 1),
         gradient: LinearGradient(colors: [
           Colors.blue.shade200,

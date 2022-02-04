@@ -18,19 +18,26 @@ class PlayerLobbyCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ProfileAvatar(false, null),
+                SizedBox(
+                  height: 75,
+                  width: 75,
+                  child: ProfileAvatar(false, null),
+                ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0, top: 10),
+                    padding: const EdgeInsets.only(left: 10.0, top: 0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ProfileUsername('@biom237'),
+                        ProfileUsername('@biom237', gameStartLobby: true),
                         GestureDetector(
                           onTap: () => showRankSystem(context),
-                          child:
-                              ProfileRankWidget(rank: 'panj', rankLevel: '1'),
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 1.0),
+                            child:
+                                ProfileRankWidget(rank: 'panj', rankLevel: '1'),
+                          ),
                         ),
                       ],
                     ),
@@ -47,7 +54,7 @@ class PlayerLobbyCard extends StatelessWidget {
   BoxDecoration _profileBoxDecoration() {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(12),
-      border: Border.all(color: Colors.white, width: 0.4),
+      border: Border.all(color: Colors.white, width: 0.75),
       gradient: LinearGradient(colors: [
         Colors.pink.shade900,
         Colors.blue.shade900,

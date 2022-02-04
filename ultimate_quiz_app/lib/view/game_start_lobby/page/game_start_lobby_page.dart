@@ -5,6 +5,7 @@ import 'package:ultimate_quiz_app/view/game_start_lobby/widgets/opponent_lobby_w
 import 'package:ultimate_quiz_app/view/game_start_lobby/widgets/player_lobby_card.dart';
 import 'package:ultimate_quiz_app/view/game_start_lobby/widgets/player_lobby_stats.dart';
 import 'package:ultimate_quiz_app/view/game_start_lobby/widgets/press_start_button.dart';
+import 'package:ultimate_quiz_app/widgets/app_logo_appbar_title.dart';
 import 'package:ultimate_quiz_app/widgets/loader_dialog.dart';
 
 class GameStartLobbyPage extends StatefulWidget {
@@ -37,6 +38,9 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
     Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         countdownNumber--;
+        if (countdownNumber == 0 || (timer.tick == 6)) {
+          timer.cancel();
+        }
       });
     });
   }
@@ -55,10 +59,12 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
+          title: AppLogoAppBarTitle(37.5),
+          centerTitle: true,
         ),
         body: Container(
-          //MediaQuery.of(context).size.height - 110,
-          padding: const EdgeInsets.only(left: 12.5, right: 12.5, top: 12.5),
+          //height: MediaQuery.of(context).size.height - 200,
+          padding: const EdgeInsets.only(left: 12.5, right: 12.5, top: 5),
           child: Column(
             children: [
               PlayerLobbyCard(),

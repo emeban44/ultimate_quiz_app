@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ProfileUsername extends StatelessWidget {
-  ProfileUsername(this.username);
+  ProfileUsername(this.username, {this.gameStartLobby = false});
   final String username;
+  final bool gameStartLobby;
   @override
   Widget build(BuildContext context) {
+    print(gameStartLobby);
     return Container(
-      padding: const EdgeInsets.only(
-        bottom: 5,
+      padding: EdgeInsets.only(
+        bottom: gameStartLobby ? 0 : 5,
         top: 3,
         left: 1,
         right: 2.5,
