@@ -3,6 +3,7 @@ import 'package:ultimate_quiz_app/view/classic/widgets/app_title_classic.dart';
 import 'package:ultimate_quiz_app/view/classic/widgets/create_join_classic_button.dart';
 import 'package:ultimate_quiz_app/view/classic/widgets/create_private_game_dialog.dart';
 import 'package:ultimate_quiz_app/view/classic/widgets/join_private_game_dialog.dart';
+import 'package:ultimate_quiz_app/view/game_start_lobby/page/game_start_lobby_page.dart';
 import 'package:ultimate_quiz_app/widgets/start_game_loading_dialog.dart';
 
 class ClassicStartPage extends StatelessWidget {
@@ -34,6 +35,12 @@ class ClassicStartPage extends StatelessWidget {
               AppTitleClassic(),
               CreateJoinClassicButton('ZAPOČNI IGRU', () {
                 showStartGameDialog(context, 'Tražimo protivnika...');
+                Future.delayed(
+                  const Duration(seconds: 1),
+                ).whenComplete(() {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, GameStartLobbyPage.routeName);
+                });
               }),
               const Divider(color: Colors.transparent),
               CreateJoinClassicButton('KREIRAJ PRIVATNU IGRU', () {

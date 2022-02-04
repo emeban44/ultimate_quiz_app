@@ -20,7 +20,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
 
   void selectImage() async {
     final ImagePicker _picker = ImagePicker();
-    final XFile? file = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? file = await _picker.pickImage(source: ImageSource.camera);
 
     if (file != null) {
       final Uint8List bytes = await file.readAsBytes();
@@ -31,13 +31,6 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
     }
   }
 
-  void showRankSystem(BuildContext ctx) {
-    showDialog(
-        context: ctx,
-        barrierDismissible: true,
-        builder: (context) => RankSystemDialog());
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,6 +38,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
       child: Column(
         children: [
           Container(
+            // PROFILE CARD WITH RANK
             decoration: _profileBoxDecoration(),
             padding: const EdgeInsets.all(10),
             child: Row(
@@ -74,14 +68,14 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
                 ),
               ],
             ),
-          ),
+          ), // END
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
             child: Column(
               children: [
                 _statRowWidget(title: 'Broj igara:', stat: '1024 🎲'),
                 _statRowWidget(stat: '123 🏆', title: 'Broj pobjeda:'),
-                _statRowWidget(title: 'Procenat pobjeda:', stat: '57 💯'),
+                _statRowWidget(title: 'Procenat pobjeda:', stat: '57/💯'),
                 _statRowWidget(title: 'Broj vezanih pobjeda:', stat: '7 🔥'),
                 _statRowWidget(
                     title: 'Favorit kategorija:', stat: 'Filmovi 🎬'),
@@ -155,4 +149,11 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
       ),
     );
   }
+}
+
+void showRankSystem(BuildContext ctx) {
+  showDialog(
+      context: ctx,
+      barrierDismissible: true,
+      builder: (context) => RankSystemDialog());
 }

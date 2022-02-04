@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_quiz_app/utils/navigation_animations.dart';
 import 'package:ultimate_quiz_app/view/classic/pages/classic_start_page.dart';
+import 'package:ultimate_quiz_app/view/game_start_lobby/page/game_start_lobby_page.dart';
 
 import 'package:ultimate_quiz_app/view/splash/splash_screen.dart';
 
@@ -15,7 +16,10 @@ mixin RouteGenerator {
         return SlideAnimationTween(
           widget: ClassicStartPage(),
         );
-
+      case GameStartLobbyPage.routeName:
+        return SlideAnimationTween(
+          widget: GameStartLobbyPage(),
+        );
       default:
         return _errorRoute();
     }
