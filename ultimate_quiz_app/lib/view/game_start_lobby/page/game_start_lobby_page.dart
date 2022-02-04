@@ -51,15 +51,15 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
       decoration: const BoxDecoration(
         image: DecorationImage(
           opacity: 1,
-          image: AssetImage("assets/images/neon_lights_upside.jpeg"),
+          image: AssetImage("assets/images/neon_smoke.jpeg"),
           fit: BoxFit.cover,
         ),
       ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black54,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: AppLogoAppBarTitle(37.5),
+          //title: AppLogoAppBarTitle(37.5),
           centerTitle: true,
         ),
         body: Container(
@@ -69,15 +69,20 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
             children: [
               PlayerLobbyCard(),
               PlayerLobbyStats(),
+              const Divider(
+                color: Colors.white,
+                thickness: 0.7,
+              ),
               PressStartButton(
                   isHomePlayerReady: isHomePlayerReady,
                   onPress: onReadyPressed,
                   shouldShowOpponent: shouldShowOpponent,
                   countdownNumber: countdownNumber),
-              const Divider(
-                color: Colors.white,
-                thickness: 0.7,
-              ),
+              if (shouldShowOpponent)
+                const Divider(
+                  color: Colors.white,
+                  thickness: 0.7,
+                ),
               OpponentLobbyWidget(shouldShowOpponent, isHomePlayerReady),
             ],
           ),

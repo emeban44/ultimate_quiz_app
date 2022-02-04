@@ -1,32 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:ultimate_quiz_app/view/classic/pages/classic_start_page.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/play/play_button.dart';
+import 'package:ultimate_quiz_app/widgets/app_logo_appbar_title.dart';
 
 class PlayTabBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       //height: 400,
-      padding: const EdgeInsets.only(bottom: 50),
+      margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.1),
       alignment: Alignment.center,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Container(
-            margin: const EdgeInsets.only(bottom: 15),
-            child: Text(
-              'Izaberi vrstu igre:',
-              style: TextStyle(
-                fontFamily: 'Acme',
-                fontSize: 30,
-              ),
+          Flexible(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 5, top: 0),
+                  child: AppLogoAppBarTitle(175),
+                ),
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(fontFamily: 'Retrolight', fontSize: 16),
+                    children: [
+                      TextSpan(
+                          text: 'KO NE ZNA, ',
+                          style: TextStyle(color: Colors.blueAccent)),
+                      TextSpan(
+                          text: 'ZNAT',
+                          style: TextStyle(color: Colors.pinkAccent.shade100)),
+                      TextSpan(
+                          text: ' CE POSLIJE',
+                          style: TextStyle(color: Colors.greenAccent)),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-          PlayButton('CLASSIC', () {
-            Navigator.pushNamed(context, ClassicStartPage.routeName);
-          }),
-          PlayButton('RANKED', () {}),
-          PlayButton('MINI IGRE', () {}),
+          Flexible(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                PlayButton('CLASSIC', () {
+                  Navigator.pushNamed(context, ClassicStartPage.routeName);
+                }),
+                PlayButton('RANKED', () {}),
+                PlayButton('MINI IGRE', () {}),
+              ],
+            ),
+          ),
         ],
       ),
     );

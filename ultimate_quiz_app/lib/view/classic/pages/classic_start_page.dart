@@ -16,12 +16,14 @@ class ClassicStartPage extends StatelessWidget {
         image: DecorationImage(
           opacity: 1,
           image: AssetImage("assets/images/cool_neon_wall.jpeg"),
+          // image: AssetImage(
+          //     'assets/images/neon_lights_upside.jpeg'), //
           fit: BoxFit.cover,
         ),
       ),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black38,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           elevation: 1,
@@ -36,7 +38,7 @@ class ClassicStartPage extends StatelessWidget {
             //mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AppTitleClassic(),
-              CreateJoinClassicButton('PLAY', () {
+              CreateJoinClassicButton('ZAPOČNI IGRU', () {
                 showStartGameDialog(context, 'Tražimo protivnika...');
                 Future.delayed(
                   const Duration(seconds: 1),

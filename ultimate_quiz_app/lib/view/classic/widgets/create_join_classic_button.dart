@@ -25,15 +25,27 @@ class CreateJoinClassicButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-        child: Text(
-          title,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: title == 'PLAY' ? 25 : 18,
-            fontWeight: FontWeight.w900,
-            letterSpacing: title == 'PLAY' ? 2 : 0.5,
-            fontFamily: 'Sarala',
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: title != 'ZAPOČNI IGRU'
+                  ? const EdgeInsets.only(right: 3.5)
+                  : null,
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: title == 'ZAPOČNI IGRU' ? 24 : 18,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: title == 'PLAY' ? 2 : 0.5,
+                  fontFamily: 'Sarala',
+                ),
+              ),
+            ),
+            if (title == 'KREIRAJ PRIVATNU IGRU') const Icon(Icons.lock),
+            if (title == 'PRIDRUŽI SE PRIVATNOJ IGRI') const Icon(Icons.people),
+          ],
         ),
       ),
     );

@@ -56,7 +56,8 @@ class CustomBottomNavBar extends StatelessWidget {
             backgroundColor: Colors.transparent,
             icon: CircleAvatar(
               radius: 26,
-              backgroundImage: AssetImage("assets/images/home_center_play.jpg"),
+              backgroundImage: AssetImage(
+                  "assets/images/play_button.jpg"), //AssetImage("assets/images/home_center_play.jpg"),
             ),
             label: 'PLAY',
           ),

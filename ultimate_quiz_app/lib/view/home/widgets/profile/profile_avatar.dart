@@ -3,9 +3,10 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 class ProfileAvatar extends StatelessWidget {
-  ProfileAvatar(this.didTakePicture, this.imageBytes);
+  ProfileAvatar(this.didTakePicture, this.imageBytes, {this.isInTestPhase});
   final bool didTakePicture;
   final Uint8List? imageBytes;
+  bool? isInTestPhase = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,14 +26,17 @@ class ProfileAvatar extends StatelessWidget {
         radius: 48,
         backgroundColor:
             didTakePicture ? Colors.grey.shade900 : Colors.grey.shade400,
-        backgroundImage: didTakePicture ? MemoryImage(imageBytes!) : null,
-        child: didTakePicture
+        backgroundImage: NetworkImage(
+            'https://m.media-amazon.com/images/M/MV5BMjI2NTE1MjY5OF5BMl5BanBnXkFtZTgwMzQ3OTIwMjE@._V1_.jpg'), // didTakePicture ? MemoryImage(imageBytes!) : null,
+        child: isInTestPhase!
             ? null
-            : Icon(
-                Icons.camera_alt_rounded,
-                size: 30,
-                color: Colors.purple.shade800,
-              ),
+            : didTakePicture
+                ? null
+                : Icon(
+                    Icons.camera_alt_rounded,
+                    size: 30,
+                    color: Colors.purple.shade800,
+                  ),
       ),
     );
   }

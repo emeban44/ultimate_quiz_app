@@ -21,7 +21,11 @@ class PlayerLobbyCard extends StatelessWidget {
                 SizedBox(
                   height: 75,
                   width: 75,
-                  child: ProfileAvatar(false, null),
+                  child: ProfileAvatar(
+                    false,
+                    null,
+                    isInTestPhase: true,
+                  ),
                 ),
                 Expanded(
                   child: Padding(
