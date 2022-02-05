@@ -6,7 +6,6 @@ class ProfileUsername extends StatelessWidget {
   final bool gameStartLobby;
   @override
   Widget build(BuildContext context) {
-    print(gameStartLobby);
     return Container(
       padding: EdgeInsets.only(
         bottom: gameStartLobby ? 0 : 5,

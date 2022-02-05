@@ -28,7 +28,7 @@ class PlayTabBody extends StatelessWidget {
                     children: [
                       TextSpan(
                           text: 'KO NE ZNA, ',
-                          style: TextStyle(color: Colors.blueAccent)),
+                          style: TextStyle(color: Colors.blue.shade300)),
                       TextSpan(
                           text: 'ZNAT',
                           style: TextStyle(color: Colors.pinkAccent.shade100)),

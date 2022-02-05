@@ -67,7 +67,8 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
               children: [
                 GestureDetector(
                   onTap: selectImage,
-                  child: ProfileAvatar(didTakePicture, imageBytes),
+                  child: ProfileAvatar(didTakePicture, imageBytes,
+                      isInTestPhase: true),
                 ),
                 Expanded(
                   child: Padding(

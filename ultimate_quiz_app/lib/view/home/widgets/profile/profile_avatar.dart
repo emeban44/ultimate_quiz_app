@@ -3,10 +3,11 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 class ProfileAvatar extends StatelessWidget {
-  ProfileAvatar(this.didTakePicture, this.imageBytes, {this.isInTestPhase});
+  ProfileAvatar(this.didTakePicture, this.imageBytes,
+      {this.isInTestPhase = false});
   final bool didTakePicture;
   final Uint8List? imageBytes;
-  bool? isInTestPhase = false;
+  final bool isInTestPhase;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +29,7 @@ class ProfileAvatar extends StatelessWidget {
             didTakePicture ? Colors.grey.shade900 : Colors.grey.shade400,
         backgroundImage: NetworkImage(
             'https://m.media-amazon.com/images/M/MV5BMjI2NTE1MjY5OF5BMl5BanBnXkFtZTgwMzQ3OTIwMjE@._V1_.jpg'), // didTakePicture ? MemoryImage(imageBytes!) : null,
-        child: isInTestPhase!
+        child: isInTestPhase
             ? null
             : didTakePicture
                 ? null
