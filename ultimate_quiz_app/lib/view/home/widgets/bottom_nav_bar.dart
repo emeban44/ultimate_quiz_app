@@ -16,9 +16,9 @@ class CustomBottomNavBar extends StatelessWidget {
             topRight: Radius.circular(17),
           ),
           gradient: LinearGradient(colors: [
-            Colors.blue.shade400,
-            Colors.purple.shade500,
-            Colors.pink.shade900,
+            Colors.blue.shade400.withOpacity(1),
+            Colors.purple.shade500.withOpacity(1),
+            Colors.pink.shade900.withOpacity(1),
           ])),
       child: BottomNavigationBar(
         backgroundColor: Colors.transparent,

@@ -13,9 +13,9 @@ class PlayButton extends StatelessWidget {
         border: Border.all(color: Colors.white, width: 1),
         gradient: LinearGradient(
           colors: [
-            Colors.pink.shade900,
-            Colors.purple.shade500,
-            Colors.blue.shade600,
+            Colors.pink.shade900.withOpacity(0.5),
+            Colors.purple.shade500.withOpacity(0.5),
+            Colors.blue.shade600.withOpacity(0.5),
           ],
         ),
       ),
