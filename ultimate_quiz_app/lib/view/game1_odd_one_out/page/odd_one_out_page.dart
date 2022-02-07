@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:ultimate_quiz_app/view/game1_odd_one_out/widgets/answer_box.dart';
-import 'package:ultimate_quiz_app/view/game_page_view/pages/prva_igra_test_page_view.dart';
+import 'package:ultimate_quiz_app/view/game1_odd_one_out/page/odd_one_out_game_view.dart';
 import 'package:ultimate_quiz_app/widgets/player_score_box.dart';
-import 'package:simple_animations/simple_animations.dart';
-import 'package:show_up_animation/show_up_animation.dart';
 
 class OddOneOutPage extends StatelessWidget {
   static const String routeName = '/odd-one-out-page';
   final PageController _pageController = PageController();
+
+  void nextPage() {
+    Future.delayed(
+      const Duration(seconds: 4),
+    ).whenComplete(() => _pageController.nextPage(
+          duration: const Duration(seconds: 1),
+          curve: Curves.decelerate,
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,8 +60,8 @@ class OddOneOutPage extends StatelessWidget {
                 child: PageView(
                   controller: _pageController,
                   children: [
-                    OddOneOutGameView(),
-                    OddOneOutGameView(),
+                    OddOneOutGameView(nextPage),
+                    OddOneOutGameView(nextPage),
                   ],
                 ),
               ),
