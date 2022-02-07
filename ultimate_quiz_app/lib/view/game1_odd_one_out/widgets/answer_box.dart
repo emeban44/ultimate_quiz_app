@@ -25,9 +25,9 @@ class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
       },
       child: Container(
         alignment: Alignment.center,
-        height: 60,
+        height: 50,
         width: double.infinity,
-        margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         padding: const EdgeInsets.symmetric(vertical: 12.5, horizontal: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
@@ -48,7 +48,10 @@ class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
         child: Text(
           widget.text,
           textAlign: TextAlign.center,
-          style: TextStyle(fontFamily: 'Signika'),
+          style: TextStyle(
+            fontFamily: 'Signika',
+            fontSize: 20,
+          ),
         ),
       ),
     );

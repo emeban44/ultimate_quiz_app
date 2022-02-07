@@ -17,8 +17,15 @@ class PlayerScoreBox extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         border: Border.all(color: Colors.white),
-        gradient: LinearGradient(
-            colors: [Colors.blue.shade900, Colors.pink.shade900]),
+        gradient: isHomePlayer
+            ? LinearGradient(colors: [
+                Colors.blue.shade900.withOpacity(0.75),
+                Colors.pink.shade900.withOpacity(0.75),
+              ])
+            : LinearGradient(colors: [
+                Colors.pink.shade900.withOpacity(0.75),
+                Colors.blue.shade900.withOpacity(0.75),
+              ]),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Column(
@@ -27,29 +34,51 @@ class PlayerScoreBox extends StatelessWidget {
         children: [
           Row(
             children: [
-              CircleAvatar(
-                child: null,
-                radius: 30,
-                backgroundImage: NetworkImage(imageURL),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15.0, top: 7.5),
-                child: Text(
-                  score.toString(),
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontFamily: 'Acme',
+              if (!isHomePlayer)
+                Padding(
+                  padding: const EdgeInsets.only(right: 10.0, top: 5),
+                  child: Text(
+                    score.toString(),
+                    style: TextStyle(
+                      fontSize: 35,
+                      fontFamily: 'Acme',
+                    ),
                   ),
                 ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 0.5,
+                  ),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: CircleAvatar(
+                  child: null,
+                  radius: 25,
+                  backgroundImage: NetworkImage(imageURL),
+                ),
               ),
+              if (isHomePlayer)
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, top: 5),
+                  child: Text(
+                    score.toString(),
+                    style: TextStyle(
+                      fontSize: 35,
+                      fontFamily: 'Acme',
+                    ),
+                  ),
+                ),
             ],
           ),
-          Container(
-            child: const Divider(
-              color: Colors.white,
-              height: 1,
-            ),
-          ),
+          // Container(
+          //   margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 2),
+          //   color: Colors.white,
+          //   height: 1,
+          //   width: 100,
+          //   //child: Text('x'),
+          // ),
           Container(
             margin: const EdgeInsets.only(top: 3.5),
             child: Text(
