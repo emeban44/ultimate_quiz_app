@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class PlayerScoreBox extends StatelessWidget {
   PlayerScoreBox({
@@ -36,7 +37,7 @@ class PlayerScoreBox extends StatelessWidget {
             children: [
               if (!isHomePlayer)
                 Padding(
-                  padding: const EdgeInsets.only(right: 10.0, top: 5),
+                  padding: const EdgeInsets.only(right: 10.0, top: 2.5),
                   child: Text(
                     score.toString(),
                     style: TextStyle(
@@ -49,19 +50,35 @@ class PlayerScoreBox extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.white,
-                    width: 0.5,
+                    width: 1,
                   ),
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: CircleAvatar(
-                  child: null,
-                  radius: 25,
-                  backgroundImage: NetworkImage(imageURL),
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(1000),
+                      child: CachedNetworkImage(
+                        imageUrl: imageURL,
+                        fit: BoxFit.fitHeight,
+                        filterQuality: FilterQuality.high,
+                        placeholder: (context, url) =>
+                            Image.asset('assets/images/strucnjak.png'),
+                      ),
+                    ),
+                  ),
+                  radius: 23,
+                  backgroundColor: Colors.black,
+                  // backgroundImage: CachedNetworkImageProvider(
+                  //   imageURL,
+                  // ),
                 ),
               ),
               if (isHomePlayer)
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, top: 5),
+                  padding: const EdgeInsets.only(left: 10.0, top: 2.5),
                   child: Text(
                     score.toString(),
                     style: TextStyle(

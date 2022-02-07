@@ -46,7 +46,7 @@ class OddOneOutPage extends StatelessWidget {
               ShowUpAnimation(
                 child: Container(
                   // height: 125,
-                  margin: const EdgeInsets.only(top: 10, bottom: 30),
+                  margin: const EdgeInsets.only(top: 15, bottom: 30),
                   // width: 300,
                   child: Image.asset('assets/images/izbaci_uljeza_fit.png'),
                 ),

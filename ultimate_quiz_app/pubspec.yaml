@@ -37,6 +37,7 @@ dependencies:
   flutter_styled_toast: ^2.0.0
   simple_animations: ^4.0.1
   show_up_animation: ^2.0.0
+  cached_network_image: ^3.2.0
   
   #FIREBASE
   firebase_storage: ^10.2.5
