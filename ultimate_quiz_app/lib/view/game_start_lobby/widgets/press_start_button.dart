@@ -15,7 +15,7 @@ class PressStartButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 62.5,
-      margin: const EdgeInsets.symmetric(horizontal: 35, vertical: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 100, vertical: 12),
       width: double.infinity,
       decoration: isHomePlayerReady
           ? BoxDecoration(

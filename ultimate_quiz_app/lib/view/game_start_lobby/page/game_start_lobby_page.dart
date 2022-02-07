@@ -23,7 +23,7 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
 
   bool shouldShowOpponent = false;
 
-  int countdownNumber = 5;
+  int countdownNumber = 3;
 
   void onReadyPressed() {
     setState(() {
@@ -67,6 +67,13 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           //title: AppLogoAppBarTitle(37.5),
+          // actions: [
+          //   IconButton(
+          //       onPressed: () {
+          //         Navigator.popUntil(context, ModalRoute.withName('/'));
+          //       },
+          //       icon: Icon(Icons.gamepad))
+          // ],
           centerTitle: true,
         ),
         body: Container(

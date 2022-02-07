@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/view/game1_odd_one_out/page/odd_one_out_game_view.dart';
 import 'package:ultimate_quiz_app/widgets/player_score_box.dart';
 

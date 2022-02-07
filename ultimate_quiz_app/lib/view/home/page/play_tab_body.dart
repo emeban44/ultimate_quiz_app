@@ -21,7 +21,7 @@ class PlayTabBody extends StatelessWidget {
               //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: const EdgeInsets.only(bottom: 5, top: 0),
+                  margin: const EdgeInsets.only(bottom: 5, top: 20),
                   child: AppLogoAppBarTitle(175),
                 ),
                 RichText(

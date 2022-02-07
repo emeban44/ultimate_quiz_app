@@ -22,8 +22,8 @@ class OddOneOutGameView extends StatelessWidget {
                     top: 15, bottom: 25, right: 12.5, left: 12.5),
                 child: Image.asset('assets/images/izbaci_uljeza_fit.png'),
               ),
-              delayStart: const Duration(milliseconds: 50),
-              animationDuration: const Duration(seconds: 1),
+              delayStart: const Duration(milliseconds: 0),
+              animationDuration: const Duration(seconds: 3),
               curve: Curves.decelerate,
               direction: Direction.horizontal,
             )

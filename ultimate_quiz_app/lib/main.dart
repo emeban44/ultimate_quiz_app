@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
                         return LoginPage();
                       }),
               //initialRoute: SplashScreen.routeName,
-              //initialRoute: OddOneOutPage.routeName,
+              //  initialRoute: OddOneOutPage.routeName,
               onGenerateRoute: (settings) =>
                   RouteGenerator.generateRoute(settings),
             ),

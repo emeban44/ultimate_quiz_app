@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
+import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
 import 'answer_box.dart';
 
@@ -16,6 +18,8 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
   final List<bool> _answerSelection = [false, false, false, false];
   final List<bool> _answerTruth = [false, false, false, true];
 
+  bool isFirstGame = false;
+
   void _selectAnswer(int index) {
     if (_answerSelection[index] == false) {
       setState(() {
@@ -27,6 +31,12 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
     }
   }
 
+  void firstGamePlayed() {
+    setState(() {
+      isFirstGame = true;
+    });
+  }
+
   final List<String> _potentialAnswers = [
     'Novak Đokovič',
     'Roger Federer',
@@ -36,12 +46,16 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
 
   @override
   Widget build(BuildContext context) {
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         children: [
           ShowUpAnimation(
-            delayStart: const Duration(milliseconds: 1000),
+            delayStart: Duration(
+                milliseconds:
+                    gameProvider.oddOneOutPageIndex != 0 ? 1000 : 3000),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
@@ -54,7 +68,9 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
             ),
           ),
           ShowUpAnimation(
-            delayStart: const Duration(milliseconds: 2000),
+            delayStart: Duration(
+                milliseconds:
+                    gameProvider.oddOneOutPageIndex != 0 ? 1900 : 3900),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
@@ -67,7 +83,9 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
             ),
           ),
           ShowUpAnimation(
-            delayStart: const Duration(milliseconds: 3000),
+            delayStart: Duration(
+                milliseconds:
+                    gameProvider.oddOneOutPageIndex != 0 ? 2800 : 4800),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
@@ -80,7 +98,9 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
             ),
           ),
           ShowUpAnimation(
-            delayStart: const Duration(milliseconds: 4000),
+            delayStart: Duration(
+                milliseconds:
+                    gameProvider.oddOneOutPageIndex != 0 ? 3700 : 5700),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
