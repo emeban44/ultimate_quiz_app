@@ -19,7 +19,7 @@ class PlayButton extends StatelessWidget {
           ],
         ),
       ),
-      height: 70,
+      height: 65,
       width: 250,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(

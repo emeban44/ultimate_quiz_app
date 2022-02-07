@@ -1,27 +1,35 @@
 import 'package:flutter/material.dart';
 
 class OddOneOutAnswerBox extends StatefulWidget {
-  OddOneOutAnswerBox(this.text);
-  final String text;
+  OddOneOutAnswerBox({
+    required this.answer,
+    required this.isSelected,
+    required this.selectAnswer,
+    required this.index,
+  });
+  final String answer;
+  final bool isSelected;
+  final Function(int) selectAnswer;
+  final int index;
 
   @override
   State<OddOneOutAnswerBox> createState() => _OddOneOutAnswerBoxState();
 }
 
 class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
-  bool isPressed = false;
+  // bool isPressed = false;
 
-  void onAnswerPressed() {
-    setState(() {
-      isPressed = !isPressed;
-    });
-  }
+  // void onAnswerPressed() {
+  //   setState(() {
+  //     isPressed = !isPressed;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        onAnswerPressed();
+        widget.selectAnswer(widget.index);
       },
       child: Container(
         alignment: Alignment.center,
@@ -31,10 +39,10 @@ class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
         padding: const EdgeInsets.symmetric(vertical: 12.5, horizontal: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: isPressed
+          color: widget.isSelected
               ? Colors.black87
               : null, //Colors.redAccent.shade700 : null,
-          gradient: isPressed
+          gradient: widget.isSelected
               ? null
               : LinearGradient(colors: [
                   Colors.blue.shade900.withOpacity(0.5),
@@ -46,7 +54,7 @@ class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
           ),
         ),
         child: Text(
-          widget.text,
+          widget.answer,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontFamily: 'Signika',

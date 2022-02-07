@@ -7,6 +7,7 @@ import 'package:ultimate_quiz_app/providers/auth_provider.dart';
 import 'package:ultimate_quiz_app/routes/route_generator.dart';
 import 'package:ultimate_quiz_app/theme/theme_data.dart';
 import 'package:ultimate_quiz_app/view/game1_odd_one_out/page/odd_one_out_page.dart';
+import 'package:ultimate_quiz_app/view/game_page_view/pages/games_page_view.dart';
 import 'package:ultimate_quiz_app/view/home/page/home_page.dart';
 import 'package:ultimate_quiz_app/view/login/page/login_page.dart';
 

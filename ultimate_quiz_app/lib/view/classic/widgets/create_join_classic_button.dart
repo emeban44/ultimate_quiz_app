@@ -36,7 +36,7 @@ class CreateJoinClassicButton extends StatelessWidget {
                 title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: title == 'ZAPOČNI IGRU' ? 22 : 18,
+                  fontSize: title == 'ZAPOČNI IGRU' ? 22 : 16,
                   fontWeight: FontWeight.w900,
                   letterSpacing: title == 'PLAY' ? 2 : 0.5,
                   fontFamily: 'Sarala',

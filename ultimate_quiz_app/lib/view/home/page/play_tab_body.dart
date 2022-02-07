@@ -8,15 +8,17 @@ class PlayTabBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //height: 400,
-      margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.1),
+      //margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.1),
       alignment: Alignment.center,
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Flexible(
+          Container(
+            // flex: 1,
+            margin: const EdgeInsets.only(bottom: 35),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 5, top: 0),
@@ -41,7 +43,8 @@ class PlayTabBody extends StatelessWidget {
               ],
             ),
           ),
-          Flexible(
+          Container(
+            //flex: 1,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
