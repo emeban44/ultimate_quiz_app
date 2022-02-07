@@ -9,7 +9,7 @@ class OddOneOutPage extends StatelessWidget {
 
   void nextPage() {
     Future.delayed(
-      const Duration(seconds: 4),
+      const Duration(milliseconds: 4500),
     ).whenComplete(() => _pageController.nextPage(
           duration: const Duration(seconds: 1),
           curve: Curves.decelerate,
@@ -18,6 +18,8 @@ class OddOneOutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('rebuild page');
+
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(

@@ -31,7 +31,7 @@ mixin RouteGenerator {
           ),
         );
       case OddOneOutPage.routeName:
-        return SlideAnimationTween(
+        return FadeAnimationTween(
           widget: ChangeNotifierProvider<GameProvider>.value(
               value: settings.arguments as GameProvider,
               child: OddOneOutPage()),

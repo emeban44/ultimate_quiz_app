@@ -8,4 +8,9 @@ class GameProvider extends ChangeNotifier {
     oddOneOutPageIndex++;
     notifyListeners();
   }
+
+  void resetCounters() {
+    oddOneOutPageIndex = 0;
+    notifyListeners();
+  }
 }

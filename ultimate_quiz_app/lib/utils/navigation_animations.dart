@@ -35,7 +35,7 @@ class FadeAnimationTween extends PageRouteBuilder<dynamic> {
               Animation<double> secAnimation) {
             return widget;
           },
-          transitionDuration: const Duration(milliseconds: 200),
+          transitionDuration: const Duration(milliseconds: 1000),
           transitionsBuilder: (BuildContext context,
               Animation<double> animation,
               Animation<double> secAnimation,

@@ -39,15 +39,40 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
 
   final List<String> _potentialAnswers = [
     'Novak Đokovič',
-    'Roger Federer',
+    'Daniil Medvedev',
     'Damir Džumhur',
-    'Ante Žižić',
+    'Nikola Jokić', // Nikola Jokić nije teniser.
+  ];
+  final List<String> _potentialAnswers1 = [
+    'Amper',
+    'Volt', // Volt nije osnovna mjerna jedinica.
+    'Kilogram',
+    'Metar',
+  ];
+  final List<String> _potentialAnswers2 = [
+    'Se7en',
+    'Mr. & Mrs. Smith',
+    'The Matrix', // U filmu Matrix nije glumio Brad Pitt.
+    'Fight Club',
+  ];
+  final List<String> _potentialAnswers3 = [
+    'Windows',
+    'macOS',
+    'Linux',
+    'HDMI', // HDMI nije operativni sistem. To je kabal.
+  ];
+  final List<String> _potentialAnswers4 = [
+    'Pantera',
+    'Hijena', // Hijena ne pripada rodu mačaka.
+    'Leopard',
+    'Gepard',
   ];
 
   @override
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
+    final int currentPage = gameProvider.oddOneOutPageIndex;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -55,11 +80,19 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
           ShowUpAnimation(
             delayStart: Duration(
                 milliseconds:
-                    gameProvider.oddOneOutPageIndex != 0 ? 1000 : 3000),
+                    gameProvider.oddOneOutPageIndex != 0 ? 750 : 2700),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
-              answer: _potentialAnswers[0],
+              answer: currentPage == 0
+                  ? _potentialAnswers[0]
+                  : currentPage == 1
+                      ? _potentialAnswers1[0]
+                      : currentPage == 2
+                          ? _potentialAnswers2[0]
+                          : currentPage == 3
+                              ? _potentialAnswers3[0]
+                              : _potentialAnswers4[0],
               isSelected: _answerSelection[0],
               index: 0,
               shouldRevealTruth: widget.shouldRevealAnwers,
@@ -70,11 +103,19 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
           ShowUpAnimation(
             delayStart: Duration(
                 milliseconds:
-                    gameProvider.oddOneOutPageIndex != 0 ? 1900 : 3900),
+                    gameProvider.oddOneOutPageIndex != 0 ? 1800 : 3700),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
-              answer: _potentialAnswers[1],
+              answer: currentPage == 0
+                  ? _potentialAnswers[1]
+                  : currentPage == 1
+                      ? _potentialAnswers1[1]
+                      : currentPage == 2
+                          ? _potentialAnswers2[1]
+                          : currentPage == 3
+                              ? _potentialAnswers3[1]
+                              : _potentialAnswers4[1],
               isSelected: _answerSelection[1],
               index: 1,
               shouldRevealTruth: widget.shouldRevealAnwers,
@@ -85,13 +126,21 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
           ShowUpAnimation(
             delayStart: Duration(
                 milliseconds:
-                    gameProvider.oddOneOutPageIndex != 0 ? 2800 : 4800),
+                    gameProvider.oddOneOutPageIndex != 0 ? 2750 : 4700),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
               index: 2,
               theTruth: _answerTruth,
-              answer: _potentialAnswers[2],
+              answer: currentPage == 0
+                  ? _potentialAnswers[2]
+                  : currentPage == 1
+                      ? _potentialAnswers1[2]
+                      : currentPage == 2
+                          ? _potentialAnswers2[2]
+                          : currentPage == 3
+                              ? _potentialAnswers3[2]
+                              : _potentialAnswers4[2],
               isSelected: _answerSelection[2],
               selectAnswer: _selectAnswer,
               shouldRevealTruth: widget.shouldRevealAnwers,
@@ -100,12 +149,20 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
           ShowUpAnimation(
             delayStart: Duration(
                 milliseconds:
-                    gameProvider.oddOneOutPageIndex != 0 ? 3700 : 5700),
+                    gameProvider.oddOneOutPageIndex != 0 ? 3900 : 5700),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
               shouldRevealTruth: widget.shouldRevealAnwers,
-              answer: _potentialAnswers[3],
+              answer: currentPage == 0
+                  ? _potentialAnswers[3]
+                  : currentPage == 1
+                      ? _potentialAnswers1[3]
+                      : currentPage == 2
+                          ? _potentialAnswers2[3]
+                          : currentPage == 3
+                              ? _potentialAnswers3[3]
+                              : _potentialAnswers4[3],
               theTruth: _answerTruth,
               isSelected: _answerSelection[3],
               index: 3,

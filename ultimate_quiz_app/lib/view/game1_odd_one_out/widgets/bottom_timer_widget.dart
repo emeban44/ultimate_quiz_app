@@ -33,7 +33,7 @@ class _BottomTimerState extends State<BottomTimer> {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     Future.delayed(
-            Duration(seconds: gameProvider.oddOneOutPageIndex != 0 ? 5 : 8))
+            Duration(seconds: gameProvider.oddOneOutPageIndex != 0 ? 6 : 8))
         .whenComplete(() => startTimer());
     super.initState();
   }
@@ -42,29 +42,59 @@ class _BottomTimerState extends State<BottomTimer> {
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
+    final int currentPage = gameProvider.oddOneOutPageIndex;
     return Expanded(
       child: shouldRevealExplanation
           ? Container(
               margin: const EdgeInsets.only(bottom: 10, right: 25, left: 25),
               alignment: Alignment.center,
-              child: ShowUpAnimation(
-                delayStart: const Duration(milliseconds: 300),
-                curve: Curves.easeIn,
-                child: const Text(
-                  '( Jedan od ponuđenih nije teniser. )',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'Signika',
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ShowUpAnimation(
+                    curve: Curves.easeOut,
+                    animationDuration: Duration(seconds: 1),
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 10, bottom: 35),
+                      child: Text(
+                        '+1',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 30,
+                          fontFamily: 'Acme',
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  ShowUpAnimation(
+                    delayStart: const Duration(milliseconds: 400),
+                    animationDuration: const Duration(seconds: 1),
+                    curve: Curves.linear,
+                    child: Text(
+                      currentPage == 0
+                          ? '( Nikola Jokić nije teniser. )'
+                          : currentPage == 2
+                              ? '( U filmu Matrix nije glumio Brad Pitt. )'
+                              : currentPage == 1
+                                  ? '( Volt nije osnovna mjerna jedinica. )'
+                                  : currentPage == 3
+                                      ? '( HDMI nije operativni sistem. To je kabal. )'
+                                      : '( Hijena ne pripada rodu mačaka. )',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Signika',
+                      ),
+                    ),
+                  ),
+                ],
               ),
             )
           : Container(
               alignment: Alignment.center,
               child: ShowUpAnimation(
                 delayStart: Duration(
-                    seconds: gameProvider.oddOneOutPageIndex != 0 ? 4 : 7),
+                    seconds: gameProvider.oddOneOutPageIndex != 0 ? 5 : 7),
                 curve: Curves.easeIn,
                 child: Text(
                   countdown.toString(),

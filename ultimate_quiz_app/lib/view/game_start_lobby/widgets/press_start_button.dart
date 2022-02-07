@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
 class PressStartButton extends StatelessWidget {
   PressStartButton({
@@ -15,22 +17,32 @@ class PressStartButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 62.5,
-      margin: const EdgeInsets.symmetric(horizontal: 100, vertical: 12),
-      width: double.infinity,
-      decoration: isHomePlayerReady
+      margin: const EdgeInsets.symmetric(vertical: 12),
+      width: 155, // double.infinity,
+      decoration: shouldShowOpponent
           ? BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Colors.green.shade600,
-                Colors.green.shade800,
-              ]),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.white))
-          : BoxDecoration(
               border: Border.all(color: Colors.white, width: 2),
               borderRadius: BorderRadius.circular(10),
-            ),
+              color: Colors.black87,
+            )
+          : isHomePlayerReady
+              ? BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                    Colors.green.shade600,
+                    Colors.green.shade800,
+                  ]),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.white))
+              : BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 2),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.black87,
+                ),
       child: ElevatedButton(
         onPressed: () {
+          final GameProvider gameProvider =
+              Provider.of<GameProvider>(context, listen: false);
+          gameProvider.resetCounters();
           onPress();
           // onOpponentReady();
 

@@ -25,7 +25,7 @@ class OddOneOutGameView extends StatelessWidget {
               delayStart: const Duration(milliseconds: 0),
               animationDuration: const Duration(seconds: 3),
               curve: Curves.decelerate,
-              direction: Direction.horizontal,
+              direction: Direction.vertical,
             )
           else
             Container(
