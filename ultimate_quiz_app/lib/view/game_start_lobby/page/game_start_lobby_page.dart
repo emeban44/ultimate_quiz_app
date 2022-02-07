@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/providers/game_provider.dart';
 import 'package:ultimate_quiz_app/view/game1_odd_one_out/page/odd_one_out_page.dart';
 import 'package:ultimate_quiz_app/view/game_start_lobby/widgets/opponent_lobby_widget.dart';
 import 'package:ultimate_quiz_app/view/game_start_lobby/widgets/player_lobby_card.dart';
@@ -33,6 +35,8 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
   }
 
   void onOpponentReady() {
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
     setState(() {
       shouldShowOpponent = !shouldShowOpponent;
     });
@@ -41,7 +45,8 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
         countdownNumber--;
         if (countdownNumber == 0 || (timer.tick == 6)) {
           timer.cancel();
-          Navigator.pushReplacementNamed(context, OddOneOutPage.routeName);
+          Navigator.pushReplacementNamed(context, OddOneOutPage.routeName,
+              arguments: gameProvider);
         }
       });
     });

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/providers/game_provider.dart';
 import 'package:ultimate_quiz_app/view/classic/widgets/app_title_classic.dart';
 import 'package:ultimate_quiz_app/view/classic/widgets/create_join_classic_button.dart';
 import 'package:ultimate_quiz_app/view/classic/widgets/create_private_game_dialog.dart';
@@ -11,6 +13,8 @@ class ClassicStartPage extends StatelessWidget {
   static const String routeName = '/classic-start';
   @override
   Widget build(BuildContext context) {
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -44,7 +48,8 @@ class ClassicStartPage extends StatelessWidget {
                   const Duration(seconds: 1),
                 ).whenComplete(() {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, GameStartLobbyPage.routeName);
+                  Navigator.pushNamed(context, GameStartLobbyPage.routeName,
+                      arguments: gameProvider);
                 });
               }),
               const Divider(color: Colors.transparent),

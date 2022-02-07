@@ -58,10 +58,16 @@ class OddOneOutPage extends StatelessWidget {
               ),
               Expanded(
                 child: PageView(
+                  physics: const NeverScrollableScrollPhysics(),
                   controller: _pageController,
+                  reverse: false,
+                  // onPageChanged: (value) => ,
                   children: [
-                    OddOneOutGameView(nextPage),
-                    OddOneOutGameView(nextPage),
+                    OddOneOutGameView(nextPage, _pageController, 0),
+                    OddOneOutGameView(nextPage, _pageController, 1),
+                    OddOneOutGameView(nextPage, _pageController, 2),
+                    OddOneOutGameView(nextPage, _pageController, 3),
+                    OddOneOutGameView(nextPage, _pageController, 4),
                   ],
                 ),
               ),

@@ -11,7 +11,7 @@ class BottomTimer extends StatefulWidget {
 }
 
 class _BottomTimerState extends State<BottomTimer> {
-  int countdown = 5;
+  int countdown = 3;
   bool shouldRevealExplanation = false;
   void startTimer() {
     Timer.periodic(Duration(seconds: 1), (timer) {
