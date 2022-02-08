@@ -34,6 +34,13 @@ class ClassicStartPage extends StatelessWidget {
           backgroundColor: Colors.transparent,
           title: AppLogoAppBarTitle(40),
           centerTitle: true,
+          actions: [
+            IconButton(
+                onPressed: () async {
+                  await gameProvider.addOddOneOutQuestionToDB();
+                },
+                icon: Icon(Icons.api))
+          ],
         ),
         body: Container(
           alignment: Alignment.center,

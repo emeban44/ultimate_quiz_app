@@ -37,7 +37,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
   @override
   void initState() {
     if (test == false) {
-      print('x');
+      //print('x');
       setState(() {
         test = true;
       });
@@ -47,7 +47,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
 
   @override
   void didChangeDependencies() {
-    print('xxx');
+    //print('xxx');
     super.didChangeDependencies();
   }
 

@@ -38,11 +38,17 @@ dependencies:
   simple_animations: ^4.0.1
   show_up_animation: ^2.0.0
   cached_network_image: ^3.2.0
+  percent_indicator: ^3.4.0
+  json_serializable: ^6.1.4
+  json_annotation: ^4.4.0
   
   #FIREBASE
   firebase_storage: ^10.2.5
   cloud_firestore: ^3.1.6
   firebase_auth: ^3.3.5
+
+  #json build runner: flutter packages pub run build_runner build --delete-conflicting-outputs
+  build_runner: ^2.1.7
 
   #LAUNCHER ICON
 flutter_icons:

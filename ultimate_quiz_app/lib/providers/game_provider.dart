@@ -1,8 +1,41 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/models/odd_one_out_question.dart';
 
 class GameProvider extends ChangeNotifier {
   int oddOneOutPageIndex = 0;
+
+  List<OddOneOutQuestion> oddOneOutQuestions = [];
+
+  Future<void> fetchOddOneOutQuestions() async {
+    final List<OddOneOutQuestion> responseList = [];
+    try {
+      final response =
+          await FirebaseFirestore.instance.collection('izbaci_uljeza').get();
+      for (var element in response.docs) {
+        responseList.add(OddOneOutQuestion.fromJson(element.data()));
+        oddOneOutQuestions = [...responseList];
+        notifyListeners();
+      }
+    } on FirebaseException catch (error) {
+      log(error.message.toString());
+    }
+  }
+
+  Future<void> addOddOneOutQuestionToDB() async {
+    try {
+      await FirebaseFirestore.instance.collection('izbaci_uljeza').doc().set({
+        'objasnjenje': 'U filmu Matrix, nije glumio Brad Pitt.',
+        'tacan_odgovor': 1,
+        'odgovori': ["Se7en", "The Matrix", "Mr. & Mrs. Smith", "Fight Club"],
+      });
+    } on FirebaseException catch (error) {
+      log(error.message.toString());
+    }
+  }
 
   void incrementOddOneOutIndex() {
     oddOneOutPageIndex++;
