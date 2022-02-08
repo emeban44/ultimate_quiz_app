@@ -14,9 +14,14 @@ class OddOneOutPage extends StatelessWidget {
     ).whenComplete(() {
       _pageController.nextPage(
         duration: const Duration(seconds: 1),
-        curve: Curves.decelerate,
+        curve: Curves.easeOut,
       );
       gameProvider.incrementOddOneOutIndex();
+      gameProvider.game1ResetSelection();
+      Future.delayed(const Duration(milliseconds: 500)).whenComplete(() {
+        gameProvider.game1ShouldDisableSelection = false;
+      });
+      //gameProvider.game1ShouldDisableSelection = false;
     });
   }
 

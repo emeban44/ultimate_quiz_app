@@ -6,9 +6,11 @@ import 'package:provider/provider.dart';
 import 'package:ultimate_quiz_app/models/odd_one_out_question.dart';
 
 class GameProvider extends ChangeNotifier {
+  //ODD ONE OUT - GAME 1
   int oddOneOutPageIndex = 0;
   int oddOneOutQuestionIndex = 0;
-
+  int game1SelectedAnswer = 10;
+  bool game1ShouldDisableSelection = false;
   List<OddOneOutQuestion> oddOneOutQuestions = [];
 
   Future<void> fetchOddOneOutQuestions() async {
@@ -46,6 +48,11 @@ class GameProvider extends ChangeNotifier {
 
   void incrementOddOneOutIndex() {
     oddOneOutPageIndex++;
+    notifyListeners();
+  }
+
+  void game1ResetSelection() {
+    game1SelectedAnswer = 10;
     notifyListeners();
   }
 

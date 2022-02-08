@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
 class OddOneOutAnswerBox extends StatefulWidget {
   OddOneOutAnswerBox({
@@ -41,9 +43,14 @@ class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
 
   @override
   Widget build(BuildContext context) {
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
     return GestureDetector(
       onTap: () {
-        widget.selectAnswer(widget.index);
+        if (gameProvider.game1ShouldDisableSelection == false) {
+          widget.selectAnswer(widget.index);
+          gameProvider.game1SelectedAnswer = widget.index;
+        }
       },
       child: Container(
         alignment: Alignment.center,

@@ -13,15 +13,18 @@ class BottomTimer extends StatefulWidget {
 }
 
 class _BottomTimerState extends State<BottomTimer> {
-  int countdown = 10;
+  int countdown = 5;
   bool shouldRevealExplanation = false;
   void startTimer() {
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
     Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         countdown--;
-        if (countdown == -1 || timer.tick == 11) {
+        if (countdown == -1 || timer.tick == 6) {
           timer.cancel();
           shouldRevealExplanation = true;
+          gameProvider.game1ShouldDisableSelection = true;
           widget.revealEverything();
         }
       });
@@ -51,40 +54,38 @@ class _BottomTimerState extends State<BottomTimer> {
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ShowUpAnimation(
-                    curve: Curves.easeOut,
-                    animationDuration: Duration(seconds: 1),
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 10, bottom: 35),
-                      child: Text(
-                        '+1',
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 30,
-                          fontFamily: 'Acme',
+                  if (gameProvider
+                          .oddOneOutQuestions[currentPage].correctAnswer ==
+                      gameProvider.game1SelectedAnswer)
+                    ShowUpAnimation(
+                      curve: Curves.easeOut,
+                      animationDuration: const Duration(seconds: 1),
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        child: const Text(
+                          '+1',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 30,
+                            fontFamily: 'Acme',
+                          ),
                         ),
                       ),
                     ),
-                  ),
                   ShowUpAnimation(
                     delayStart: const Duration(milliseconds: 400),
                     animationDuration: const Duration(seconds: 1),
                     curve: Curves.linear,
-                    child: Text(
-                      gameProvider.oddOneOutQuestions[currentPage].explanation!,
-                      // currentPage == 0
-                      //     ? '( Nikola Jokić nije teniser. )'
-                      //     : currentPage == 2
-                      //         ? '( U filmu Matrix nije glumio Brad Pitt. )'
-                      //         : currentPage == 1
-                      //             ? '( Volt nije osnovna mjerna jedinica. )'
-                      //             : currentPage == 3
-                      //                 ? '( HDMI nije operativni sistem. To je kabal. )'
-                      //                 : '( Hijena ne pripada rodu mačaka. )',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Signika',
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 35),
+                      child: Text(
+                        gameProvider
+                            .oddOneOutQuestions[currentPage].explanation!,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Signika',
+                        ),
                       ),
                     ),
                   ),
