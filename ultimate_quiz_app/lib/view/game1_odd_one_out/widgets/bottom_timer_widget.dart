@@ -13,15 +13,16 @@ class BottomTimer extends StatefulWidget {
 }
 
 class _BottomTimerState extends State<BottomTimer> {
-  int countdown = 5;
+  int countdown = 7;
   bool shouldRevealExplanation = false;
+  Timer? timer;
   void startTimer() {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         countdown--;
-        if (countdown == -1 || timer.tick == 6) {
+        if (countdown == -1 || timer.tick == 8) {
           timer.cancel();
           shouldRevealExplanation = true;
           gameProvider.game1ShouldDisableSelection = true;
@@ -29,6 +30,13 @@ class _BottomTimerState extends State<BottomTimer> {
         }
       });
     });
+  }
+
+  @override
+  void dispose() {
+    print('timer disposed');
+    timer!.cancel();
+    super.dispose();
   }
 
   @override
