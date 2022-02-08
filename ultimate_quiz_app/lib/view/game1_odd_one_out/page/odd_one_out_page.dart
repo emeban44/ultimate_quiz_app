@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 import 'package:ultimate_quiz_app/view/game1_odd_one_out/page/odd_one_out_game_view.dart';
+import 'package:ultimate_quiz_app/view/game2_guessing/pages/guessing_game_view.dart';
 import 'package:ultimate_quiz_app/widgets/player_score_box.dart';
 
 class OddOneOutPage extends StatelessWidget {
@@ -73,6 +74,15 @@ class OddOneOutPage extends StatelessWidget {
                   reverse: false,
                   // onPageChanged: (value) => ,
                   children: [
+                    GuessingGameView(
+                      pageController: _pageController,
+                      imageURL:
+                          'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fmekonagej.jpeg?alt=media&token=7b13c593-ae15-49ba-850b-1cbb985f3731',
+                    ),
+                    GuessingGameView(
+                        pageController: _pageController,
+                        imageURL:
+                            'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fgavrilo.jpg?alt=media&token=6aaaf702-2a8f-45b8-a9b5-96cc2167b019'),
                     OddOneOutGameView(nextPage, _pageController, 0),
                     OddOneOutGameView(nextPage, _pageController, 1),
                     OddOneOutGameView(nextPage, _pageController, 2),

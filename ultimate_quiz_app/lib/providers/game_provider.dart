@@ -13,6 +13,10 @@ class GameProvider extends ChangeNotifier {
   bool game1ShouldDisableSelection = false;
   List<OddOneOutQuestion> oddOneOutQuestions = [];
 
+  //GUESSING - GAME 2
+  int guessingPageIndex = 0;
+  int guessingQuestionIndex = 0;
+
   Future<void> fetchOddOneOutQuestions() async {
     final List<OddOneOutQuestion> responseList = [];
     try {
@@ -41,6 +45,23 @@ class GameProvider extends ChangeNotifier {
     }
   }
 
+  // GUESSING GAME INCREMENT AND RESET
+  void incrementGuessingQuestionIndex() {
+    guessingQuestionIndex++;
+    notifyListeners();
+  }
+
+  void incrementGuessingPageIndex() {
+    guessingPageIndex++;
+    notifyListeners();
+  }
+
+  void game2ResetSelection() {
+    game1SelectedAnswer = 10;
+    notifyListeners();
+  }
+
+  // ODD ONE OUT RESET AND INCREMENT
   void incrementOddOneOutQuestionIndex() {
     oddOneOutQuestionIndex++;
     notifyListeners();
