@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:show_up_animation/show_up_animation.dart';
+import 'package:ultimate_quiz_app/providers/game_provider.dart';
 import 'package:ultimate_quiz_app/view/game1_odd_one_out/page/odd_one_out_game_view.dart';
 import 'package:ultimate_quiz_app/widgets/player_score_box.dart';
 
@@ -7,19 +8,20 @@ class OddOneOutPage extends StatelessWidget {
   static const String routeName = '/odd-one-out-page';
   final PageController _pageController = PageController();
 
-  void nextPage() {
+  void nextPage(GameProvider gameProvider) {
     Future.delayed(
       const Duration(milliseconds: 4500),
-    ).whenComplete(() => _pageController.nextPage(
-          duration: const Duration(seconds: 1),
-          curve: Curves.decelerate,
-        ));
+    ).whenComplete(() {
+      _pageController.nextPage(
+        duration: const Duration(seconds: 1),
+        curve: Curves.decelerate,
+      );
+      gameProvider.incrementOddOneOutIndex();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    print('rebuild page');
-
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(

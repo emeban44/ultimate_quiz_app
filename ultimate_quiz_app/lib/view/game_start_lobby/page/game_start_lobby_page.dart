@@ -34,7 +34,7 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
     });
   }
 
-  void onOpponentReady() {
+  void onOpponentReady() async {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     setState(() {
@@ -50,6 +50,11 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
         }
       });
     });
+    try {
+      await gameProvider.fetchOddOneOutQuestions();
+    } catch (error) {
+      Navigator.popUntil(context, ModalRoute.withName('/'));
+    }
   }
 
   @override

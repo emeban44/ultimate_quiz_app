@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:show_up_animation/show_up_animation.dart';
+import 'package:ultimate_quiz_app/providers/game_provider.dart';
 import 'package:ultimate_quiz_app/view/game1_odd_one_out/widgets/answer_box.dart';
 import 'package:ultimate_quiz_app/view/game1_odd_one_out/widgets/answer_column.dart';
 import 'package:ultimate_quiz_app/view/game1_odd_one_out/widgets/bottom_timer_widget.dart';
@@ -7,7 +8,7 @@ import 'package:ultimate_quiz_app/view/game1_odd_one_out/widgets/game_column.dar
 
 class OddOneOutGameView extends StatelessWidget {
   OddOneOutGameView(this.nextPage, this._pageController, this.pageIndex);
-  final Function nextPage;
+  final Function(GameProvider) nextPage;
   final PageController _pageController;
   final int pageIndex;
   @override

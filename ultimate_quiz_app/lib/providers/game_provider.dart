@@ -7,6 +7,7 @@ import 'package:ultimate_quiz_app/models/odd_one_out_question.dart';
 
 class GameProvider extends ChangeNotifier {
   int oddOneOutPageIndex = 0;
+  int oddOneOutQuestionIndex = 0;
 
   List<OddOneOutQuestion> oddOneOutQuestions = [];
 
@@ -15,6 +16,7 @@ class GameProvider extends ChangeNotifier {
     try {
       final response =
           await FirebaseFirestore.instance.collection('izbaci_uljeza').get();
+      log(response.size.toString());
       for (var element in response.docs) {
         responseList.add(OddOneOutQuestion.fromJson(element.data()));
         oddOneOutQuestions = [...responseList];
@@ -35,6 +37,11 @@ class GameProvider extends ChangeNotifier {
     } on FirebaseException catch (error) {
       log(error.message.toString());
     }
+  }
+
+  void incrementOddOneOutQuestionIndex() {
+    oddOneOutQuestionIndex++;
+    notifyListeners();
   }
 
   void incrementOddOneOutIndex() {

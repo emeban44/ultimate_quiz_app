@@ -71,15 +71,16 @@ class _BottomTimerState extends State<BottomTimer> {
                     animationDuration: const Duration(seconds: 1),
                     curve: Curves.linear,
                     child: Text(
-                      currentPage == 0
-                          ? '( Nikola Jokić nije teniser. )'
-                          : currentPage == 2
-                              ? '( U filmu Matrix nije glumio Brad Pitt. )'
-                              : currentPage == 1
-                                  ? '( Volt nije osnovna mjerna jedinica. )'
-                                  : currentPage == 3
-                                      ? '( HDMI nije operativni sistem. To je kabal. )'
-                                      : '( Hijena ne pripada rodu mačaka. )',
+                      gameProvider.oddOneOutQuestions[currentPage].explanation!,
+                      // currentPage == 0
+                      //     ? '( Nikola Jokić nije teniser. )'
+                      //     : currentPage == 2
+                      //         ? '( U filmu Matrix nije glumio Brad Pitt. )'
+                      //         : currentPage == 1
+                      //             ? '( Volt nije osnovna mjerna jedinica. )'
+                      //             : currentPage == 3
+                      //                 ? '( HDMI nije operativni sistem. To je kabal. )'
+                      //                 : '( Hijena ne pripada rodu mačaka. )',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20,

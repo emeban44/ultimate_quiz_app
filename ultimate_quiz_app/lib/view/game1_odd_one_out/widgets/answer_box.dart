@@ -6,14 +6,16 @@ class OddOneOutAnswerBox extends StatefulWidget {
     required this.isSelected,
     required this.selectAnswer,
     required this.index,
-    required this.theTruth,
+    required this.correctAnswer,
+    //required this.theTruth,
     required this.shouldRevealTruth,
   });
   final String answer;
   final bool isSelected;
   final Function(int) selectAnswer;
   final int index;
-  final List<bool> theTruth;
+  final int correctAnswer;
+  //final List<bool> theTruth;
   final bool shouldRevealTruth;
 
   @override
@@ -23,10 +25,10 @@ class OddOneOutAnswerBox extends StatefulWidget {
 class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
   Color revealColor() {
     if (widget.shouldRevealTruth) {
-      if (widget.theTruth[widget.index] == true) {
+      if (widget.index == widget.correctAnswer) {
         return Colors.green;
       }
-      if (widget.isSelected && widget.theTruth[widget.index] == false) {
+      if (widget.isSelected && widget.correctAnswer != widget.index) {
         return Colors.redAccent.shade700;
       }
     } else {
@@ -54,7 +56,7 @@ class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
           color: revealColor() == Colors.transparent ? null : revealColor(),
           gradient: widget.shouldRevealTruth && widget.isSelected
               ? null
-              : widget.theTruth[widget.index] && widget.shouldRevealTruth
+              : widget.index == widget.correctAnswer && widget.shouldRevealTruth
                   ? null
                   : widget.isSelected
                       ? null

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
+import 'package:ultimate_quiz_app/models/odd_one_out_question.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
 import 'answer_box.dart';
@@ -16,7 +17,7 @@ class OddOneOutAnswerColumn extends StatefulWidget {
 
 class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
   final List<bool> _answerSelection = [false, false, false, false];
-  final List<bool> _answerTruth = [false, false, false, true];
+  //final List<bool> _answerTruth = [false, false, false, true];
 
   bool isFirstGame = false;
 
@@ -37,42 +38,12 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
     });
   }
 
-  final List<String> _potentialAnswers = [
-    'Novak Đokovič',
-    'Daniil Medvedev',
-    'Damir Džumhur',
-    'Nikola Jokić', // Nikola Jokić nije teniser.
-  ];
-  final List<String> _potentialAnswers1 = [
-    'Amper',
-    'Volt', // Volt nije osnovna mjerna jedinica.
-    'Kilogram',
-    'Metar',
-  ];
-  final List<String> _potentialAnswers2 = [
-    'Se7en',
-    'Mr. & Mrs. Smith',
-    'The Matrix', // U filmu Matrix nije glumio Brad Pitt.
-    'Fight Club',
-  ];
-  final List<String> _potentialAnswers3 = [
-    'Windows',
-    'macOS',
-    'Linux',
-    'HDMI', // HDMI nije operativni sistem. To je kabal.
-  ];
-  final List<String> _potentialAnswers4 = [
-    'Pantera',
-    'Hijena', // Hijena ne pripada rodu mačaka.
-    'Leopard',
-    'Gepard',
-  ];
-
   @override
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     final int currentPage = gameProvider.oddOneOutPageIndex;
+    final List<OddOneOutQuestion> questions = gameProvider.oddOneOutQuestions;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -84,19 +55,12 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
-              answer: currentPage == 0
-                  ? _potentialAnswers[0]
-                  : currentPage == 1
-                      ? _potentialAnswers1[0]
-                      : currentPage == 2
-                          ? _potentialAnswers2[0]
-                          : currentPage == 3
-                              ? _potentialAnswers3[0]
-                              : _potentialAnswers4[0],
               isSelected: _answerSelection[0],
+              correctAnswer: questions[currentPage].correctAnswer!,
               index: 0,
               shouldRevealTruth: widget.shouldRevealAnwers,
-              theTruth: _answerTruth,
+              answer: questions[currentPage].answers[0],
+              //theTruth: _answerTruth,
               selectAnswer: _selectAnswer,
             ),
           ),
@@ -107,19 +71,12 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
-              answer: currentPage == 0
-                  ? _potentialAnswers[1]
-                  : currentPage == 1
-                      ? _potentialAnswers1[1]
-                      : currentPage == 2
-                          ? _potentialAnswers2[1]
-                          : currentPage == 3
-                              ? _potentialAnswers3[1]
-                              : _potentialAnswers4[1],
+              answer: questions[currentPage].answers[1],
+              correctAnswer: questions[currentPage].correctAnswer!,
               isSelected: _answerSelection[1],
               index: 1,
               shouldRevealTruth: widget.shouldRevealAnwers,
-              theTruth: _answerTruth,
+              //theTruth: _answerTruth,
               selectAnswer: _selectAnswer,
             ),
           ),
@@ -131,16 +88,8 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
               index: 2,
-              theTruth: _answerTruth,
-              answer: currentPage == 0
-                  ? _potentialAnswers[2]
-                  : currentPage == 1
-                      ? _potentialAnswers1[2]
-                      : currentPage == 2
-                          ? _potentialAnswers2[2]
-                          : currentPage == 3
-                              ? _potentialAnswers3[2]
-                              : _potentialAnswers4[2],
+              correctAnswer: questions[currentPage].correctAnswer!,
+              answer: questions[currentPage].answers[2],
               isSelected: _answerSelection[2],
               selectAnswer: _selectAnswer,
               shouldRevealTruth: widget.shouldRevealAnwers,
@@ -154,16 +103,8 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
               shouldRevealTruth: widget.shouldRevealAnwers,
-              answer: currentPage == 0
-                  ? _potentialAnswers[3]
-                  : currentPage == 1
-                      ? _potentialAnswers1[3]
-                      : currentPage == 2
-                          ? _potentialAnswers2[3]
-                          : currentPage == 3
-                              ? _potentialAnswers3[3]
-                              : _potentialAnswers4[3],
-              theTruth: _answerTruth,
+              answer: questions[currentPage].answers[3],
+              correctAnswer: questions[currentPage].correctAnswer!,
               isSelected: _answerSelection[3],
               index: 3,
               selectAnswer: _selectAnswer,

@@ -7,7 +7,7 @@ import 'bottom_timer_widget.dart';
 
 class OddOneOutGameColumn extends StatefulWidget {
   OddOneOutGameColumn(this.nextPage);
-  final Function nextPage;
+  final Function(GameProvider) nextPage;
   @override
   _OddOneOutGameColumnState createState() => _OddOneOutGameColumnState();
 }
@@ -20,12 +20,16 @@ class _OddOneOutGameColumnState extends State<OddOneOutGameColumn> {
     setState(() {
       shouldRevealAnswers = true;
     });
-    gameProvider.incrementOddOneOutIndex();
-    widget.nextPage();
+    //gameProvider.incrementOddOneOutIndex();
+    if (gameProvider.oddOneOutPageIndex < 4) {
+      widget.nextPage(gameProvider);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
     return Flexible(
       child: Column(
         children: [
