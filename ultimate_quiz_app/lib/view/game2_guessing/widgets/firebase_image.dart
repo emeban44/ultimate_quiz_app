@@ -18,23 +18,23 @@ class FirebaseImage extends StatelessWidget {
       direction: Direction.vertical,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 25),
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-            color: Colors.black45,
-            offset: Offset(2, 4),
-            spreadRadius: 4,
-            blurRadius: 15,
-          )
-        ]),
+        decoration: const BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black45,
+              offset: Offset(2, 4),
+              spreadRadius: 4,
+              blurRadius: 15,
+            )
+          ],
+        ),
         constraints: BoxConstraints(maxHeight: 240),
-        //padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: CachedNetworkImage(
             filterQuality: FilterQuality.high,
             fit: BoxFit.cover,
             imageUrl: imageURL,
-            // 'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fmekonagej.jpeg?alt=media&token=7b13c593-ae15-49ba-850b-1cbb985f3731',
           ),
         ),
       ),

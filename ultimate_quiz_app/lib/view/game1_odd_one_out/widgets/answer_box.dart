@@ -45,43 +45,64 @@ class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
-    return GestureDetector(
-      onTap: () {
-        if (gameProvider.game1ShouldDisableSelection == false) {
-          widget.selectAnswer(widget.index);
-          gameProvider.game1SelectedAnswer = widget.index;
-        }
-      },
-      child: Container(
-        alignment: Alignment.center,
-        //height: 55,
-        width: double.infinity,
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12.5),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: revealColor() == Colors.transparent ? null : revealColor(),
-          gradient: widget.shouldRevealTruth && widget.isSelected
-              ? null
-              : widget.index == widget.correctAnswer && widget.shouldRevealTruth
-                  ? null
-                  : widget.isSelected
-                      ? null
-                      : LinearGradient(colors: [
-                          Colors.blue.shade900.withOpacity(0.5),
-                          Colors.purple.shade900.withOpacity(0.5),
-                          Colors.pink.shade900.withOpacity(0.5),
-                        ]),
-          border: Border.all(
-            color: Colors.white,
-          ),
+    return Container(
+      // alignment: Alignment.center,
+      //height: 55,
+      width: double.infinity,
+
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: revealColor() == Colors.transparent ? null : revealColor(),
+        gradient: widget.shouldRevealTruth && widget.isSelected
+            ? null
+            : widget.index == widget.correctAnswer && widget.shouldRevealTruth
+                ? null
+                : widget.isSelected
+                    ? LinearGradient(colors: [
+                        Colors.blue.shade900.withOpacity(0.5),
+                        Colors.purple.shade900.withOpacity(0.5),
+                        Colors.pink.shade900.withOpacity(0.5),
+                      ])
+                    : LinearGradient(colors: [
+                        Colors.black45,
+                        Colors.black54,
+                      ]),
+        // ? null
+        // : LinearGradient(colors: [
+        //     Colors.blue.shade900.withOpacity(0.5),
+        //     Colors.purple.shade900.withOpacity(0.5),
+        //     Colors.pink.shade900.withOpacity(0.5),
+        //   ]),
+        border: Border.all(
+          color: Colors.white,
         ),
-        child: Text(
-          widget.answer,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontFamily: 'Signika',
-            fontSize: 20,
+      ),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            primary: Colors.transparent,
+            elevation: 0,
+            onPrimary: Colors.white,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15))),
+        onPressed: () {
+          if (gameProvider.game1ShouldDisableSelection == false) {
+            widget.selectAnswer(widget.index);
+            gameProvider.game1SelectedAnswer = widget.index;
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            widget.answer,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontFamily: 'Sarala',
+              fontSize: 19,
+              //fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

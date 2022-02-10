@@ -32,14 +32,6 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
     }
   }
 
-  // @override
-  // void initState() {
-  //   // final GameProvider gameProvider =
-  //   //     Provider.of<GameProvider>(context, listen: false);
-  //   // gameProvider.game1ResetSelection();
-  //   super.initState();
-  // }
-
   void firstGamePlayed() {
     setState(() {
       isFirstGame = true;
