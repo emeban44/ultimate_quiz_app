@@ -79,6 +79,9 @@ class GameProvider extends ChangeNotifier {
 
   void resetCounters() {
     oddOneOutPageIndex = 0;
+    guessingPageIndex = 0;
+    oddOneOutQuestionIndex = 0;
+    guessingQuestionIndex = 0;
     notifyListeners();
   }
 }

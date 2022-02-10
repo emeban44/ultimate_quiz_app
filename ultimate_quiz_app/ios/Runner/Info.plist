@@ -26,6 +26,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Ako želite uslikati sliku profila, molimo dozvolite korištenje vaše kamere.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Molimo dozvolite pristup internetu, kako bi mogli igrati kviz online.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Ako želite dodati sliku profila iz galerije, molimo dozvolite pristup istoj.</string>
 	<key>UILaunchStoryboardName</key>
