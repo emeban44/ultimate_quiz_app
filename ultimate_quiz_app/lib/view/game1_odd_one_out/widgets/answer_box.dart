@@ -61,9 +61,9 @@ class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
                 ? null
                 : widget.isSelected
                     ? LinearGradient(colors: [
-                        Colors.blue.shade900.withOpacity(0.9),
-                        Colors.purple.shade900.withOpacity(0.9),
-                        Colors.pink.shade900.withOpacity(0.9),
+                        Colors.blue.shade900.withOpacity(1),
+                        Colors.purple.shade900.withOpacity(1),
+                        Colors.pink.shade900.withOpacity(1),
                       ])
                     : LinearGradient(colors: [
                         Colors.black45,

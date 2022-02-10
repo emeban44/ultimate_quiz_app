@@ -39,6 +39,11 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
           //animationDuration: ,
           child: Container(
             margin: const EdgeInsets.only(bottom: 20),
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            decoration: BoxDecoration(
+              color: Colors.black26,
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: Text(
               'Pogodi ličnost sa slike:',
               textAlign: TextAlign.center,

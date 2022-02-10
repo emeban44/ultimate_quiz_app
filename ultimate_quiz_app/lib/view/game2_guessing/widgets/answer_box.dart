@@ -28,8 +28,8 @@ class GuessingAnswerBox extends StatelessWidget {
                   Colors.pink.shade900.withOpacity(0.9),
                 ])
               : LinearGradient(colors: [
-                  Colors.black12,
-                  Colors.black12,
+                  Colors.black45,
+                  Colors.black54,
                 ]),
         ),
         child: ElevatedButton(
