@@ -61,9 +61,9 @@ class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
                 ? null
                 : widget.isSelected
                     ? LinearGradient(colors: [
-                        Colors.blue.shade900.withOpacity(0.5),
-                        Colors.purple.shade900.withOpacity(0.5),
-                        Colors.pink.shade900.withOpacity(0.5),
+                        Colors.blue.shade900.withOpacity(0.9),
+                        Colors.purple.shade900.withOpacity(0.9),
+                        Colors.pink.shade900.withOpacity(0.9),
                       ])
                     : LinearGradient(colors: [
                         Colors.black45,
@@ -81,12 +81,14 @@ class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.transparent,
-            elevation: 0,
-            onPrimary: Colors.white,
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15))),
+          primary: Colors.transparent,
+          elevation: 0,
+          onPrimary: Colors.white,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
         onPressed: () {
           if (gameProvider.game1ShouldDisableSelection == false) {
             widget.selectAnswer(widget.index);

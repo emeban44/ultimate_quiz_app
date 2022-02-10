@@ -70,7 +70,7 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
           curve: Curves.easeIn,
           child: GuessingAnswerRow(
             answer1: 'Edin Džeko',
-            answer2: 'Neka budalčina',
+            answer2: 'Matthew McConaughey',
             index1: 2,
             index2: 3,
             selectAnswer: _selectAnswer,
