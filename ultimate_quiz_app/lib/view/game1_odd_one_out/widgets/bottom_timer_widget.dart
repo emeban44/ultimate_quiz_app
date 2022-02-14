@@ -6,8 +6,9 @@ import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
 class BottomTimer extends StatefulWidget {
-  BottomTimer(this.revealEverything);
+  BottomTimer(this.revealEverything, this.shouldRevealEverything);
   final Function() revealEverything;
+  final bool shouldRevealEverything;
   @override
   State<BottomTimer> createState() => _BottomTimerState();
 }
@@ -16,10 +17,12 @@ class _BottomTimerState extends State<BottomTimer> {
   int countdown = 7;
   bool shouldRevealExplanation = false;
   Timer? timer;
+
   void startTimer() {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    gameProvider.oddOneOutTimer =
+        Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         countdown--;
         if (countdown == -1 || timer.tick == 8) {
@@ -30,12 +33,21 @@ class _BottomTimerState extends State<BottomTimer> {
         }
       });
     });
+    timer = gameProvider.oddOneOutTimer;
+    gameProvider.game1ShouldDisableSelection = false;
   }
 
   @override
   void dispose() {
+    // final GameProvider gameProvider =
+    //     Provider.of<GameProvider>(context, listen: false);
+    // if (gameProvider.oddOneOutTimer != null) {
+    //   print('provider timer');
+    //   gameProvider.oddOneOutTimer!.cancel();
+    // }
     print('timer disposed');
-    timer!.cancel();
+
+    timer?.cancel();
     super.dispose();
   }
 
@@ -55,7 +67,7 @@ class _BottomTimerState extends State<BottomTimer> {
         Provider.of<GameProvider>(context, listen: false);
     final int currentPage = gameProvider.oddOneOutPageIndex;
     return Expanded(
-      child: shouldRevealExplanation
+      child: widget.shouldRevealEverything
           ? Container(
               margin: const EdgeInsets.only(bottom: 10, right: 25, left: 25),
               alignment: Alignment.center,

@@ -19,6 +19,7 @@ class _OddOneOutGameColumnState extends State<OddOneOutGameColumn> {
         Provider.of<GameProvider>(context, listen: false);
     setState(() {
       shouldRevealAnswers = true;
+      print('revealAnswers');
     });
     //gameProvider.incrementOddOneOutIndex();
     if (gameProvider.oddOneOutPageIndex < 5) {
@@ -33,8 +34,10 @@ class _OddOneOutGameColumnState extends State<OddOneOutGameColumn> {
     return Flexible(
       child: Column(
         children: [
-          OddOneOutAnswerColumn(shouldRevealAnwers: shouldRevealAnswers),
-          BottomTimer(revealAnswers),
+          OddOneOutAnswerColumn(
+              shouldRevealAnwers: shouldRevealAnswers,
+              revealEverything: revealAnswers),
+          BottomTimer(revealAnswers, shouldRevealAnswers),
         ],
       ),
     );

@@ -11,6 +11,7 @@ class OddOneOutAnswerBox extends StatefulWidget {
     required this.correctAnswer,
     //required this.theTruth,
     required this.shouldRevealTruth,
+    required this.revealEverything,
   });
   final String answer;
   final bool isSelected;
@@ -19,6 +20,7 @@ class OddOneOutAnswerBox extends StatefulWidget {
   final int correctAnswer;
   //final List<bool> theTruth;
   final bool shouldRevealTruth;
+  final Function() revealEverything;
 
   @override
   State<OddOneOutAnswerBox> createState() => _OddOneOutAnswerBoxState();
@@ -79,20 +81,25 @@ class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
           color: Colors.white,
         ),
       ),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: Colors.transparent,
-          elevation: 0,
-          onPrimary: Colors.white,
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ),
-        onPressed: () {
+      child: GestureDetector(
+        // child: ElevatedButton(
+        //   style: ElevatedButton.styleFrom(
+        //     primary: Colors.transparent,
+        //     elevation: 0,
+        //     onPrimary: Colors.white,
+        //     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        //     shape: RoundedRectangleBorder(
+        //       borderRadius: BorderRadius.circular(15),
+        //     ),
+        //   ),
+        //   onPressed: () {
+        onTap: () {
           if (gameProvider.game1ShouldDisableSelection == false) {
             widget.selectAnswer(widget.index);
             gameProvider.game1SelectedAnswer = widget.index;
+            gameProvider.oddOneOutTimer!.cancel();
+            gameProvider.game1ShouldDisableSelection = true;
+            widget.revealEverything();
           }
         },
         child: Padding(

@@ -11,7 +11,7 @@ class OddOneOutPage extends StatelessWidget {
 
   void nextPage(GameProvider gameProvider) {
     Future.delayed(
-      const Duration(milliseconds: 4500),
+      const Duration(milliseconds: 4000),
     ).whenComplete(() {
       _pageController.nextPage(
         duration: const Duration(seconds: 1),
@@ -19,9 +19,10 @@ class OddOneOutPage extends StatelessWidget {
       );
       gameProvider.incrementOddOneOutIndex();
       gameProvider.game1ResetSelection();
-      Future.delayed(const Duration(milliseconds: 500)).whenComplete(() {
-        gameProvider.game1ShouldDisableSelection = false;
-      });
+      // Future.delayed(const Duration(milliseconds: 500)).whenComplete(() {
+      //   gameProvider.game1ShouldDisableSelection = false;
+      // }); OVO JE RADILO BEZ PROBLEMA
+
       //gameProvider.game1ShouldDisableSelection = false;
     });
   }

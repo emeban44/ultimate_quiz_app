@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,8 +11,13 @@ class GameProvider extends ChangeNotifier {
   int oddOneOutPageIndex = 0;
   int oddOneOutQuestionIndex = 0;
   int game1SelectedAnswer = 10;
-  bool game1ShouldDisableSelection = false;
+  bool game1ShouldDisableSelection = true;
   List<OddOneOutQuestion> oddOneOutQuestions = [];
+  Timer? oddOneOutTimer;
+
+  void startOddOneOutTimer() {
+    oddOneOutTimer = Timer.periodic(const Duration(seconds: 5), (timer) {});
+  }
 
   //GUESSING - GAME 2
   int guessingPageIndex = 0;

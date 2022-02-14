@@ -26,7 +26,7 @@ class PlayTabBody extends StatelessWidget {
                 ),
                 RichText(
                   text: TextSpan(
-                    style: TextStyle(fontFamily: 'Retrolight', fontSize: 16),
+                    style: TextStyle(fontFamily: 'Retrolight', fontSize: 17),
                     children: [
                       TextSpan(
                           text: 'KO NE ZNA, ',

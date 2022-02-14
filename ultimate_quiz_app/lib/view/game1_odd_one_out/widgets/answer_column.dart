@@ -9,8 +9,10 @@ import 'answer_box.dart';
 class OddOneOutAnswerColumn extends StatefulWidget {
   OddOneOutAnswerColumn({
     required this.shouldRevealAnwers,
+    required this.revealEverything,
   });
   final bool shouldRevealAnwers;
+  final Function() revealEverything;
   @override
   State<OddOneOutAnswerColumn> createState() => _OddOneOutAnswerColumnState();
 }
@@ -55,6 +57,7 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
+              revealEverything: widget.revealEverything,
               isSelected: _answerSelection[0],
               correctAnswer: questions[currentPage].correctAnswer!,
               index: 0,
@@ -71,6 +74,7 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
+              revealEverything: widget.revealEverything,
               answer: questions[currentPage].answers[1],
               correctAnswer: questions[currentPage].correctAnswer!,
               isSelected: _answerSelection[1],
@@ -87,6 +91,7 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
+              revealEverything: widget.revealEverything,
               index: 2,
               correctAnswer: questions[currentPage].correctAnswer!,
               answer: questions[currentPage].answers[2],
@@ -102,6 +107,7 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
+              revealEverything: widget.revealEverything,
               shouldRevealTruth: widget.shouldRevealAnwers,
               answer: questions[currentPage].answers[3],
               correctAnswer: questions[currentPage].correctAnswer!,
