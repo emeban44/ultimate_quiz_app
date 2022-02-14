@@ -18,6 +18,15 @@ class GuessingGameView extends StatefulWidget {
 }
 
 class _GuessingGameViewState extends State<GuessingGameView> {
+  void nextView(GameProvider gameProvider) {
+    Future.delayed(const Duration(seconds: 2)).then((value) {
+      widget.pageController
+          .nextPage(duration: const Duration(seconds: 2), curve: Curves.easeIn);
+      gameProvider.incrementGuessingPageIndex();
+      gameProvider.game2ResetSelection();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
@@ -27,11 +36,11 @@ class _GuessingGameViewState extends State<GuessingGameView> {
         if (gameProvider.guessingPageIndex == 0)
           ShowUpAnimation(
             child: GestureDetector(
-              onTap: () {
-                widget.pageController.nextPage(
-                    duration: Duration(seconds: 1), curve: Curves.easeOut);
-                gameProvider.incrementGuessingPageIndex();
-              },
+              // onTap: () {
+              //   widget.pageController.nextPage(
+              //       duration: Duration(seconds: 1), curve: Curves.easeOut);
+              //   gameProvider.incrementGuessingPageIndex();
+              // },
               child: Container(
                 margin: const EdgeInsets.only(
                     top: 5, bottom: 15, right: 25, left: 25),
@@ -45,18 +54,15 @@ class _GuessingGameViewState extends State<GuessingGameView> {
           )
         else
           GestureDetector(
-            onTap: () {
-              widget.pageController.nextPage(
-                  duration: Duration(seconds: 1), curve: Curves.easeOut);
-            },
+            //onTap: () => nextView(),
             child: Container(
               margin: const EdgeInsets.only(
                   top: 5, bottom: 15, right: 25, left: 25),
-              child: Image.asset('assets/images/pogadjanje_fit.png'),
+              child: Image.asset('assets/images/pogadjanje_fix.png'),
             ),
           ),
         FirebaseImage(widget.imageURL, gameProvider),
-        GuessingAnswerColumn(gameProvider),
+        GuessingAnswerColumn(gameProvider, nextView),
       ],
     );
   }

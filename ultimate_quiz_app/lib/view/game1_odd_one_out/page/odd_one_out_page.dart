@@ -14,9 +14,10 @@ class OddOneOutPage extends StatelessWidget {
       const Duration(milliseconds: 4000),
     ).whenComplete(() {
       _pageController.nextPage(
-        duration: const Duration(seconds: 1),
-        curve: Curves.easeOut,
-      );
+          duration: const Duration(milliseconds: 1300),
+          curve: gameProvider.oddOneOutPageIndex == 4
+              ? Curves.linearToEaseOut
+              : Curves.linearToEaseOut);
       gameProvider.incrementOddOneOutIndex();
       gameProvider.game1ResetSelection();
       // Future.delayed(const Duration(milliseconds: 500)).whenComplete(() {
@@ -72,6 +73,8 @@ class OddOneOutPage extends StatelessWidget {
                 child: PageView(
                   physics: const NeverScrollableScrollPhysics(),
                   controller: _pageController,
+                  restorationId: 'game',
+
                   reverse: false,
                   // onPageChanged: (value) => ,
                   children: [
@@ -89,6 +92,14 @@ class OddOneOutPage extends StatelessWidget {
                         pageController: _pageController,
                         imageURL:
                             'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fgavrilo.jpg?alt=media&token=6aaaf702-2a8f-45b8-a9b5-96cc2167b019'),
+                    GuessingGameView(
+                        pageController: _pageController,
+                        imageURL:
+                            'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fputin.jpeg?alt=media&token=9e515c3e-2d8f-4214-9cb0-8903fd1f98e0'),
+                    GuessingGameView(
+                        pageController: _pageController,
+                        imageURL:
+                            'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fbecker.jpeg?alt=media&token=4d673a9b-e0ee-469e-8a93-300b54e323af'),
                   ],
                 ),
               ),

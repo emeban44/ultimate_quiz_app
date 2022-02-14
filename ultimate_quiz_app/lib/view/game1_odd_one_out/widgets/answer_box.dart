@@ -67,7 +67,7 @@ class _OddOneOutAnswerBoxState extends State<OddOneOutAnswerBox> {
                         Colors.purple.shade900.withOpacity(1),
                         Colors.pink.shade900.withOpacity(1),
                       ])
-                    : LinearGradient(colors: [
+                    : const LinearGradient(colors: [
                         Colors.black45,
                         Colors.black54,
                       ]),

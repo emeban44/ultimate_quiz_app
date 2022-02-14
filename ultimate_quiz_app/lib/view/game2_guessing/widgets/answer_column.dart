@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 import 'package:ultimate_quiz_app/view/game2_guessing/widgets/answer_row.dart';
 import 'package:ultimate_quiz_app/view/game2_guessing/widgets/bottom_timer.dart';
 
 class GuessingAnswerColumn extends StatefulWidget {
-  GuessingAnswerColumn(this.gameProvider);
+  GuessingAnswerColumn(this.gameProvider, this.nextPage);
   final GameProvider gameProvider;
+  final Function(GameProvider) nextPage;
 
   @override
   State<GuessingAnswerColumn> createState() => _GuessingAnswerColumnState();
@@ -26,6 +28,21 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
     }
   }
 
+  bool shouldRevealAnswers = false;
+
+  void revealAnswers() {
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
+    setState(() {
+      shouldRevealAnswers = true;
+      print('revealAnswers');
+    });
+    //gameProvider.incrementOddOneOutIndex();
+    if (gameProvider.guessingPageIndex < 3) {
+      widget.nextPage(gameProvider);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +51,7 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
         ShowUpAnimation(
           delayStart: Duration(
               milliseconds:
-                  widget.gameProvider.guessingPageIndex == 0 ? 3500 : 2000),
+                  widget.gameProvider.guessingPageIndex == 0 ? 3500 : 3000),
           curve: Curves.easeIn,
           //animationDuration: ,
           child: Container(
@@ -57,7 +74,7 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
         ShowUpAnimation(
           delayStart: Duration(
               milliseconds:
-                  widget.gameProvider.guessingPageIndex == 0 ? 4500 : 3000),
+                  widget.gameProvider.guessingPageIndex == 0 ? 4500 : 4000),
           curve: Curves.easeIn,
           child: GuessingAnswerRow(
             answer1: 'Gavrilo Princip',
@@ -66,12 +83,15 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
             index2: 1,
             selectAnswer: _selectAnswer,
             selection: _answerSelection,
+            correctAnswer: 0,
+            revealEverything: revealAnswers,
+            shouldRevealTruth: shouldRevealAnswers,
           ),
         ),
         ShowUpAnimation(
           delayStart: Duration(
               milliseconds:
-                  widget.gameProvider.guessingPageIndex == 0 ? 5500 : 4000),
+                  widget.gameProvider.guessingPageIndex == 0 ? 5500 : 5000),
           curve: Curves.easeIn,
           child: GuessingAnswerRow(
             answer1: 'Edin Džeko',
@@ -80,14 +100,17 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
             index2: 3,
             selectAnswer: _selectAnswer,
             selection: _answerSelection,
+            correctAnswer: 0,
+            revealEverything: revealAnswers,
+            shouldRevealTruth: shouldRevealAnswers,
           ),
         ),
         ShowUpAnimation(
           delayStart: Duration(
               milliseconds:
-                  widget.gameProvider.guessingPageIndex == 0 ? 6500 : 5000),
+                  widget.gameProvider.guessingPageIndex == 0 ? 6500 : 6000),
           curve: Curves.easeIn,
-          child: GuessingBottomTimer(),
+          child: GuessingBottomTimer(revealAnswers, shouldRevealAnswers),
         ),
       ]),
     );

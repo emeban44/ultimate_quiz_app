@@ -22,6 +22,9 @@ class GameProvider extends ChangeNotifier {
   //GUESSING - GAME 2
   int guessingPageIndex = 0;
   int guessingQuestionIndex = 0;
+  int game2SelectedAnswer = 10;
+  bool game2ShouldDisableSelection = true;
+  Timer? guessingGameTimer;
 
   Future<void> fetchOddOneOutQuestions() async {
     final List<OddOneOutQuestion> responseList = [];
@@ -63,7 +66,7 @@ class GameProvider extends ChangeNotifier {
   }
 
   void game2ResetSelection() {
-    game1SelectedAnswer = 10;
+    game2SelectedAnswer = 10;
     notifyListeners();
   }
 

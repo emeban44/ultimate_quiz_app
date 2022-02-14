@@ -3,9 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
 class GuessingBottomTimer extends StatefulWidget {
+  GuessingBottomTimer(this.revealEverything, this.shouldRevealEverything);
+  final Function() revealEverything;
+  final bool shouldRevealEverything;
   @override
   State<GuessingBottomTimer> createState() => _GuessingBottomTimerState();
 }
@@ -13,10 +17,12 @@ class GuessingBottomTimer extends StatefulWidget {
 class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
   int countdown = 5;
   int percentCounter = 0;
+  bool shouldRevealTruth = false;
   Timer? _timer;
 
-  void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+  void startTimer(GameProvider gameProvider) {
+    gameProvider.guessingGameTimer =
+        Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         countdown--;
         if (percentCounter < 5) {
@@ -24,9 +30,14 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
         }
         if (countdown == 0 || timer.tick == 6) {
           timer.cancel();
+          shouldRevealTruth = true;
+          widget.revealEverything();
+          gameProvider.game2ShouldDisableSelection = true;
         }
       });
     });
+    _timer = gameProvider.guessingGameTimer;
+    gameProvider.game2ShouldDisableSelection = false;
   }
 
   @override
@@ -34,14 +45,14 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     Future.delayed(
-            Duration(seconds: gameProvider.guessingPageIndex == 0 ? 7 : 6))
-        .whenComplete(() => startTimer());
+            Duration(seconds: gameProvider.guessingPageIndex == 0 ? 7 : 7))
+        .whenComplete(() => startTimer(gameProvider));
     super.initState();
   }
 
   @override
   void dispose() {
-    _timer!.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -49,21 +60,46 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
-    return Container(
-      margin: const EdgeInsets.only(top: 15),
-      child: CircularPercentIndicator(
-        radius: 50,
-        progressColor: Colors.purple,
-        backgroundColor: Colors.transparent,
-        percent: 1 - percentCounter * 0.2,
-        center: Text(
-          countdown.toString(),
-          style: TextStyle(
-            fontFamily: 'Acme',
-            fontSize: 30,
-          ),
-        ),
-      ),
-    );
+    return widget.shouldRevealEverything
+
+        // if (gameProvider
+        //                       .oddOneOutQuestions[currentPage].correctAnswer ==
+        //                   gameProvider.game1SelectedAnswer)
+        ? ShowUpAnimation(
+            curve: Curves.easeOut,
+            delayStart: const Duration(milliseconds: 600),
+            animationDuration: const Duration(seconds: 1),
+            child: Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: const Text(
+                '+1',
+                style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 30,
+                  fontFamily: 'Acme',
+                ),
+              ),
+            ),
+          )
+        : ShowUpAnimation(
+            delayStart: const Duration(milliseconds: 500),
+            curve: Curves.linear,
+            child: Container(
+              margin: const EdgeInsets.only(top: 15),
+              child: CircularPercentIndicator(
+                radius: 50,
+                progressColor: Colors.purple,
+                backgroundColor: Colors.transparent,
+                percent: 1 - percentCounter * 0.2,
+                center: Text(
+                  countdown.toString(),
+                  style: TextStyle(
+                    fontFamily: 'Acme',
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+            ),
+          );
   }
 }
