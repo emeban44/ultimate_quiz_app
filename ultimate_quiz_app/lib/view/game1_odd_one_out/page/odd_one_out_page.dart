@@ -74,6 +74,11 @@ class OddOneOutPage extends StatelessWidget {
                   reverse: false,
                   // onPageChanged: (value) => ,
                   children: [
+                    OddOneOutGameView(nextPage, _pageController, 0),
+                    OddOneOutGameView(nextPage, _pageController, 1),
+                    OddOneOutGameView(nextPage, _pageController, 2),
+                    OddOneOutGameView(nextPage, _pageController, 3),
+                    OddOneOutGameView(nextPage, _pageController, 4),
                     GuessingGameView(
                       pageController: _pageController,
                       imageURL:
@@ -83,11 +88,6 @@ class OddOneOutPage extends StatelessWidget {
                         pageController: _pageController,
                         imageURL:
                             'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fgavrilo.jpg?alt=media&token=6aaaf702-2a8f-45b8-a9b5-96cc2167b019'),
-                    OddOneOutGameView(nextPage, _pageController, 0),
-                    OddOneOutGameView(nextPage, _pageController, 1),
-                    OddOneOutGameView(nextPage, _pageController, 2),
-                    OddOneOutGameView(nextPage, _pageController, 3),
-                    OddOneOutGameView(nextPage, _pageController, 4),
                   ],
                 ),
               ),

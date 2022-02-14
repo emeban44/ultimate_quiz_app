@@ -22,7 +22,7 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
         if (percentCounter < 5) {
           percentCounter++;
         }
-        if (countdown == -1 || timer.tick == 6) {
+        if (countdown == 0 || timer.tick == 6) {
           timer.cancel();
         }
       });
@@ -31,7 +31,11 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 7)).whenComplete(() => startTimer());
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
+    Future.delayed(
+            Duration(seconds: gameProvider.guessingPageIndex == 0 ? 7 : 6))
+        .whenComplete(() => startTimer());
     super.initState();
   }
 

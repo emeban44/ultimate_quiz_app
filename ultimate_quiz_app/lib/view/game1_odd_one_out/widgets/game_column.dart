@@ -21,7 +21,7 @@ class _OddOneOutGameColumnState extends State<OddOneOutGameColumn> {
       shouldRevealAnswers = true;
     });
     //gameProvider.incrementOddOneOutIndex();
-    if (gameProvider.oddOneOutPageIndex < 4) {
+    if (gameProvider.oddOneOutPageIndex < 5) {
       widget.nextPage(gameProvider);
     }
   }

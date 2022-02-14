@@ -43,6 +43,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final AuthProvider authProvider =
         Provider.of<AuthProvider>(context, listen: false);
