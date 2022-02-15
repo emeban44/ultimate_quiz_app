@@ -60,25 +60,52 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
+    final int currentPage = gameProvider.guessingPageIndex;
     return widget.shouldRevealEverything
 
         // if (gameProvider
         //                       .oddOneOutQuestions[currentPage].correctAnswer ==
         //                   gameProvider.game1SelectedAnswer)
-        ? ShowUpAnimation(
-            curve: Curves.easeOut,
-            delayStart: const Duration(milliseconds: 600),
-            animationDuration: const Duration(seconds: 1),
-            child: Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: const Text(
-                '+1',
-                style: TextStyle(
-                  color: Colors.green,
-                  fontSize: 30,
-                  fontFamily: 'Acme',
-                ),
-              ),
+        // ? ShowUpAnimation(
+        //     curve: Curves.easeOut,
+        //     delayStart: const Duration(milliseconds: 600),
+        //     animationDuration: const Duration(seconds: 1),
+        //     child: Container(
+        //       margin: const EdgeInsets.only(top: 10),
+        //       child: const Text(
+        //         '+1',
+        //         style: TextStyle(
+        //           color: Colors.green,
+        //           fontSize: 30,
+        //           fontFamily: 'Acme',
+        //         ),
+        //       ),
+        //     ),
+        //   )
+        ? Container(
+            margin: const EdgeInsets.only(bottom: 0, right: 0, left: 0),
+            alignment: Alignment.center,
+            child: Column(
+              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                if (gameProvider.guessQuestions[currentPage].correctAnswer ==
+                    gameProvider.game2SelectedAnswer)
+                  ShowUpAnimation(
+                    curve: Curves.easeOut,
+                    animationDuration: const Duration(seconds: 1),
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      child: const Text(
+                        '+1',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 30,
+                          fontFamily: 'Acme',
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
           )
         : ShowUpAnimation(
