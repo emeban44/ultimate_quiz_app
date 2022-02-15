@@ -14,10 +14,7 @@ class OddOneOutPage extends StatelessWidget {
       const Duration(milliseconds: 4000),
     ).whenComplete(() {
       _pageController.nextPage(
-          duration: const Duration(milliseconds: 1300),
-          curve: gameProvider.oddOneOutPageIndex == 4
-              ? Curves.linearToEaseOut
-              : Curves.linearToEaseOut);
+          duration: const Duration(milliseconds: 1300), curve: Curves.linear);
       gameProvider.incrementOddOneOutIndex();
       gameProvider.game1ResetSelection();
       // Future.delayed(const Duration(milliseconds: 500)).whenComplete(() {

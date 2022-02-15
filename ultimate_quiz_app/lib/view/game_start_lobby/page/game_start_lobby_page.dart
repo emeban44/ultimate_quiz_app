@@ -51,7 +51,11 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
       });
     });
     try {
-      await gameProvider.fetchOddOneOutQuestions();
+      //await gameProvider.fetchOddOneOutQuestions();
+      await Future.wait([
+        gameProvider.fetchOddOneOutQuestions(),
+        gameProvider.fetchGuessingQuestions(),
+      ]);
     } catch (error) {
       Navigator.popUntil(context, ModalRoute.withName('/'));
     }

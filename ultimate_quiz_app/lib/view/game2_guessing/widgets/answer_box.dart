@@ -56,7 +56,7 @@ class GuessingAnswerBox extends StatelessWidget {
                           Colors.purple.shade900.withOpacity(0.9),
                           Colors.pink.shade900.withOpacity(0.9),
                         ])
-                      : LinearGradient(colors: [
+                      : const LinearGradient(colors: [
                           Colors.black45,
                           Colors.black54,
                         ]),
@@ -74,7 +74,7 @@ class GuessingAnswerBox extends StatelessWidget {
           child: FittedBox(
             child: Container(
               padding:
-                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10),
+                  const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10),
               child: Text(
                 text,
                 textAlign: TextAlign.center,
