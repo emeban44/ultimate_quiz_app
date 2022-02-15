@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
+import 'package:ultimate_quiz_app/models/guess_question.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 import 'package:ultimate_quiz_app/view/game2_guessing/widgets/answer_row.dart';
 import 'package:ultimate_quiz_app/view/game2_guessing/widgets/bottom_timer.dart';
@@ -38,13 +39,16 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
       print('revealAnswers');
     });
     //gameProvider.incrementOddOneOutIndex();
-    if (gameProvider.guessingPageIndex < 3) {
+    if (gameProvider.guessingPageIndex < 4) {
       widget.nextPage(gameProvider);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<GuessQuestion> guessQuestionsList =
+        widget.gameProvider.guessQuestions;
+    final int currentPage = widget.gameProvider.guessingPageIndex;
     return Container(
       margin: const EdgeInsets.only(top: 20),
       child: Column(children: [
@@ -62,7 +66,10 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
-              'Pogodi ličnost sa slike:',
+              widget
+                  .gameProvider
+                  .guessQuestions[widget.gameProvider.guessingPageIndex]
+                  .explanation!,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontFamily: 'Signika',
@@ -77,13 +84,13 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
                   widget.gameProvider.guessingPageIndex == 0 ? 4500 : 4000),
           curve: Curves.easeIn,
           child: GuessingAnswerRow(
-            answer1: 'Gavrilo Princip',
-            answer2: 'Nikola Tesla',
+            answer1: guessQuestionsList[currentPage].answers[0],
+            answer2: guessQuestionsList[currentPage].answers[1],
             index1: 0,
             index2: 1,
             selectAnswer: _selectAnswer,
             selection: _answerSelection,
-            correctAnswer: 0,
+            correctAnswer: guessQuestionsList[currentPage].correctAnswer!,
             revealEverything: revealAnswers,
             shouldRevealTruth: shouldRevealAnswers,
           ),
@@ -94,13 +101,13 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
                   widget.gameProvider.guessingPageIndex == 0 ? 5500 : 5000),
           curve: Curves.easeIn,
           child: GuessingAnswerRow(
-            answer1: 'Edin Džeko',
-            answer2: 'Matthew McConaughey',
+            answer1: guessQuestionsList[currentPage].answers[2],
+            answer2: guessQuestionsList[currentPage].answers[3],
             index1: 2,
             index2: 3,
             selectAnswer: _selectAnswer,
             selection: _answerSelection,
-            correctAnswer: 0,
+            correctAnswer: guessQuestionsList[currentPage].correctAnswer!,
             revealEverything: revealAnswers,
             shouldRevealTruth: shouldRevealAnswers,
           ),

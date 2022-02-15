@@ -9,10 +9,10 @@ import 'package:ultimate_quiz_app/view/game2_guessing/widgets/firebase_image.dar
 class GuessingGameView extends StatefulWidget {
   GuessingGameView({
     required this.pageController,
-    required this.imageURL,
+    // required this.imageURL,
   });
   final PageController pageController;
-  final String imageURL;
+  //final String imageURL;
   @override
   _GuessingGameViewState createState() => _GuessingGameViewState();
 }
@@ -61,7 +61,10 @@ class _GuessingGameViewState extends State<GuessingGameView> {
               child: Image.asset('assets/images/pogadjanje_fix.png'),
             ),
           ),
-        FirebaseImage(widget.imageURL, gameProvider),
+        FirebaseImage(
+            gameProvider
+                .guessQuestions[gameProvider.guessingPageIndex].imageURL!,
+            gameProvider),
         GuessingAnswerColumn(gameProvider, nextView),
       ],
     );

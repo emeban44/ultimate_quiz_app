@@ -7,6 +7,7 @@ class GuessQuestion {
   GuessQuestion({
     required this.answers,
     this.explanation,
+    this.imageURL,
     this.correctAnswer,
   });
 
@@ -15,6 +16,8 @@ class GuessQuestion {
   Map<String, dynamic> toJson() => _$GuessQuestionToJson(this);
 
   @JsonKey(name: 'imageURL')
+  String? imageURL;
+  @JsonKey(name: 'objasnjenje')
   String? explanation;
   @JsonKey(name: 'tacan_odgovor')
   int? correctAnswer;

@@ -80,23 +80,11 @@ class OddOneOutPage extends StatelessWidget {
                     OddOneOutGameView(nextPage, _pageController, 2),
                     OddOneOutGameView(nextPage, _pageController, 3),
                     OddOneOutGameView(nextPage, _pageController, 4),
-                    GuessingGameView(
-                      pageController: _pageController,
-                      imageURL:
-                          'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fmekonagej.jpeg?alt=media&token=7b13c593-ae15-49ba-850b-1cbb985f3731',
-                    ),
-                    GuessingGameView(
-                        pageController: _pageController,
-                        imageURL:
-                            'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fgavrilo.jpg?alt=media&token=6aaaf702-2a8f-45b8-a9b5-96cc2167b019'),
-                    GuessingGameView(
-                        pageController: _pageController,
-                        imageURL:
-                            'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fputin.jpeg?alt=media&token=9e515c3e-2d8f-4214-9cb0-8903fd1f98e0'),
-                    GuessingGameView(
-                        pageController: _pageController,
-                        imageURL:
-                            'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fbecker.jpeg?alt=media&token=4d673a9b-e0ee-469e-8a93-300b54e323af'),
+                    GuessingGameView(pageController: _pageController),
+                    GuessingGameView(pageController: _pageController),
+                    GuessingGameView(pageController: _pageController),
+                    GuessingGameView(pageController: _pageController),
+                    GuessingGameView(pageController: _pageController),
                   ],
                 ),
               ),
