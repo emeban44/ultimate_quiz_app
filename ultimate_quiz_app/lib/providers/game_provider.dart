@@ -16,9 +16,9 @@ class GameProvider extends ChangeNotifier {
   List<OddOneOutQuestion> oddOneOutQuestions = [];
   Timer? oddOneOutTimer;
 
-  void startOddOneOutTimer() {
-    oddOneOutTimer = Timer.periodic(const Duration(seconds: 5), (timer) {});
-  }
+  // void startOddOneOutTimer() {
+  //   oddOneOutTimer = Timer.periodic(const Duration(seconds: 5), (timer) {});
+  // }
 
   //GUESSING - GAME 2
   int guessingPageIndex = 0;
@@ -27,6 +27,14 @@ class GameProvider extends ChangeNotifier {
   bool game2ShouldDisableSelection = true;
   Timer? guessingGameTimer;
   List<GuessQuestion> guessQuestions = [];
+
+  //ESTIMATION - GAME 3
+  int estimationPageIndex = 0;
+  int estimationQuestionIndex = 0;
+  int game3SelectedAnswer = 10;
+  bool game3ShouldDisableSelection = true;
+  Timer? estimationGameTimer;
+  List<GuessQuestion> estimationQuestions = [];
 
   Future<void> fetchOddOneOutQuestions() async {
     final List<OddOneOutQuestion> responseList = [];

@@ -39,7 +39,7 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
       print('revealAnswers');
     });
     //gameProvider.incrementOddOneOutIndex();
-    if (gameProvider.guessingPageIndex < 4) {
+    if (gameProvider.guessingPageIndex < 5) {
       widget.nextPage(gameProvider);
     }
   }

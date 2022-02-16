@@ -35,17 +35,10 @@ class _GuessingGameViewState extends State<GuessingGameView> {
       children: [
         if (gameProvider.guessingPageIndex == 0)
           ShowUpAnimation(
-            child: GestureDetector(
-              // onTap: () {
-              //   widget.pageController.nextPage(
-              //       duration: Duration(seconds: 1), curve: Curves.easeOut);
-              //   gameProvider.incrementGuessingPageIndex();
-              // },
-              child: Container(
-                margin: const EdgeInsets.only(
-                    top: 5, bottom: 15, right: 25, left: 25),
-                child: Image.asset('assets/images/pogadjanje_fix.png'),
-              ),
+            child: Container(
+              margin: const EdgeInsets.only(
+                  top: 5, bottom: 15, right: 25, left: 25),
+              child: Image.asset('assets/images/pogadjanje_fix.png'),
             ),
             //delayStart: const Duration(milliseconds: 2000),
             animationDuration: const Duration(seconds: 3),
