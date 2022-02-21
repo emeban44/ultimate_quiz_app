@@ -31,35 +31,38 @@ class _GuessingGameViewState extends State<GuessingGameView> {
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
-    return Column(
-      children: [
-        if (gameProvider.guessingPageIndex == 0)
-          ShowUpAnimation(
-            child: Container(
-              margin: const EdgeInsets.only(
-                  top: 5, bottom: 15, right: 25, left: 25),
-              child: Image.asset('assets/images/pogadjanje_fix.png'),
+    return SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
+      child: Column(
+        children: [
+          if (gameProvider.guessingPageIndex == 0)
+            ShowUpAnimation(
+              child: Container(
+                margin: const EdgeInsets.only(
+                    top: 5, bottom: 15, right: 25, left: 25),
+                child: Image.asset('assets/images/pogadjanje_fix.png'),
+              ),
+              delayStart: const Duration(milliseconds: 500),
+              animationDuration: const Duration(seconds: 3),
+              curve: Curves.decelerate,
+              direction: Direction.vertical,
+            )
+          else
+            GestureDetector(
+              //onTap: () => nextView(),
+              child: Container(
+                margin: const EdgeInsets.only(
+                    top: 5, bottom: 15, right: 25, left: 25),
+                child: Image.asset('assets/images/pogadjanje_fix.png'),
+              ),
             ),
-            delayStart: const Duration(milliseconds: 500),
-            animationDuration: const Duration(seconds: 3),
-            curve: Curves.decelerate,
-            direction: Direction.vertical,
-          )
-        else
-          GestureDetector(
-            //onTap: () => nextView(),
-            child: Container(
-              margin: const EdgeInsets.only(
-                  top: 5, bottom: 15, right: 25, left: 25),
-              child: Image.asset('assets/images/pogadjanje_fix.png'),
-            ),
-          ),
-        FirebaseImage(
-            gameProvider
-                .guessQuestions[gameProvider.guessingPageIndex].imageURL!,
-            gameProvider),
-        GuessingAnswerColumn(gameProvider, nextView),
-      ],
+          FirebaseImage(
+              gameProvider
+                  .guessQuestions[gameProvider.guessingPageIndex].imageURL!,
+              gameProvider),
+          GuessingAnswerColumn(gameProvider, nextView),
+        ],
+      ),
     );
   }
 }

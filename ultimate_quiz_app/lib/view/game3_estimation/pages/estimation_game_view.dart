@@ -5,14 +5,16 @@ import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 import 'package:ultimate_quiz_app/view/game2_guessing/widgets/answer_column.dart';
 import 'package:ultimate_quiz_app/view/game2_guessing/widgets/firebase_image.dart';
+import 'package:ultimate_quiz_app/view/game3_estimation/widgets/bottom_timer.dart';
+import 'package:ultimate_quiz_app/view/game3_estimation/widgets/input_box.dart';
+import 'package:ultimate_quiz_app/view/game3_estimation/widgets/question_box.dart';
 
 class EstimationGameView extends StatefulWidget {
   EstimationGameView({
     required this.pageController,
-    // required this.imageURL,
   });
   final PageController pageController;
-  //final String imageURL;
+
   @override
   _EstimationGameViewState createState() => _EstimationGameViewState();
 }
@@ -22,8 +24,8 @@ class _EstimationGameViewState extends State<EstimationGameView> {
     Future.delayed(const Duration(seconds: 2)).then((value) {
       widget.pageController
           .nextPage(duration: const Duration(seconds: 2), curve: Curves.easeIn);
-      gameProvider.incrementGuessingPageIndex();
-      gameProvider.game2ResetSelection();
+      gameProvider.incrementEstimationIndex();
+      gameProvider.game3ResetSelection();
     });
   }
 
@@ -35,19 +37,23 @@ class _EstimationGameViewState extends State<EstimationGameView> {
       backgroundColor: Colors.transparent,
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-            if (gameProvider.guessingPageIndex == 0)
-              ShowUpAnimation(
-                child: Container(
-                  margin: const EdgeInsets.only(
-                      top: 5, bottom: 15, right: 25, left: 25),
-                  child: Image.asset('assets/images/ko_je_blizi_fit.png'),
+            if (gameProvider.estimationPageIndex == 0)
+              GestureDetector(
+                onTap: () => nextView(gameProvider),
+                child: ShowUpAnimation(
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                        top: 5, bottom: 15, right: 25, left: 25),
+                    child: Image.asset('assets/images/ko_je_blizi_fit.png'),
+                  ),
+                  delayStart: const Duration(milliseconds: 1250),
+                  animationDuration: const Duration(seconds: 3),
+                  curve: Curves.decelerate,
+                  direction: Direction.vertical,
                 ),
-                //delayStart: const Duration(milliseconds: 2000),
-                animationDuration: const Duration(seconds: 3),
-                curve: Curves.decelerate,
-                direction: Direction.vertical,
               )
             else
               GestureDetector(
@@ -58,47 +64,12 @@ class _EstimationGameViewState extends State<EstimationGameView> {
                   child: Image.asset('assets/images/ko_je_blizi_fit.png'),
                 ),
               ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Text(
-                'Koliko miliona stanovnika ima Njemačka?',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'Signika',
-                  fontSize: 21,
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 25),
-              height: 55,
-              alignment: Alignment.center,
-              width: 160,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: Colors.white, width: 1),
-                gradient: LinearGradient(colors: [
-                  Colors.blue.shade100,
-                  Colors.purple.shade200,
-                ]),
-              ),
-              child: TextFormField(
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                //textAlignVertical: TextAlignVertical.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28,
-                  fontFamily: 'Lexend',
-                  letterSpacing: 0.75,
-                ),
-                //textAlignVertical: TextAlignVertical.center,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.only(right: 0, bottom: 0.5),
-                  //contentPadding: const E
-                ),
-              ),
+            EstimationQuestionBox(),
+            EstimationInputBox(),
+            Column(
+              children: [
+                EstimationBottomTimer(),
+              ],
             ),
           ],
         ),

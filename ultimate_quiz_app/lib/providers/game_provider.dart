@@ -130,11 +130,29 @@ class GameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ESTIMATION GAME RESET AND INCREMENT
+  void incrementEstimationQuestionIndex() {
+    estimationQuestionIndex++;
+    notifyListeners();
+  }
+
+  void incrementEstimationIndex() {
+    estimationPageIndex++;
+    notifyListeners();
+  }
+
+  void game3ResetSelection() {
+    game3SelectedAnswer = 10;
+    notifyListeners();
+  }
+
   void resetCounters() {
     oddOneOutPageIndex = 0;
     guessingPageIndex = 0;
     oddOneOutQuestionIndex = 0;
     guessingQuestionIndex = 0;
+    estimationPageIndex = 0;
+    estimationQuestionIndex = 0;
     notifyListeners();
   }
 }

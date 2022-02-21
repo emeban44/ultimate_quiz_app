@@ -62,26 +62,6 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
         Provider.of<GameProvider>(context, listen: false);
     final int currentPage = gameProvider.guessingPageIndex;
     return widget.shouldRevealEverything
-
-        // if (gameProvider
-        //                       .oddOneOutQuestions[currentPage].correctAnswer ==
-        //                   gameProvider.game1SelectedAnswer)
-        // ? ShowUpAnimation(
-        //     curve: Curves.easeOut,
-        //     delayStart: const Duration(milliseconds: 600),
-        //     animationDuration: const Duration(seconds: 1),
-        //     child: Container(
-        //       margin: const EdgeInsets.only(top: 10),
-        //       child: const Text(
-        //         '+1',
-        //         style: TextStyle(
-        //           color: Colors.green,
-        //           fontSize: 30,
-        //           fontFamily: 'Acme',
-        //         ),
-        //       ),
-        //     ),
-        //   )
         ? Container(
             margin: const EdgeInsets.only(bottom: 0, right: 0, left: 0),
             alignment: Alignment.center,
@@ -115,8 +95,9 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
               margin: const EdgeInsets.only(top: 15),
               child: CircularPercentIndicator(
                 radius: 50,
-                progressColor: Colors.purple,
+                progressColor: Colors.pink.shade900,
                 backgroundColor: Colors.transparent,
+                lineWidth: 3,
                 percent: 1 - percentCounter * 0.2,
                 center: Text(
                   countdown.toString(),
