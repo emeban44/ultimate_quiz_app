@@ -122,6 +122,9 @@ flutter:
     - family: Signika
       fonts:
         - asset: fonts/SignikaNegative-Regular.ttf
+    - family: Itim
+      fonts:
+        - asset: fonts/Itim-Regular.ttf
     - family: Mochy
       fonts:
         - asset: fonts/MochiyPopPOne-Regular.ttf

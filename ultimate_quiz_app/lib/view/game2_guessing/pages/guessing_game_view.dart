@@ -40,7 +40,7 @@ class _GuessingGameViewState extends State<GuessingGameView> {
                   top: 5, bottom: 15, right: 25, left: 25),
               child: Image.asset('assets/images/pogadjanje_fix.png'),
             ),
-            //delayStart: const Duration(milliseconds: 2000),
+            delayStart: const Duration(milliseconds: 500),
             animationDuration: const Duration(seconds: 3),
             curve: Curves.decelerate,
             direction: Direction.vertical,
