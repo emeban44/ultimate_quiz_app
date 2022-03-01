@@ -20,12 +20,20 @@ class EstimationGameView extends StatefulWidget {
 }
 
 class _EstimationGameViewState extends State<EstimationGameView> {
+  bool didConfirm = false;
+
   void nextView(GameProvider gameProvider) {
     Future.delayed(const Duration(seconds: 2)).then((value) {
       widget.pageController
           .nextPage(duration: const Duration(seconds: 2), curve: Curves.easeIn);
       gameProvider.incrementEstimationIndex();
       gameProvider.game3ResetSelection();
+    });
+  }
+
+  void confirmAnswer() {
+    setState(() {
+      didConfirm = !didConfirm;
     });
   }
 
@@ -65,10 +73,10 @@ class _EstimationGameViewState extends State<EstimationGameView> {
                 ),
               ),
             EstimationQuestionBox(),
-            EstimationInputBox(),
+            if (!didConfirm) EstimationInputBox(),
             Column(
               children: [
-                EstimationBottomTimer(),
+                EstimationBottomTimer(confirmAnswer, didConfirm),
               ],
             ),
           ],

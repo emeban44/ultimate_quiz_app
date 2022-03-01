@@ -76,7 +76,7 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
                     child: Container(
                       margin: const EdgeInsets.only(top: 10),
                       child: const Text(
-                        '+1',
+                        '+2',
                         style: TextStyle(
                           color: Colors.green,
                           fontSize: 30,
