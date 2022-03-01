@@ -38,17 +38,24 @@ class _EstimationGameViewState extends State<EstimationGameView> {
   }
 
   void confirmAnswer(GameProvider gameProvider) {
-    calculateFinalResult();
+    calculateFinalResult(gameProvider);
     setState(() {
       didConfirm = !didConfirm;
     });
     gameProvider.estimationGameTimer?.cancel();
+    Future.delayed(const Duration(milliseconds: 9000))
+        .whenComplete(() => nextView(gameProvider));
   }
 
-  void calculateFinalResult() {
-    correctAnswer = int.parse('83');
-    yourAnswer = int.parse(_inputController.text);
-    opponentAnswer = int.parse('59');
+  void calculateFinalResult(GameProvider gameProvider) {
+    correctAnswer = int.parse(gameProvider
+        .estimationQuestions[gameProvider.estimationPageIndex].correctAnswer!);
+    if (_inputController.text.isEmpty) {
+      yourAnswer = -100;
+    } else {
+      yourAnswer = int.parse(_inputController.text);
+    }
+    opponentAnswer = int.parse('200000');
     yourDifference = (correctAnswer! - yourAnswer!).abs();
     opponentDifference = (correctAnswer! - opponentAnswer!).abs();
     if (yourDifference! < opponentDifference!) {

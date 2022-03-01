@@ -62,6 +62,7 @@ class _EstimationBottomTimerState extends State<EstimationBottomTimer> {
           timer.cancel();
           shouldRevealTruth = true;
           //widget.revealEverything();
+          widget.confirmAnswer(gameProvider);
           gameProvider.game3ShouldDisableSelection = true;
         }
       });

@@ -37,7 +37,7 @@ class ClassicStartPage extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () async {
-                  await gameProvider.addGuessQuestionToDB();
+                  await gameProvider.addEstimationQuestionToDB();
                 },
                 icon: Icon(Icons.api))
           ],

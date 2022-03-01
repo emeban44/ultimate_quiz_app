@@ -55,6 +55,7 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
       await Future.wait([
         gameProvider.fetchOddOneOutQuestions(),
         gameProvider.fetchGuessingQuestions(),
+        gameProvider.fetchEstimationQuestions(),
       ]);
     } catch (error) {
       Navigator.popUntil(context, ModalRoute.withName('/'));

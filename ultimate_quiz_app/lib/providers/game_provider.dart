@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/models/estimation_question.dart';
 import 'package:ultimate_quiz_app/models/guess_question.dart';
 import 'package:ultimate_quiz_app/models/odd_one_out_question.dart';
 
@@ -34,7 +35,7 @@ class GameProvider extends ChangeNotifier {
   int game3SelectedAnswer = 10;
   bool game3ShouldDisableSelection = true;
   Timer? estimationGameTimer;
-  List<GuessQuestion> estimationQuestions = [];
+  List<EstimationQuestion> estimationQuestions = [];
 
   Future<void> fetchOddOneOutQuestions() async {
     final List<OddOneOutQuestion> responseList = [];
@@ -68,6 +69,22 @@ class GameProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> fetchEstimationQuestions() async {
+    final List<EstimationQuestion> responseList = [];
+    try {
+      final response =
+          await FirebaseFirestore.instance.collection('ko_je_blizi').get();
+      log(response.size.toString() + ' loaded estimation');
+      for (var element in response.docs) {
+        responseList.add(EstimationQuestion.fromJson(element.data()));
+      }
+      estimationQuestions = [...responseList];
+      notifyListeners();
+    } on FirebaseException catch (error) {
+      log(error.message.toString());
+    }
+  }
+
   Future<void> addOddOneOutQuestionToDB() async {
     try {
       await FirebaseFirestore.instance.collection('izbaci_uljeza').doc().set({
@@ -92,6 +109,18 @@ class GameProvider extends ChangeNotifier {
           "Lewis Hamilton",
           "Max Verstappen"
         ],
+      });
+    } on FirebaseException catch (error) {
+      log(error.message.toString());
+    }
+  }
+
+  Future<void> addEstimationQuestionToDB() async {
+    try {
+      await FirebaseFirestore.instance.collection('ko_je_blizi').doc().set({
+        'pitanje': 'Koje godine je osnovana društvena mreža Facebook?',
+        'tacan_odgovor': '2004',
+        'ima_zarez': false,
       });
     } on FirebaseException catch (error) {
       log(error.message.toString());

@@ -34,10 +34,11 @@ class EstimationQuestionBox extends StatelessWidget {
             ],
           ),
         ), //width: 250,
-        child: const Text(
-          'Koliko miliona stanovnika ima Njemačka?',
+        child: Text(
+          gameProvider
+              .estimationQuestions[gameProvider.estimationPageIndex].question!,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Signika',
             fontSize: 22.5,
           ),
