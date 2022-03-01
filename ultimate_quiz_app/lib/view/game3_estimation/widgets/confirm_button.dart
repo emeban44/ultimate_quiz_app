@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
 class EstimationConfirmButton extends StatefulWidget {
   EstimationConfirmButton(this.confirmAnswer);
-  final Function confirmAnswer;
+  final Function(GameProvider) confirmAnswer;
   @override
   State<EstimationConfirmButton> createState() =>
       _EstimationConfirmButtonState();
@@ -11,15 +13,17 @@ class EstimationConfirmButton extends StatefulWidget {
 class _EstimationConfirmButtonState extends State<EstimationConfirmButton> {
   bool isClicked = false;
 
-  void toggleClicked() {
+  void toggleClicked(GameProvider gameProvider) {
     setState(() {
       isClicked = !isClicked;
     });
-    widget.confirmAnswer();
+    widget.confirmAnswer(gameProvider);
   }
 
   @override
   Widget build(BuildContext context) {
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
     return Container(
       margin: const EdgeInsets.only(top: 10),
 
@@ -27,7 +31,7 @@ class _EstimationConfirmButtonState extends State<EstimationConfirmButton> {
       //     border: Border.all(color: Colors.white, width: 1.0)),
       child: isClicked
           ? GestureDetector(
-              onTap: () => toggleClicked(),
+              //onTap: () => toggleClicked(gameProvider),
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Icon(
@@ -46,7 +50,7 @@ class _EstimationConfirmButtonState extends State<EstimationConfirmButton> {
               // primary: Colors.black,
               // onSurface: Colors.white,
               // textStyle: TextStyle(color: Colors.white)),
-              onPressed: () => toggleClicked(),
+              onPressed: () => toggleClicked(gameProvider),
               child: Text(
                 'POTVRDI',
                 style:

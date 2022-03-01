@@ -16,9 +16,26 @@ import 'package:ultimate_quiz_app/view/game3_estimation/widgets/result_text.dart
 import 'package:ultimate_quiz_app/view/game3_estimation/widgets/vs_text.dart';
 
 class EstimationBottomTimer extends StatefulWidget {
-  EstimationBottomTimer(this.confirmAnswer, this.didConfirm);
-  final Function confirmAnswer;
+  EstimationBottomTimer({
+    required this.confirmAnswer,
+    required this.didConfirm,
+    required this.controller,
+    this.correctAnswer,
+    this.opponentAnswer,
+    this.opponentDifference,
+    this.yourAnswer,
+    this.yourDifference,
+    this.homePlayerWon,
+  });
+  final Function(GameProvider) confirmAnswer;
   final bool didConfirm;
+  final TextEditingController controller;
+  final int? correctAnswer;
+  final int? yourAnswer;
+  final int? opponentAnswer;
+  final int? yourDifference;
+  final int? opponentDifference;
+  final bool? homePlayerWon;
   // EstimationBottomTimer(this.revealEverything, this.shouldRevealEverything);
   // final Function() revealEverything;
   // final bool shouldRevealEverything;
@@ -35,7 +52,7 @@ class _EstimationBottomTimerState extends State<EstimationBottomTimer> {
 
   void startTimer(GameProvider gameProvider) {
     gameProvider.estimationGameTimer =
-        Timer.periodic(Duration(seconds: 1), (timer) {
+        Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         countdown--;
         if (percentCounter < 10) {
@@ -57,9 +74,9 @@ class _EstimationBottomTimerState extends State<EstimationBottomTimer> {
   void initState() {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
-    // Future.delayed(Duration(
-    //         milliseconds: gameProvider.estimationPageIndex == 0 ? 6000 : 4500))
-    //     .whenComplete(() => startTimer(gameProvider));
+    Future.delayed(Duration(
+            milliseconds: gameProvider.estimationPageIndex == 0 ? 6000 : 4500))
+        .whenComplete(() => startTimer(gameProvider));
     super.initState();
   }
 
@@ -80,9 +97,10 @@ class _EstimationBottomTimerState extends State<EstimationBottomTimer> {
         widget.didConfirm
             ? Column(
                 children: [
-                  EstimationAnswerRow('50', '59'),
+                  EstimationAnswerRow(
+                      widget.yourAnswer!, widget.opponentAnswer!),
                   EstimationCorrectAnswerText(),
-                  EstimationCorrectAnswerBox('84'),
+                  EstimationCorrectAnswerBox(widget.correctAnswer!),
                   Container(
                     margin: const EdgeInsets.only(top: 25),
                     child: Column(
@@ -93,16 +111,18 @@ class _EstimationBottomTimerState extends State<EstimationBottomTimer> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              EstimationFinalResultBox(false, '34'),
+                              EstimationFinalResultBox(widget.homePlayerWon!,
+                                  widget.yourDifference!, 1),
                               EstimationVSText(),
-                              EstimationFinalResultBox(true, '25'),
+                              EstimationFinalResultBox(!widget.homePlayerWon!,
+                                  widget.opponentDifference!, 2),
                             ],
                           ),
                         )
                       ],
                     ),
                   ),
-                  EstimationAddPoints(),
+                  if (widget.homePlayerWon!) EstimationAddPoints(),
                 ],
               )
             : Column(

@@ -3,7 +3,7 @@ import 'package:show_up_animation/show_up_animation.dart';
 
 class EstimationCorrectAnswerBox extends StatelessWidget {
   EstimationCorrectAnswerBox(this.score);
-  final String score;
+  final int score;
   @override
   Widget build(BuildContext context) {
     return ShowUpAnimation(
@@ -30,7 +30,7 @@ class EstimationCorrectAnswerBox extends StatelessWidget {
             //color: Colors.green,
             ),
         child: Text(
-          score,
+          score.toString(),
           style: const TextStyle(fontFamily: 'Acme'),
         ),
       ),

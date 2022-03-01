@@ -21,7 +21,13 @@ class EstimationGameView extends StatefulWidget {
 
 class _EstimationGameViewState extends State<EstimationGameView> {
   bool didConfirm = false;
-
+  int? correctAnswer;
+  int? yourAnswer;
+  int? opponentAnswer;
+  int? yourDifference;
+  int? opponentDifference;
+  bool? homePlayerWon;
+  final TextEditingController _inputController = TextEditingController();
   void nextView(GameProvider gameProvider) {
     Future.delayed(const Duration(seconds: 2)).then((value) {
       widget.pageController
@@ -31,10 +37,25 @@ class _EstimationGameViewState extends State<EstimationGameView> {
     });
   }
 
-  void confirmAnswer() {
+  void confirmAnswer(GameProvider gameProvider) {
+    calculateFinalResult();
     setState(() {
       didConfirm = !didConfirm;
     });
+    gameProvider.estimationGameTimer?.cancel();
+  }
+
+  void calculateFinalResult() {
+    correctAnswer = int.parse('83');
+    yourAnswer = int.parse(_inputController.text);
+    opponentAnswer = int.parse('59');
+    yourDifference = (correctAnswer! - yourAnswer!).abs();
+    opponentDifference = (correctAnswer! - opponentAnswer!).abs();
+    if (yourDifference! < opponentDifference!) {
+      homePlayerWon = true;
+    } else {
+      homePlayerWon = false;
+    }
   }
 
   @override
@@ -73,10 +94,20 @@ class _EstimationGameViewState extends State<EstimationGameView> {
                 ),
               ),
             EstimationQuestionBox(),
-            if (!didConfirm) EstimationInputBox(),
+            if (!didConfirm) EstimationInputBox(_inputController),
             Column(
               children: [
-                EstimationBottomTimer(confirmAnswer, didConfirm),
+                EstimationBottomTimer(
+                  confirmAnswer: confirmAnswer,
+                  homePlayerWon: homePlayerWon,
+                  didConfirm: didConfirm,
+                  controller: _inputController,
+                  correctAnswer: correctAnswer,
+                  opponentAnswer: opponentAnswer,
+                  opponentDifference: opponentDifference,
+                  yourAnswer: yourAnswer,
+                  yourDifference: yourDifference,
+                ),
               ],
             ),
           ],

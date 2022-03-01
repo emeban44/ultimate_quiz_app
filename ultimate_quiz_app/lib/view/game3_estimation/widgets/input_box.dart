@@ -4,6 +4,8 @@ import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
 class EstimationInputBox extends StatelessWidget {
+  EstimationInputBox(this.controller);
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
@@ -27,6 +29,7 @@ class EstimationInputBox extends StatelessWidget {
           ]),
         ),
         child: TextFormField(
+          controller: controller,
           keyboardType: TextInputType.number,
           textAlign: TextAlign.center,
           //textAlignVertical: TextAlignVertical.center,
