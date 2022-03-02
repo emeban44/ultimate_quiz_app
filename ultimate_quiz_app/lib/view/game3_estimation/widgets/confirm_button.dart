@@ -32,8 +32,8 @@ class _EstimationConfirmButtonState extends State<EstimationConfirmButton> {
       child: isClicked
           ? GestureDetector(
               //onTap: () => toggleClicked(gameProvider),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
+              child: const Padding(
+                padding: EdgeInsets.only(top: 8.0),
                 child: Icon(
                   Icons.check,
                   size: 35,
@@ -44,17 +44,19 @@ class _EstimationConfirmButtonState extends State<EstimationConfirmButton> {
               style: OutlinedButton.styleFrom(
                   primary: Colors.black,
                   backgroundColor: Colors.black,
-                  side: BorderSide(color: Colors.white, width: 0.5),
+                  side: const BorderSide(color: Colors.white, width: 0.5),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(7.5))),
               // primary: Colors.black,
               // onSurface: Colors.white,
               // textStyle: TextStyle(color: Colors.white)),
               onPressed: () => toggleClicked(gameProvider),
-              child: Text(
+              child: const Text(
                 'POTVRDI',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17),
               ),
             ),
     );

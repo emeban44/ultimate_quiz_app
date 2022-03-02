@@ -4,8 +4,8 @@ import 'answer_box.dart';
 
 class EstimationAnswerRow extends StatelessWidget {
   EstimationAnswerRow(this.yourAnswer, this.opponentAnswer);
-  final int yourAnswer;
-  final int opponentAnswer;
+  final double yourAnswer;
+  final double opponentAnswer;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -14,7 +14,7 @@ class EstimationAnswerRow extends StatelessWidget {
         Expanded(
           child: Container(
               margin: const EdgeInsets.only(top: 15),
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

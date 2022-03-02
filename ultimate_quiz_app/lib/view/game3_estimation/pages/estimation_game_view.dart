@@ -21,12 +21,15 @@ class EstimationGameView extends StatefulWidget {
 
 class _EstimationGameViewState extends State<EstimationGameView> {
   bool didConfirm = false;
-  int? correctAnswer;
-  int? yourAnswer;
-  int? opponentAnswer;
-  int? yourDifference;
-  int? opponentDifference;
+  double? correctAnswer;
+  double? yourAnswer;
+  double? opponentAnswer;
+  double? yourDifference;
+  double? opponentDifference;
   bool? homePlayerWon;
+  bool bothPlayersWon = false;
+  bool homePlayerInvalidInput = false;
+  bool awayPlayerInvalidInput = false;
   final TextEditingController _inputController = TextEditingController();
   void nextView(GameProvider gameProvider) {
     Future.delayed(const Duration(seconds: 2)).then((value) {
@@ -43,25 +46,49 @@ class _EstimationGameViewState extends State<EstimationGameView> {
       didConfirm = !didConfirm;
     });
     gameProvider.estimationGameTimer?.cancel();
-    Future.delayed(const Duration(milliseconds: 9000))
-        .whenComplete(() => nextView(gameProvider));
+    if (gameProvider.estimationPageIndex < 4) {
+      Future.delayed(const Duration(milliseconds: 9000))
+          .whenComplete(() => nextView(gameProvider));
+    }
   }
 
   void calculateFinalResult(GameProvider gameProvider) {
-    correctAnswer = int.parse(gameProvider
+    correctAnswer = double.parse(gameProvider
         .estimationQuestions[gameProvider.estimationPageIndex].correctAnswer!);
     if (_inputController.text.isEmpty) {
-      yourAnswer = -100;
+      yourAnswer = -123456789.0;
+      homePlayerInvalidInput = true;
     } else {
-      yourAnswer = int.parse(_inputController.text);
+      yourAnswer = double.tryParse(_inputController.text.replaceAll(',', '.'));
+      if (yourAnswer == null) {
+        homePlayerInvalidInput = true;
+        yourAnswer ??= -123456789.0;
+      } else if (_inputController.text.contains('.') ||
+          _inputController.text.contains(',')) {
+        gameProvider.estimationQuestions[gameProvider.estimationPageIndex]
+            .isDecimal = true;
+      }
     }
-    opponentAnswer = int.parse('200000');
+    opponentAnswer = double.tryParse('1234567');
+    if (opponentAnswer == null) {
+      awayPlayerInvalidInput = true;
+      opponentAnswer ??= -123456789.0;
+    }
     yourDifference = (correctAnswer! - yourAnswer!).abs();
     opponentDifference = (correctAnswer! - opponentAnswer!).abs();
     if (yourDifference! < opponentDifference!) {
       homePlayerWon = true;
+    } else if (yourDifference == opponentDifference) {
+      bothPlayersWon = true;
+      homePlayerWon = true;
     } else {
       homePlayerWon = false;
+    }
+    if (homePlayerInvalidInput) {
+      yourDifference = -123456789.0;
+    }
+    if (awayPlayerInvalidInput) {
+      opponentDifference = -123456789.0;
     }
   }
 
@@ -107,12 +134,15 @@ class _EstimationGameViewState extends State<EstimationGameView> {
                 EstimationBottomTimer(
                   confirmAnswer: confirmAnswer,
                   homePlayerWon: homePlayerWon,
+                  bothPlayersWon: bothPlayersWon,
                   didConfirm: didConfirm,
                   controller: _inputController,
                   correctAnswer: correctAnswer,
                   opponentAnswer: opponentAnswer,
                   opponentDifference: opponentDifference,
                   yourAnswer: yourAnswer,
+                  homePlayerInvalidInput: homePlayerInvalidInput,
+                  awayPlayerInvalidInput: awayPlayerInvalidInput,
                   yourDifference: yourDifference,
                 ),
               ],

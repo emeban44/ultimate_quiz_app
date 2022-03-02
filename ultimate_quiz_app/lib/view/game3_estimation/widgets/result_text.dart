@@ -9,7 +9,7 @@ class EstimationResultText extends StatelessWidget {
       animationDuration: const Duration(seconds: 1),
       delayStart: const Duration(milliseconds: 4000),
       child: const Text(
-        'Rezultat:',
+        'Razlika:',
         style: TextStyle(
           fontFamily: 'Signika',
           fontSize: 22,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
@@ -30,7 +31,13 @@ class EstimationInputBox extends StatelessWidget {
         ),
         child: TextFormField(
           controller: controller,
-          keyboardType: TextInputType.number,
+          maxLength: 7,
+          inputFormatters: gameProvider
+                  .estimationQuestions[gameProvider.estimationPageIndex]
+                  .isDecimal!
+              ? null
+              : [FilteringTextInputFormatter.digitsOnly],
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
           textAlign: TextAlign.center,
           //textAlignVertical: TextAlignVertical.center,
           style: const TextStyle(
@@ -42,6 +49,7 @@ class EstimationInputBox extends StatelessWidget {
           //textAlignVertical: TextAlignVertical.center,
           decoration: const InputDecoration(
             hintText: '?',
+            counterText: '',
             hintStyle: TextStyle(fontSize: 30, fontFamily: 'Lexend'),
             border: InputBorder.none,
             contentPadding: EdgeInsets.only(right: 0, bottom: 0.5),

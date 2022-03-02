@@ -26,16 +26,22 @@ class EstimationBottomTimer extends StatefulWidget {
     this.yourAnswer,
     this.yourDifference,
     this.homePlayerWon,
+    required this.bothPlayersWon,
+    required this.homePlayerInvalidInput,
+    required this.awayPlayerInvalidInput,
   });
   final Function(GameProvider) confirmAnswer;
   final bool didConfirm;
   final TextEditingController controller;
-  final int? correctAnswer;
-  final int? yourAnswer;
-  final int? opponentAnswer;
-  final int? yourDifference;
-  final int? opponentDifference;
+  final double? correctAnswer;
+  final double? yourAnswer;
+  final double? opponentAnswer;
+  final double? yourDifference;
+  final double? opponentDifference;
   final bool? homePlayerWon;
+  final bool bothPlayersWon;
+  final bool homePlayerInvalidInput;
+  final bool awayPlayerInvalidInput;
   // EstimationBottomTimer(this.revealEverything, this.shouldRevealEverything);
   // final Function() revealEverything;
   // final bool shouldRevealEverything;
@@ -58,7 +64,7 @@ class _EstimationBottomTimerState extends State<EstimationBottomTimer> {
         if (percentCounter < 10) {
           percentCounter++;
         }
-        if (countdown == 0 || timer.tick == 11) {
+        if (countdown == 0 || timer.tick == 10) {
           timer.cancel();
           shouldRevealTruth = true;
           //widget.revealEverything();
@@ -103,7 +109,7 @@ class _EstimationBottomTimerState extends State<EstimationBottomTimer> {
                   EstimationCorrectAnswerText(),
                   EstimationCorrectAnswerBox(widget.correctAnswer!),
                   Container(
-                    margin: const EdgeInsets.only(top: 25),
+                    margin: const EdgeInsets.only(top: 25, right: 5, left: 5),
                     child: Column(
                       children: [
                         EstimationResultText(),
@@ -112,11 +118,17 @@ class _EstimationBottomTimerState extends State<EstimationBottomTimer> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              EstimationFinalResultBox(widget.homePlayerWon!,
-                                  widget.yourDifference!, 1),
+                              EstimationFinalResultBox(
+                                  widget.homePlayerWon!,
+                                  widget.yourDifference!,
+                                  1,
+                                  widget.bothPlayersWon),
                               EstimationVSText(),
-                              EstimationFinalResultBox(!widget.homePlayerWon!,
-                                  widget.opponentDifference!, 2),
+                              EstimationFinalResultBox(
+                                  !widget.homePlayerWon!,
+                                  widget.opponentDifference!,
+                                  2,
+                                  widget.bothPlayersWon),
                             ],
                           ),
                         )
