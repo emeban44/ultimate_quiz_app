@@ -28,6 +28,7 @@ class _EstimationGameViewState extends State<EstimationGameView> {
   bool homePlayerInvalidInput = false;
   bool awayPlayerInvalidInput = false;
   final TextEditingController _inputController = TextEditingController();
+
   void nextView(GameProvider gameProvider) {
     Future.delayed(const Duration(seconds: 2)).then((value) {
       widget.pageController

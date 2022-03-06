@@ -4,6 +4,7 @@ import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/bottom_timer.dart';
 import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/confirm_button.dart';
+import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/game_column.dart';
 import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/question_box.dart';
 import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/reorderable_answers_list.dart';
 
@@ -59,28 +60,7 @@ class _SortByGameViewState extends State<SortByGameView> {
                   child: Image.asset('assets/images/poredaj_po_fit.png'),
                 ),
               ),
-            SortByQuestionBox('Poredaj tenisere po broju Grand Slam titula:'),
-            SortByReorderableAnswerList(),
-            Flexible(
-              flex: 1,
-              child: ShowUpAnimation(
-                delayStart: Duration(
-                    milliseconds:
-                        gameProvider.sortByPageIndex == 0 ? 5000 : 4000),
-                animationDuration: const Duration(seconds: 1),
-                curve: Curves.linear,
-                offset: 0.1,
-                child: Container(
-                  child: Column(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SortByConfirmButton(),
-                      SortByBottomTimer(),
-                    ],
-                  ),
-                ),
-              ),
-            )
+            SortByGameColumn(),
           ],
         ),
       ),

@@ -22,7 +22,7 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
 
   void startTimer(GameProvider gameProvider) {
     gameProvider.guessingGameTimer =
-        Timer.periodic(Duration(seconds: 1), (timer) {
+        Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         countdown--;
         if (percentCounter < 5) {

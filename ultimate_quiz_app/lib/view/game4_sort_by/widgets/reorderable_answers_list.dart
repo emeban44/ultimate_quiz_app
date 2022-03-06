@@ -29,10 +29,10 @@ class _SortByReorderableAnswerListState
       flex: 3,
       child: ShowUpAnimation(
         delayStart: Duration(
-            milliseconds: gameProvider.sortByPageIndex == 0 ? 4000 : 3000),
+            milliseconds: gameProvider.sortByPageIndex == 0 ? 4200 : 2600),
         animationDuration: const Duration(seconds: 1),
         curve: Curves.linear,
-        offset: 0.1,
+        offset: 0.01,
         child: Container(
           margin: const EdgeInsets.only(top: 17.5),
           child: ReorderableListView(
