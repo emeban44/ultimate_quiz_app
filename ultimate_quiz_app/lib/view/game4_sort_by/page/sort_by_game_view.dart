@@ -1,0 +1,89 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:show_up_animation/show_up_animation.dart';
+import 'package:ultimate_quiz_app/providers/game_provider.dart';
+import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/bottom_timer.dart';
+import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/confirm_button.dart';
+import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/question_box.dart';
+import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/reorderable_answers_list.dart';
+
+class SortByGameView extends StatefulWidget {
+  const SortByGameView(this._pageController, {Key? key}) : super(key: key);
+  final PageController _pageController;
+
+  @override
+  State<SortByGameView> createState() => _SortByGameViewState();
+}
+
+class _SortByGameViewState extends State<SortByGameView> {
+  void nextView(GameProvider gameProvider) {
+    Future.delayed(const Duration(seconds: 2)).then((value) {
+      widget._pageController
+          .nextPage(duration: const Duration(seconds: 2), curve: Curves.easeIn);
+      gameProvider.incrementSortByIndex();
+      gameProvider.game4ResetSelection();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: [
+            if (gameProvider.sortByPageIndex == 0)
+              GestureDetector(
+                //onTap: () => nextView(gameProvider),
+                child: ShowUpAnimation(
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                        top: 5, bottom: 15, right: 25, left: 25),
+                    child: Image.asset('assets/images/poredaj_po_fit.png'),
+                  ),
+                  delayStart: const Duration(milliseconds: 1250),
+                  animationDuration: const Duration(seconds: 3),
+                  curve: Curves.decelerate,
+                  direction: Direction.vertical,
+                ),
+              )
+            else
+              GestureDetector(
+                //onTap: () => nextView(),
+                child: Container(
+                  margin: const EdgeInsets.only(
+                      top: 5, bottom: 15, right: 25, left: 25),
+                  child: Image.asset('assets/images/poredaj_po_fit.png'),
+                ),
+              ),
+            SortByQuestionBox('Poredaj tenisere po broju Grand Slam titula:'),
+            SortByReorderableAnswerList(),
+            Flexible(
+              flex: 1,
+              child: ShowUpAnimation(
+                delayStart: Duration(
+                    milliseconds:
+                        gameProvider.sortByPageIndex == 0 ? 5000 : 4000),
+                animationDuration: const Duration(seconds: 1),
+                curve: Curves.linear,
+                offset: 0.1,
+                child: Container(
+                  child: Column(
+                    //mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SortByConfirmButton(),
+                      SortByBottomTimer(),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

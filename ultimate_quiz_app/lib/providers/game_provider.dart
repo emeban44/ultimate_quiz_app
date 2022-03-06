@@ -37,6 +37,14 @@ class GameProvider extends ChangeNotifier {
   Timer? estimationGameTimer;
   List<EstimationQuestion> estimationQuestions = [];
 
+  //SORT BY - GAME 4
+  int sortByPageIndex = 0;
+  int sortByQuestionIndex = 0;
+  int game4SelectedAnswer = 10;
+  bool game4ShouldDisableSelection = true;
+  Timer? sortyByGameTimer;
+  List<EstimationQuestion> sortyByQuestions = [];
+
   Future<void> fetchOddOneOutQuestions() async {
     final List<OddOneOutQuestion> responseList = [];
     try {
@@ -175,6 +183,22 @@ class GameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // SORT BY GAME RESET AND INCREMENT
+  void incrementSortByQuestionIndex() {
+    sortByQuestionIndex++;
+    notifyListeners();
+  }
+
+  void incrementSortByIndex() {
+    sortByPageIndex++;
+    notifyListeners();
+  }
+
+  void game4ResetSelection() {
+    game4SelectedAnswer = 10;
+    notifyListeners();
+  }
+
   void resetCounters() {
     oddOneOutPageIndex = 0;
     guessingPageIndex = 0;
@@ -182,6 +206,8 @@ class GameProvider extends ChangeNotifier {
     guessingQuestionIndex = 0;
     estimationPageIndex = 0;
     estimationQuestionIndex = 0;
+    sortByPageIndex = 0;
+    sortByQuestionIndex = 0;
     notifyListeners();
   }
 }

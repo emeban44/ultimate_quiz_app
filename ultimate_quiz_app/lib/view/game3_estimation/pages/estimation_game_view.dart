@@ -102,7 +102,7 @@ class _EstimationGameViewState extends State<EstimationGameView> {
           children: [
             if (gameProvider.estimationPageIndex == 0)
               GestureDetector(
-                onTap: () => nextView(gameProvider),
+                //onTap: () => nextView(gameProvider),
                 child: ShowUpAnimation(
                   child: Container(
                     margin: const EdgeInsets.only(
