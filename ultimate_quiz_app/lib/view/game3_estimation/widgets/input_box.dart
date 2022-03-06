@@ -31,7 +31,7 @@ class EstimationInputBox extends StatelessWidget {
         ),
         child: TextFormField(
           controller: controller,
-          maxLength: 7,
+          maxLength: 6,
           inputFormatters: gameProvider
                   .estimationQuestions[gameProvider.estimationPageIndex]
                   .isDecimal!

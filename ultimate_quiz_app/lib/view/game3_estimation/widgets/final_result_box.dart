@@ -29,18 +29,22 @@ class EstimationFinalResultBox extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.white, width: 0.5),
             gradient: LinearGradient(
-                colors: bothPlayersWon
-                    ? [Colors.green, Colors.green.shade900]
-                    : isCloser
+                colors: result == -123456789.0
+                    ? [Colors.red, Colors.red.shade900]
+                    : bothPlayersWon
                         ? [Colors.green, Colors.green.shade900]
-                        : [Colors.red, Colors.red.shade900]),
+                        : isCloser
+                            ? [Colors.green, Colors.green.shade900]
+                            : [Colors.red, Colors.red.shade900]),
             boxShadow: [
               BoxShadow(
-                color: bothPlayersWon
-                    ? Colors.green
-                    : isCloser
+                color: result == -123456789.0
+                    ? Colors.red
+                    : bothPlayersWon
                         ? Colors.green
-                        : Colors.red,
+                        : isCloser
+                            ? Colors.green
+                            : Colors.red,
                 spreadRadius: 2,
                 blurRadius: 5,
               )

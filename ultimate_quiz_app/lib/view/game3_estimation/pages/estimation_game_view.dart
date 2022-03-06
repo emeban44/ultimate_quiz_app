@@ -1,10 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
-import 'package:ultimate_quiz_app/view/game2_guessing/widgets/answer_column.dart';
-import 'package:ultimate_quiz_app/view/game2_guessing/widgets/firebase_image.dart';
 import 'package:ultimate_quiz_app/view/game3_estimation/widgets/bottom_timer.dart';
 import 'package:ultimate_quiz_app/view/game3_estimation/widgets/input_box.dart';
 import 'package:ultimate_quiz_app/view/game3_estimation/widgets/question_box.dart';
@@ -69,7 +66,7 @@ class _EstimationGameViewState extends State<EstimationGameView> {
             .isDecimal = true;
       }
     }
-    opponentAnswer = double.tryParse('1234567');
+    opponentAnswer = double.tryParse('200.99');
     if (opponentAnswer == null) {
       awayPlayerInvalidInput = true;
       opponentAnswer ??= -123456789.0;
