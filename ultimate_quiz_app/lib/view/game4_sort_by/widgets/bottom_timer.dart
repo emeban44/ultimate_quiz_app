@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
 class SortByBottomTimer extends StatefulWidget {
-  const SortByBottomTimer({Key? key}) : super(key: key);
-
+  const SortByBottomTimer(this.confirmAnswer, {Key? key}) : super(key: key);
+  final Function(GameProvider) confirmAnswer;
   @override
   State<SortByBottomTimer> createState() => _SortByBottomTimerState();
 }
@@ -27,7 +27,7 @@ class _SortByBottomTimerState extends State<SortByBottomTimer> {
         if (countdown == 0 || timer.tick == 21) {
           timer.cancel();
           //shouldRevealTruth = true;
-          //widget.revealEverything();
+          widget.confirmAnswer(gameProvider);
           gameProvider.game4ShouldDisableSelection = true;
         }
       });

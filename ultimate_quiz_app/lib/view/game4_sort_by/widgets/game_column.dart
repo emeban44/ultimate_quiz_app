@@ -16,8 +16,8 @@ import 'bottom_timer.dart';
 import 'confirm_button.dart';
 
 class SortByGameColumn extends StatefulWidget {
-  const SortByGameColumn({Key? key}) : super(key: key);
-
+  const SortByGameColumn(this.nextView, {Key? key}) : super(key: key);
+  final Function(GameProvider) nextView;
   @override
   State<SortByGameColumn> createState() => _SortByGameColumnState();
 }
@@ -30,6 +30,9 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
     setState(() {
       shouldReveal = true;
     });
+    if (gameProvider.sortByPageIndex < 1) {
+      widget.nextView(gameProvider);
+    }
   }
 
   @override
@@ -48,7 +51,7 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
                   //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ShowUpAnimation(
-                      offset: 0,
+                      offset: 0.1,
                       //delayStart: const Duration(milliseconds: 500),
                       curve: Curves.easeIn,
                       child: Container(
@@ -98,7 +101,8 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
                     ),
                     ShowUpAnimation(
                       delayStart: const Duration(milliseconds: 10050),
-                      curve: Curves.easeIn,
+                      animationDuration: const Duration(seconds: 1),
+                      curve: Curves.decelerate,
                       child: Container(
                         margin: const EdgeInsets.only(top: 0),
                         child: Row(
@@ -131,7 +135,7 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
                     //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SortByConfirmButton(confirmAnswer),
-                      SortByBottomTimer(),
+                      SortByBottomTimer(confirmAnswer),
                     ],
                   ),
                 ),

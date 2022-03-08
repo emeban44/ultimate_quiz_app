@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
-import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/bottom_timer.dart';
-import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/confirm_button.dart';
 import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/game_column.dart';
-import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/question_box.dart';
-import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/reorderable_answers_list.dart';
 
 class SortByGameView extends StatefulWidget {
   const SortByGameView(this._pageController, {Key? key}) : super(key: key);
@@ -18,7 +14,7 @@ class SortByGameView extends StatefulWidget {
 
 class _SortByGameViewState extends State<SortByGameView> {
   void nextView(GameProvider gameProvider) {
-    Future.delayed(const Duration(seconds: 2)).then((value) {
+    Future.delayed(const Duration(seconds: 14)).then((value) {
       widget._pageController
           .nextPage(duration: const Duration(seconds: 2), curve: Curves.easeIn);
       gameProvider.incrementSortByIndex();
@@ -60,7 +56,7 @@ class _SortByGameViewState extends State<SortByGameView> {
                   child: Image.asset('assets/images/poredaj_po_fit.png'),
                 ),
               ),
-            SortByGameColumn(),
+            SortByGameColumn(nextView),
           ],
         ),
       ),
