@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
+import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/add_point.dart';
+import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/all_correct_bonus_column.dart';
 import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/answer_box.dart';
 import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/correct_answer_box.dart';
+import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/final_result_box.dart';
 import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/question_box.dart';
 import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/reorderable_answers_list.dart';
+import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/result_row.dart';
+import 'package:ultimate_quiz_app/view/game4_sort_by/widgets/wrong_answer.dart';
 
 import 'bottom_timer.dart';
 import 'confirm_button.dart';
@@ -36,75 +41,71 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
         children: [
           SortByQuestionBox('Poredaj tenisere po broju Grand Slam titula:'),
           if (shouldReveal)
-            ShowUpAnimation(
+            Expanded(
               child: Container(
                 margin: const EdgeInsets.only(top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                child: Column(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      //margin: const EdgeInsets.only(left: 10),
-                      child: Column(
-                        children: [
-                          const Text(
-                            'Ti:',
-                            style: TextStyle(fontFamily: 'Acme'),
-                          ),
-                          SortByAnswerBox('1. Novak Đoković'),
-                          SortByAnswerBox('2. Andy Murray'),
-                          SortByAnswerBox('3. Rafael Nadal'),
-                          SortByAnswerBox('4. Marin Čilić'),
-                          SortByAnswerBox('5. Damir Džumhur'),
-                        ],
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 20),
+                      decoration: BoxDecoration(
+                        color: Colors.black26,
+                        borderRadius: BorderRadius.circular(10),
                       ),
+                      child: Text(
+                        'Rješenje:',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontFamily: 'Signika', fontSize: 26),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    SortByResultRow(
+                      orderedResult: '1. Rafael Nadal',
+                      homePlayerCorrectAnswer: true,
+                      awayPlayerCorrectAnswer: false,
+                      order: 1,
+                    ),
+                    SortByResultRow(
+                      orderedResult: '2. Novak Đoković',
+                      homePlayerCorrectAnswer: true,
+                      awayPlayerCorrectAnswer: false,
+                      order: 2,
+                    ),
+                    SortByResultRow(
+                      orderedResult: '3. Andy Murray',
+                      homePlayerCorrectAnswer: true,
+                      awayPlayerCorrectAnswer: false,
+                      order: 3,
+                    ),
+                    SortByResultRow(
+                      orderedResult: '4. Marin Čilić',
+                      homePlayerCorrectAnswer: true,
+                      awayPlayerCorrectAnswer: false,
+                      order: 4,
+                    ),
+                    SortByResultRow(
+                      orderedResult: '5. Damir Džumhur',
+                      homePlayerCorrectAnswer: true,
+                      awayPlayerCorrectAnswer: true,
+                      order: 5,
                     ),
                     Container(
-                      //margin: const EdgeInsets.only(right: 10),
-                      child: Column(
+                      margin: const EdgeInsets.only(top: 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            'Protivnik:',
-                            style: TextStyle(fontFamily: 'Acme'),
-                          ),
-                          SortByAnswerBox('1. Novak Đoković'),
-                          SortByAnswerBox('2. Andy Murray'),
-                          SortByAnswerBox('3. Rafael Nadal'),
-                          SortByAnswerBox('4. Marin Čilić'),
-                          SortByAnswerBox('5. Damir Džumhur'),
+                          SortByAllCorrectBonusColumn(),
+                          SortByFinalResultBox(),
+                          SortByAllCorrectBonusColumn(),
                         ],
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
             ),
-          if (shouldReveal)
-            ShowUpAnimation(
-                child: Container(
-              margin: const EdgeInsets.only(top: 15),
-              child: Column(
-                children: [
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.black26,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      'Rješenje:',
-                      style: TextStyle(fontFamily: 'Signika'),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  SortByCorrectAnswerBox('1. Rafael Nadal'),
-                  SortByCorrectAnswerBox('2. Novak Đoković'),
-                  SortByCorrectAnswerBox('3. Andy Murray'),
-                  SortByCorrectAnswerBox('4. Marin Čilić'),
-                  SortByCorrectAnswerBox('5. Damir Džumhur'),
-                ],
-              ),
-            )),
           if (!shouldReveal) SortByReorderableAnswerList(),
           if (!shouldReveal)
             Flexible(
