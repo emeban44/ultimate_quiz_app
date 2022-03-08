@@ -47,20 +47,25 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
                 child: Column(
                   //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: Colors.black26,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        'Rješenje:',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontFamily: 'Signika', fontSize: 26),
+                    ShowUpAnimation(
+                      offset: 0,
+                      //delayStart: const Duration(milliseconds: 500),
+                      curve: Curves.easeIn,
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.black26,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Text(
+                          'Rješenje:',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontFamily: 'Signika', fontSize: 26),
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 10),
                     SortByResultRow(
                       orderedResult: '1. Rafael Nadal',
                       homePlayerCorrectAnswer: true,
@@ -91,15 +96,19 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
                       awayPlayerCorrectAnswer: true,
                       order: 5,
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SortByAllCorrectBonusColumn(),
-                          SortByFinalResultBox(),
-                          SortByAllCorrectBonusColumn(),
-                        ],
+                    ShowUpAnimation(
+                      delayStart: const Duration(milliseconds: 10050),
+                      curve: Curves.easeIn,
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SortByAllCorrectBonusColumn(true),
+                            SortByFinalResultBox(),
+                            SortByAllCorrectBonusColumn(false),
+                          ],
+                        ),
                       ),
                     )
                   ],

@@ -22,7 +22,7 @@ class SortByFinalResultBox extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '3 : 3',
+                '7 : 1',
                 style: TextStyle(fontFamily: 'Acme'),
               ),
             ],
