@@ -8,6 +8,7 @@ class SortByQuestionBox extends StatelessWidget {
   final String question;
   @override
   Widget build(BuildContext context) {
+    print(question.length);
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     return ShowUpAnimation(
@@ -15,17 +16,22 @@ class SortByQuestionBox extends StatelessWidget {
           milliseconds: gameProvider.sortByPageIndex == 0 ? 3200 : 1600),
       animationDuration: const Duration(seconds: 1),
       curve: Curves.linear,
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 30),
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-        decoration: BoxDecoration(
-          color: Colors.black26,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          question,
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontFamily: 'Signika', fontSize: 20),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxHeight: 80, minHeight: 30),
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 30),
+          decoration: BoxDecoration(
+            color: Colors.black26,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
+            question,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontFamily: 'Signika',
+                fontSize: question.length > 130 ? 16 : 18),
+          ),
         ),
       ),
     );

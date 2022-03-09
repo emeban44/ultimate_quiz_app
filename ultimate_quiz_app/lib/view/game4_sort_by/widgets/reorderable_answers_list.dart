@@ -21,6 +21,13 @@ class _SortByReorderableAnswerListState
     'Rafael Nadal',
     'Damir Džumhur'
   ];
+  final List<String> _list2 = [
+    'The Godfather',
+    'Forrest Gump',
+    'Scarface',
+    'Titanic',
+    'Donnie Darko',
+  ];
   @override
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
@@ -34,15 +41,22 @@ class _SortByReorderableAnswerListState
         curve: Curves.linear,
         offset: 0.01,
         child: Container(
-          margin: const EdgeInsets.only(top: 17.5),
+          margin: const EdgeInsets.only(top: 15),
           child: ReorderableListView(
               buildDefaultDragHandles: true,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                for (int i = 0; i < _list.length; i++)
+                for (int i = 0;
+                    i <
+                        (gameProvider.sortByPageIndex == 0
+                            ? _list.length
+                            : _list2.length);
+                    i++)
                   ReorderableDragStartListener(
                     index: i,
-                    key: ValueKey(_list[i]),
+                    key: ValueKey(gameProvider.sortByPageIndex == 0
+                        ? _list[i]
+                        : _list2[i]),
                     child: Container(
                       margin: const EdgeInsets.symmetric(
                         vertical: 8.5,
@@ -66,7 +80,11 @@ class _SortByReorderableAnswerListState
                         ),
                       ),
                       child: Text(
-                        (i + 1).toString() + '.  ' + _list[i],
+                        (i + 1).toString() +
+                            '.  ' +
+                            (gameProvider.sortByPageIndex == 0
+                                ? _list[i]
+                                : _list2[i]),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             fontFamily: 'Signika', fontSize: 21),
@@ -76,11 +94,19 @@ class _SortByReorderableAnswerListState
               ],
               onReorder: (oldIndex, newIndex) {
                 //setState for new index
-                setState(() {
-                  final index = newIndex > oldIndex ? newIndex - 1 : newIndex;
-                  final answer = _list.removeAt(oldIndex);
-                  _list.insert(index, answer);
-                });
+                if (gameProvider.sortByPageIndex == 0) {
+                  setState(() {
+                    final index = newIndex > oldIndex ? newIndex - 1 : newIndex;
+                    final answer = _list.removeAt(oldIndex);
+                    _list.insert(index, answer);
+                  });
+                } else {
+                  setState(() {
+                    final index = newIndex > oldIndex ? newIndex - 1 : newIndex;
+                    final answer = _list2.removeAt(oldIndex);
+                    _list2.insert(index, answer);
+                  });
+                }
               }),
         ),
       ),

@@ -25,7 +25,7 @@ class SortByCorrectAnswerBox extends StatelessWidget {
       ),
       child: Center(
         child: ConstrainedBox(
-          constraints: BoxConstraints(
+          constraints: const BoxConstraints(
               maxWidth: 200, maxHeight: 25, minHeight: 25, minWidth: 100),
           child: Container(
             // width: 200,

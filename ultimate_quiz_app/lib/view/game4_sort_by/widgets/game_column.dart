@@ -30,7 +30,7 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
     setState(() {
       shouldReveal = true;
     });
-    if (gameProvider.sortByPageIndex < 2) {
+    if (gameProvider.sortByPageIndex < 1) {
       widget.nextView(gameProvider);
     }
   }
@@ -42,7 +42,9 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
     return Expanded(
       child: Column(
         children: [
-          SortByQuestionBox('Poredaj tenisere po broju Grand Slam titula:'),
+          SortByQuestionBox(gameProvider.sortByPageIndex == 0
+              ? 'Poredaj tenisere po broju Grand Slam titula:'
+              : 'Poredaj filmove po godini izlaska (od najstarijeg do najmlađeg):'),
           if (shouldReveal)
             Expanded(
               child: Container(
@@ -130,14 +132,12 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
                 animationDuration: const Duration(seconds: 1),
                 curve: Curves.linear,
                 offset: 0.1,
-                child: Container(
-                  child: Column(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SortByConfirmButton(confirmAnswer),
-                      SortByBottomTimer(confirmAnswer),
-                    ],
-                  ),
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SortByConfirmButton(confirmAnswer),
+                    SortByBottomTimer(confirmAnswer),
+                  ],
                 ),
               ),
             )
