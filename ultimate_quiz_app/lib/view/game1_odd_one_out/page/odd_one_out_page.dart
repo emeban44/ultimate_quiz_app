@@ -78,8 +78,6 @@ class OddOneOutPage extends StatelessWidget {
                     reverse: false,
                     // onPageChanged: (value) => ,
                     children: [
-                      SortByGameView(_pageController),
-                      SortByGameView(_pageController),
                       OddOneOutGameView(nextPage, _pageController, 0),
                       OddOneOutGameView(nextPage, _pageController, 1),
                       OddOneOutGameView(nextPage, _pageController, 2),

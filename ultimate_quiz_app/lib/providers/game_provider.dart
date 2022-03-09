@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:ultimate_quiz_app/models/estimation_question.dart';
 import 'package:ultimate_quiz_app/models/guess_question.dart';
 import 'package:ultimate_quiz_app/models/odd_one_out_question.dart';
+import 'package:ultimate_quiz_app/models/sort_by_question.dart';
 
 class GameProvider extends ChangeNotifier {
   //ODD ONE OUT - GAME 1
@@ -42,9 +43,12 @@ class GameProvider extends ChangeNotifier {
   int sortByPageIndex = 0;
   int sortByQuestionIndex = 0;
   int game4SelectedAnswer = 10;
+  int correctSorts = 0;
   bool game4ShouldDisableSelection = true;
+  bool homePlayerAllCorrect = false;
+  bool awayPlayerAllCorrect = false;
   Timer? sortyByGameTimer;
-  List<EstimationQuestion> sortyByQuestions = [];
+  List<SortByQuestion> sortByQuestions = [];
 
   Future<void> fetchOddOneOutQuestions() async {
     final List<OddOneOutQuestion> responseList = [];
@@ -61,7 +65,6 @@ class GameProvider extends ChangeNotifier {
         do {
           final int kocka = Random().nextInt(responseList.length);
           if (!randomNumbers.contains(kocka)) {
-            print('1: ' + kocka.toString());
             randomNumbers.add(kocka);
             didGenerate = true;
 
@@ -91,7 +94,6 @@ class GameProvider extends ChangeNotifier {
         do {
           final int kocka = Random().nextInt(responseList.length);
           if (!randomNumbers.contains(kocka)) {
-            print('2: ' + kocka.toString());
             randomNumbers.add(kocka);
             didGenerate = true;
             guessQuestions.add(responseList[kocka]);
@@ -120,10 +122,37 @@ class GameProvider extends ChangeNotifier {
         do {
           final int kocka = Random().nextInt(responseList.length);
           if (!randomNumbers.contains(kocka)) {
-            print('3: ' + kocka.toString());
             randomNumbers.add(kocka);
             didGenerate = true;
             estimationQuestions.add(responseList[kocka]);
+          }
+        } while (!didGenerate);
+      }
+      //estimationQuestions = [...responseList];
+      notifyListeners();
+    } on FirebaseException catch (error) {
+      developer.log(error.message.toString());
+    }
+  }
+
+  Future<void> fetchSortByQuestions() async {
+    final List<SortByQuestion> responseList = [];
+    final List<int> randomNumbers = [];
+    try {
+      final response =
+          await FirebaseFirestore.instance.collection('poredaj_po').get();
+      developer.log(response.size.toString() + ' loaded sort by');
+      for (var element in response.docs) {
+        responseList.add(SortByQuestion.fromJson(element.data()));
+      }
+      for (int i = 0; i < 2; i++) {
+        bool didGenerate = false;
+        do {
+          final int kocka = Random().nextInt(responseList.length);
+          if (!randomNumbers.contains(kocka)) {
+            randomNumbers.add(kocka);
+            didGenerate = true;
+            sortByQuestions.add(responseList[kocka]);
           }
         } while (!didGenerate);
       }
@@ -166,6 +195,31 @@ class GameProvider extends ChangeNotifier {
         'pitanje': 'Koje godine je izgrađen Berlinski zid?',
         'tacan_odgovor': '1961',
         'ima_zarez': false,
+      });
+    } on FirebaseException catch (error) {
+      developer.log(error.message.toString());
+    }
+  }
+
+  Future<void> addSortByQuestionToDB() async {
+    try {
+      await FirebaseFirestore.instance.collection('poredaj_po').doc().set({
+        'pitanje':
+            'Hronološki poredaj historijske događaje, počevši od najstarijeg:',
+        'tacan_poredak': [
+          "Grčko-perzijski ratovi",
+          "Pad Zapadnog Rimskog carstva",
+          "Povelja Kulina Bana",
+          "Otkriće Amerike",
+          "Pad Bastilje",
+        ],
+        'shuffle_poredak': [
+          "Pad Zapadnog Rimskog carstva",
+          "Povelja Kulina Bana",
+          "Pad Bastilje",
+          "Grčko-perzijski ratovi",
+          "Otkriće Amerike",
+        ],
       });
     } on FirebaseException catch (error) {
       developer.log(error.message.toString());
@@ -233,6 +287,8 @@ class GameProvider extends ChangeNotifier {
 
   void game4ResetSelection() {
     game4SelectedAnswer = 10;
+    correctSorts = 0;
+    homePlayerAllCorrect = false;
     notifyListeners();
   }
 
@@ -245,6 +301,7 @@ class GameProvider extends ChangeNotifier {
     estimationQuestionIndex = 0;
     sortByPageIndex = 0;
     sortByQuestionIndex = 0;
+    game4ResetSelection();
     notifyListeners();
   }
 }

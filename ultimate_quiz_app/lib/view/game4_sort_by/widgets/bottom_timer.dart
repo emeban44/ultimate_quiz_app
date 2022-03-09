@@ -13,7 +13,7 @@ class SortByBottomTimer extends StatefulWidget {
 }
 
 class _SortByBottomTimerState extends State<SortByBottomTimer> {
-  int countdown = 20;
+  int countdown = 30;
   int percentCounter = 0;
   Timer? _timer;
   void startTimer(GameProvider gameProvider) {
@@ -21,10 +21,10 @@ class _SortByBottomTimerState extends State<SortByBottomTimer> {
         Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         countdown--;
-        if (percentCounter < 20) {
+        if (percentCounter < 30) {
           percentCounter++;
         }
-        if (countdown == 0 || timer.tick == 21) {
+        if (countdown == 0 || timer.tick == 31) {
           timer.cancel();
           //shouldRevealTruth = true;
           widget.confirmAnswer(gameProvider);
@@ -61,7 +61,7 @@ class _SortByBottomTimerState extends State<SortByBottomTimer> {
         progressColor: Colors.pink.shade900,
         backgroundColor: Colors.transparent,
         lineWidth: 3,
-        percent: 1 - percentCounter * 0.05,
+        percent: 1 - percentCounter * 0.0333,
         center: Text(
           countdown.toString(),
           style: const TextStyle(

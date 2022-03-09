@@ -56,6 +56,7 @@ class _GameStartLobbyPageState extends State<GameStartLobbyPage> {
         gameProvider.fetchOddOneOutQuestions(),
         gameProvider.fetchGuessingQuestions(),
         gameProvider.fetchEstimationQuestions(),
+        gameProvider.fetchSortByQuestions(),
       ]);
     } catch (error) {
       Navigator.popUntil(context, ModalRoute.withName('/'));

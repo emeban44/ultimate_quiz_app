@@ -27,6 +27,7 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
 
   void confirmAnswer(GameProvider gameProvider) {
     gameProvider.sortyByGameTimer?.cancel();
+    calculateHomePlayerPoints(gameProvider);
     setState(() {
       shouldReveal = true;
     });
@@ -35,16 +36,31 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
     }
   }
 
+  void calculateHomePlayerPoints(GameProvider gameProvider) {
+    for (int i = 0;
+        i <
+            gameProvider.sortByQuestions[gameProvider.sortByPageIndex]
+                .correctList.length;
+        i++) {
+      if (gameProvider
+              .sortByQuestions[gameProvider.sortByPageIndex].correctList[i] ==
+          gameProvider
+              .sortByQuestions[gameProvider.sortByPageIndex].shuffledList[i]) {
+        gameProvider.correctSorts++;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
+    final int currentPage = gameProvider.sortByPageIndex;
     return Expanded(
       child: Column(
         children: [
-          SortByQuestionBox(gameProvider.sortByPageIndex == 0
-              ? 'Poredaj tenisere po broju Grand Slam titula:'
-              : 'Poredaj filmove po godini izlaska (od najstarijeg do najmlađeg):'),
+          SortByQuestionBox(
+              gameProvider.sortByQuestions[currentPage].question!),
           if (shouldReveal)
             Expanded(
               child: Container(
@@ -72,33 +88,73 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
                       ),
                     ),
                     SortByResultRow(
-                      orderedResult: '1. Rafael Nadal',
-                      homePlayerCorrectAnswer: true,
+                      orderedResult: '1. ' +
+                          gameProvider
+                              .sortByQuestions[currentPage].correctList[0],
+                      homePlayerCorrectAnswer: gameProvider
+                                  .sortByQuestions[currentPage]
+                                  .correctList[0] ==
+                              gameProvider
+                                  .sortByQuestions[currentPage].shuffledList[0]
+                          ? true
+                          : false,
                       awayPlayerCorrectAnswer: false,
                       order: 1,
                     ),
                     SortByResultRow(
-                      orderedResult: '2. Novak Đoković',
-                      homePlayerCorrectAnswer: true,
+                      orderedResult: '2. ' +
+                          gameProvider
+                              .sortByQuestions[currentPage].correctList[1],
+                      homePlayerCorrectAnswer: gameProvider
+                                  .sortByQuestions[currentPage]
+                                  .correctList[1] ==
+                              gameProvider
+                                  .sortByQuestions[currentPage].shuffledList[1]
+                          ? true
+                          : false,
                       awayPlayerCorrectAnswer: false,
                       order: 2,
                     ),
                     SortByResultRow(
-                      orderedResult: '3. Andy Murray',
-                      homePlayerCorrectAnswer: true,
+                      orderedResult: '3. ' +
+                          gameProvider
+                              .sortByQuestions[currentPage].correctList[2],
+                      homePlayerCorrectAnswer: gameProvider
+                                  .sortByQuestions[currentPage]
+                                  .correctList[2] ==
+                              gameProvider
+                                  .sortByQuestions[currentPage].shuffledList[2]
+                          ? true
+                          : false,
                       awayPlayerCorrectAnswer: false,
                       order: 3,
                     ),
                     SortByResultRow(
-                      orderedResult: '4. Marin Čilić',
-                      homePlayerCorrectAnswer: true,
+                      orderedResult: '4. ' +
+                          gameProvider
+                              .sortByQuestions[currentPage].correctList[3],
+                      homePlayerCorrectAnswer: gameProvider
+                                  .sortByQuestions[currentPage]
+                                  .correctList[3] ==
+                              gameProvider
+                                  .sortByQuestions[currentPage].shuffledList[3]
+                          ? true
+                          : false,
                       awayPlayerCorrectAnswer: false,
                       order: 4,
                     ),
                     SortByResultRow(
-                      orderedResult: '5. Damir Džumhur',
-                      homePlayerCorrectAnswer: true,
-                      awayPlayerCorrectAnswer: true,
+                      orderedResult: '5. ' +
+                          gameProvider
+                              .sortByQuestions[currentPage].correctList[4],
+                      homePlayerCorrectAnswer: gameProvider
+                                  .sortByQuestions[currentPage]
+                                  .correctList[4] ==
+                              gameProvider
+                                  .sortByQuestions[currentPage].shuffledList[4]
+                          ? true
+                          : false,
+                      awayPlayerCorrectAnswer: false,
                       order: 5,
                     ),
                     ShowUpAnimation(
@@ -106,11 +162,13 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
                       animationDuration: const Duration(seconds: 1),
                       curve: Curves.decelerate,
                       child: Container(
-                        margin: const EdgeInsets.only(top: 0),
+                        margin: const EdgeInsets.only(top: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SortByAllCorrectBonusColumn(true),
+                            SortByAllCorrectBonusColumn(
+                                gameProvider.correctSorts == 5 ? true : false),
                             SortByFinalResultBox(),
                             SortByAllCorrectBonusColumn(false),
                           ],
