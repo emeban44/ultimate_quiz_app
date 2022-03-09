@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'dart:developer';
+import 'dart:developer' as developer;
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -47,61 +48,101 @@ class GameProvider extends ChangeNotifier {
 
   Future<void> fetchOddOneOutQuestions() async {
     final List<OddOneOutQuestion> responseList = [];
+    final List<int> randomNumbers = [];
     try {
       final response =
           await FirebaseFirestore.instance.collection('izbaci_uljeza').get();
-      log(response.size.toString() + ' loaded odd one out');
+      developer.log(response.size.toString() + ' loaded odd one out');
       for (var element in response.docs) {
         responseList.add(OddOneOutQuestion.fromJson(element.data()));
       }
-      oddOneOutQuestions = [...responseList];
+      for (int i = 0; i < 5; i++) {
+        bool didGenerate = false;
+        do {
+          final int kocka = Random().nextInt(responseList.length);
+          if (!randomNumbers.contains(kocka)) {
+            print('1: ' + kocka.toString());
+            randomNumbers.add(kocka);
+            didGenerate = true;
+
+            oddOneOutQuestions.add(responseList[kocka]);
+          }
+        } while (!didGenerate);
+      }
+      //oddOneOutQuestions = [...responseList];
       notifyListeners();
     } on FirebaseException catch (error) {
-      log(error.message.toString());
+      developer.log(error.message.toString());
     }
   }
 
   Future<void> fetchGuessingQuestions() async {
     final List<GuessQuestion> responseList = [];
+    final List<int> randomNumbers = [];
     try {
       final response =
           await FirebaseFirestore.instance.collection('pogadjanje').get();
-      log(response.size.toString() + ' loaded guessing');
+      developer.log(response.size.toString() + ' loaded guessing');
       for (var element in response.docs) {
         responseList.add(GuessQuestion.fromJson(element.data()));
       }
-      guessQuestions = [...responseList];
+      for (int i = 0; i < 5; i++) {
+        bool didGenerate = false;
+        do {
+          final int kocka = Random().nextInt(responseList.length);
+          if (!randomNumbers.contains(kocka)) {
+            print('2: ' + kocka.toString());
+            randomNumbers.add(kocka);
+            didGenerate = true;
+            guessQuestions.add(responseList[kocka]);
+          }
+        } while (!didGenerate);
+      }
+      //guessQuestions = [...responseList];
       notifyListeners();
     } on FirebaseException catch (error) {
-      log(error.message.toString());
+      developer.log(error.message.toString());
     }
   }
 
   Future<void> fetchEstimationQuestions() async {
     final List<EstimationQuestion> responseList = [];
+    final List<int> randomNumbers = [];
     try {
       final response =
           await FirebaseFirestore.instance.collection('ko_je_blizi').get();
-      log(response.size.toString() + ' loaded estimation');
+      developer.log(response.size.toString() + ' loaded estimation');
       for (var element in response.docs) {
         responseList.add(EstimationQuestion.fromJson(element.data()));
       }
-      estimationQuestions = [...responseList];
+      for (int i = 0; i < 5; i++) {
+        bool didGenerate = false;
+        do {
+          final int kocka = Random().nextInt(responseList.length);
+          if (!randomNumbers.contains(kocka)) {
+            print('3: ' + kocka.toString());
+            randomNumbers.add(kocka);
+            didGenerate = true;
+            estimationQuestions.add(responseList[kocka]);
+          }
+        } while (!didGenerate);
+      }
+      //estimationQuestions = [...responseList];
       notifyListeners();
     } on FirebaseException catch (error) {
-      log(error.message.toString());
+      developer.log(error.message.toString());
     }
   }
 
   Future<void> addOddOneOutQuestionToDB() async {
     try {
       await FirebaseFirestore.instance.collection('izbaci_uljeza').doc().set({
-        'objasnjenje': 'U filmu Matrix, nije glumio Brad Pitt.',
-        'tacan_odgovor': 1,
-        'odgovori': ["Se7en", "The Matrix", "Mr. & Mrs. Smith", "Fight Club"],
+        'objasnjenje': 'Astra nije model Renaulta nego Opela',
+        'tacan_odgovor': 0,
+        'odgovori': ["Astra", "Clio", "Captur", "Megane"],
       });
     } on FirebaseException catch (error) {
-      log(error.message.toString());
+      developer.log(error.message.toString());
     }
   }
 
@@ -109,29 +150,25 @@ class GameProvider extends ChangeNotifier {
     try {
       await FirebaseFirestore.instance.collection('pogadjanje').doc().set({
         'imageURL':
-            'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fverstappen.jpeg?alt=media&token=3148897d-4602-4879-8cae-35bed66a9761',
-        'tacan_odgovor': 3,
-        'odgovori': [
-          "Valentino Rossi",
-          "Charles Leclerc",
-          "Lewis Hamilton",
-          "Max Verstappen"
-        ],
+            'https://firebasestorage.googleapis.com/v0/b/ultimatequizapp.appspot.com/o/pogadjanje%2Fbremen.png?alt=media&token=86a71182-b482-4745-a21b-6c09bb86b7d7',
+        'tacan_odgovor': 2,
+        'objasnjenje': 'Pogodi grb fudbalskog kluba:',
+        'odgovori': ["Wolfsburg", "Celtic", "Werder Bremen", "Panathinaikos"],
       });
     } on FirebaseException catch (error) {
-      log(error.message.toString());
+      developer.log(error.message.toString());
     }
   }
 
   Future<void> addEstimationQuestionToDB() async {
     try {
       await FirebaseFirestore.instance.collection('ko_je_blizi').doc().set({
-        'pitanje': 'Koje godine je osnovana društvena mreža Facebook?',
-        'tacan_odgovor': '2004',
+        'pitanje': 'Koje godine je izgrađen Berlinski zid?',
+        'tacan_odgovor': '1961',
         'ima_zarez': false,
       });
     } on FirebaseException catch (error) {
-      log(error.message.toString());
+      developer.log(error.message.toString());
     }
   }
 

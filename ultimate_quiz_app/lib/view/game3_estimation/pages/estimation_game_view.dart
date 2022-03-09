@@ -44,8 +44,8 @@ class _EstimationGameViewState extends State<EstimationGameView> {
       didConfirm = !didConfirm;
     });
     gameProvider.estimationGameTimer?.cancel();
-    if (gameProvider.estimationPageIndex < 4) {
-      Future.delayed(const Duration(milliseconds: 9000))
+    if (gameProvider.estimationPageIndex < 5) {
+      Future.delayed(const Duration(milliseconds: 7500))
           .whenComplete(() => nextView(gameProvider));
     }
   }

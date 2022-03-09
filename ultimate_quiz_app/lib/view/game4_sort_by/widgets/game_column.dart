@@ -30,7 +30,7 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
     setState(() {
       shouldReveal = true;
     });
-    if (gameProvider.sortByPageIndex < 1) {
+    if (gameProvider.sortByPageIndex < 2) {
       widget.nextView(gameProvider);
     }
   }
