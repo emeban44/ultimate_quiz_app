@@ -53,7 +53,7 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
           ShowUpAnimation(
             delayStart: Duration(
                 milliseconds:
-                    gameProvider.oddOneOutPageIndex != 0 ? 750 : 2700),
+                    gameProvider.oddOneOutPageIndex != 0 ? 750 : 2200),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
@@ -70,7 +70,7 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
           ShowUpAnimation(
             delayStart: Duration(
                 milliseconds:
-                    gameProvider.oddOneOutPageIndex != 0 ? 1800 : 3700),
+                    gameProvider.oddOneOutPageIndex != 0 ? 1800 : 3200),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
@@ -87,7 +87,7 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
           ShowUpAnimation(
             delayStart: Duration(
                 milliseconds:
-                    gameProvider.oddOneOutPageIndex != 0 ? 2750 : 4700),
+                    gameProvider.oddOneOutPageIndex != 0 ? 2750 : 4200),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(
@@ -103,7 +103,7 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
           ShowUpAnimation(
             delayStart: Duration(
                 milliseconds:
-                    gameProvider.oddOneOutPageIndex != 0 ? 3900 : 5700),
+                    gameProvider.oddOneOutPageIndex != 0 ? 3900 : 5200),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(

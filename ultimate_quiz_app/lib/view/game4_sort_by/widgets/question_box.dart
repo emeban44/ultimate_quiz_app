@@ -20,7 +20,7 @@ class SortByQuestionBox extends StatelessWidget {
         constraints: const BoxConstraints(maxHeight: 90, minHeight: 30),
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 30),
-          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 30),
+          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
           decoration: BoxDecoration(
             color: Colors.black26,
             borderRadius: BorderRadius.circular(10),
