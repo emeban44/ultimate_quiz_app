@@ -50,6 +50,14 @@ class GameProvider extends ChangeNotifier {
   Timer? sortyByGameTimer;
   List<SortByQuestion> sortByQuestions = [];
 
+  //GENERAL KNOWLEDGE - GAME 5
+  int generalKnowledgePageIndex = 0;
+  int generalKnowledgeQuestionIndex = 0;
+  int game5SelectedAnswer = 10;
+  bool game5ShouldDisableSelection = true;
+  Timer? generalKnowledgeByGameTimer;
+  List<SortByQuestion> generalKnowledgeQuestions = [];
+
   Future<void> fetchOddOneOutQuestions() async {
     final List<OddOneOutQuestion> responseList = [];
     final List<int> randomNumbers = [];
@@ -292,6 +300,22 @@ class GameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // GENERAL KNOWLEDGE RESET AND INCREMENT
+  void incrementGeneralKnowledgeQuestionIndex() {
+    generalKnowledgeQuestionIndex++;
+    notifyListeners();
+  }
+
+  void incrementGeneralKnowledgeIndex() {
+    generalKnowledgePageIndex++;
+    notifyListeners();
+  }
+
+  void game5ResetSelection() {
+    game5SelectedAnswer = 10;
+    notifyListeners();
+  }
+
   void resetCounters() {
     oddOneOutPageIndex = 0;
     guessingPageIndex = 0;
@@ -301,7 +325,11 @@ class GameProvider extends ChangeNotifier {
     estimationQuestionIndex = 0;
     sortByPageIndex = 0;
     sortByQuestionIndex = 0;
+    game1ResetSelection();
+    game2ResetSelection();
+    game3ResetSelection();
     game4ResetSelection();
+    game5ResetSelection();
     notifyListeners();
   }
 }

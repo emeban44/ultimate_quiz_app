@@ -5,6 +5,7 @@ import 'package:ultimate_quiz_app/view/game1_odd_one_out/page/odd_one_out_game_v
 import 'package:ultimate_quiz_app/view/game2_guessing/pages/guessing_game_view.dart';
 import 'package:ultimate_quiz_app/view/game3_estimation/pages/estimation_game_view.dart';
 import 'package:ultimate_quiz_app/view/game4_sort_by/page/sort_by_game_view.dart';
+import 'package:ultimate_quiz_app/view/game5_general_knowledge/page/general_knowledge_page.dart';
 import 'package:ultimate_quiz_app/widgets/player_score_box.dart';
 
 class OddOneOutPage extends StatelessWidget {
@@ -81,6 +82,7 @@ class OddOneOutPage extends StatelessWidget {
                     reverse: false,
                     // onPageChanged: (value) => ,
                     children: [
+                      GeneralKnowledgeGameView(_pageController),
                       OddOneOutGameView(nextPage, _pageController, 0),
                       OddOneOutGameView(nextPage, _pageController, 1),
                       OddOneOutGameView(nextPage, _pageController, 2),
