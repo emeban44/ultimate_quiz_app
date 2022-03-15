@@ -7,7 +7,7 @@ class EstimationVSText extends StatelessWidget {
     return ShowUpAnimation(
       curve: Curves.easeOut,
       animationDuration: const Duration(seconds: 1),
-      delayStart: const Duration(milliseconds: 6000),
+      delayStart: const Duration(milliseconds: 4000),
       child: Container(
         margin: const EdgeInsets.only(left: 15, right: 15, top: 0),
         child: const Text(

@@ -7,7 +7,7 @@ class EstimationResultText extends StatelessWidget {
     return ShowUpAnimation(
       curve: Curves.easeOut,
       animationDuration: const Duration(seconds: 1),
-      delayStart: const Duration(milliseconds: 4000),
+      delayStart: const Duration(milliseconds: 3000),
       child: const Text(
         'Razlika:',
         style: TextStyle(

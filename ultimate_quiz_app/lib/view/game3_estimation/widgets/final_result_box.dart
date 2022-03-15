@@ -20,7 +20,7 @@ class EstimationFinalResultBox extends StatelessWidget {
     return ShowUpAnimation(
       curve: Curves.easeOut,
       animationDuration: const Duration(seconds: 1),
-      delayStart: Duration(milliseconds: player == 1 ? 5000 : 7000),
+      delayStart: Duration(milliseconds: player == 1 ? 4000 : 4000),
       child: ConstrainedBox(
         constraints: const BoxConstraints(minWidth: 40, minHeight: 35),
         child: Container(

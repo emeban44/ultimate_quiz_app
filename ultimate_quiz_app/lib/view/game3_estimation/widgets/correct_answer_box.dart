@@ -15,7 +15,7 @@ class EstimationCorrectAnswerBox extends StatelessWidget {
     return ShowUpAnimation(
       curve: Curves.easeOut,
       animationDuration: const Duration(seconds: 1),
-      delayStart: const Duration(milliseconds: 3000),
+      delayStart: const Duration(milliseconds: 2000),
       child: Container(
         margin: const EdgeInsets.only(top: 15),
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3.5),

@@ -17,10 +17,10 @@ class SortByQuestionBox extends StatelessWidget {
       animationDuration: const Duration(seconds: 1),
       curve: Curves.linear,
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxHeight: 80, minHeight: 30),
+        constraints: const BoxConstraints(maxHeight: 90, minHeight: 30),
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 30),
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 30),
+          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 30),
           decoration: BoxDecoration(
             color: Colors.black26,
             borderRadius: BorderRadius.circular(10),

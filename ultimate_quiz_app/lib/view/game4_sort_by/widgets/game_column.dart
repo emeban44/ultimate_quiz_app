@@ -77,7 +77,7 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 5, horizontal: 20),
                         decoration: BoxDecoration(
-                          color: Colors.black26,
+                          // color: Colors.black26,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: const Text(
