@@ -41,7 +41,7 @@ class _SortByBottomTimerState extends State<SortByBottomTimer> {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     Future.delayed(Duration(
-            milliseconds: gameProvider.sortByPageIndex == 0 ? 5700 : 3750))
+            milliseconds: gameProvider.sortByPageIndex == 0 ? 5700 : 2850))
         .whenComplete(() => startTimer(gameProvider));
     super.initState();
   }

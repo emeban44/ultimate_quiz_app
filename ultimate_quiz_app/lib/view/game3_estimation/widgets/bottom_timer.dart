@@ -82,7 +82,7 @@ class _EstimationBottomTimerState extends State<EstimationBottomTimer> {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     Future.delayed(Duration(
-            milliseconds: gameProvider.estimationPageIndex == 0 ? 6000 : 4500))
+            milliseconds: gameProvider.estimationPageIndex == 0 ? 6000 : 3500))
         .whenComplete(() => startTimer(gameProvider));
     super.initState();
   }
@@ -149,7 +149,7 @@ class _EstimationBottomTimerState extends State<EstimationBottomTimer> {
                       delayStart: Duration(
                           milliseconds: gameProvider.estimationPageIndex == 0
                               ? 5500
-                              : 4000),
+                              : 3000),
                       curve: Curves.linear,
                       child: EstimationConfirmButton(widget.confirmAnswer),
                     ),
@@ -158,7 +158,7 @@ class _EstimationBottomTimerState extends State<EstimationBottomTimer> {
                       delayStart: Duration(
                           milliseconds: gameProvider.estimationPageIndex == 0
                               ? 5500
-                              : 4000),
+                              : 3000),
                       curve: Curves.linear,
                       child: Container(
                         margin: const EdgeInsets.only(top: 60, bottom: 10),

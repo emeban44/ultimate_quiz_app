@@ -23,7 +23,7 @@ class _SortByReorderableAnswerListState
       flex: 3,
       child: ShowUpAnimation(
         delayStart: Duration(
-            milliseconds: gameProvider.sortByPageIndex == 0 ? 4200 : 2600),
+            milliseconds: gameProvider.sortByPageIndex == 0 ? 4200 : 1600),
         animationDuration: const Duration(seconds: 1),
         curve: Curves.linear,
         offset: 0.01,

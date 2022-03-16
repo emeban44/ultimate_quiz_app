@@ -14,9 +14,13 @@ class SortByGameView extends StatefulWidget {
 
 class _SortByGameViewState extends State<SortByGameView> {
   void nextView(GameProvider gameProvider) {
-    Future.delayed(const Duration(seconds: 14)).then((value) {
-      widget._pageController
-          .nextPage(duration: const Duration(seconds: 2), curve: Curves.easeIn);
+    Future.delayed(const Duration(seconds: 13)).then((value) {
+      widget._pageController.nextPage(
+          duration: Duration(
+              milliseconds: gameProvider.sortByPageIndex == 1 ? 1750 : 1000),
+          curve: gameProvider.sortByPageIndex == 1
+              ? Curves.easeInToLinear
+              : Curves.easeIn);
       gameProvider.incrementSortByIndex();
       gameProvider.game4ResetSelection();
     });

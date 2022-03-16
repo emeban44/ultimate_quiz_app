@@ -17,10 +17,11 @@ class OddOneOutPage extends StatelessWidget {
       const Duration(milliseconds: 3250),
     ).whenComplete(() {
       _pageController.nextPage(
-          duration: const Duration(milliseconds: 1400),
+          duration: Duration(
+              milliseconds: gameProvider.oddOneOutPageIndex == 4 ? 1750 : 1000),
           curve: gameProvider.oddOneOutPageIndex == 4
               ? Curves.easeInToLinear // linear
-              : Curves.decelerate);
+              : Curves.easeIn);
       gameProvider.incrementOddOneOutIndex();
       gameProvider.game1ResetSelection();
       // Future.delayed(const Duration(milliseconds: 500)).whenComplete(() {
@@ -82,7 +83,6 @@ class OddOneOutPage extends StatelessWidget {
                     reverse: false,
                     // onPageChanged: (value) => ,
                     children: [
-                      GeneralKnowledgeGameView(_pageController),
                       OddOneOutGameView(nextPage, _pageController, 0),
                       OddOneOutGameView(nextPage, _pageController, 1),
                       OddOneOutGameView(nextPage, _pageController, 2),
@@ -100,6 +100,7 @@ class OddOneOutPage extends StatelessWidget {
                       EstimationGameView(pageController: _pageController),
                       SortByGameView(_pageController),
                       SortByGameView(_pageController),
+                      GeneralKnowledgeGameView(_pageController),
                     ],
                   ),
                 ),

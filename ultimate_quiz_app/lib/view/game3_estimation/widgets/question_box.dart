@@ -10,12 +10,12 @@ class EstimationQuestionBox extends StatelessWidget {
         Provider.of<GameProvider>(context, listen: false);
     return ShowUpAnimation(
       delayStart: Duration(
-          milliseconds: gameProvider.estimationPageIndex == 0 ? 3500 : 2000),
+          milliseconds: gameProvider.estimationPageIndex == 0 ? 3500 : 1000),
       curve: Curves.linear,
       //animationDuration: const Duration(milliseconds: 1000),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 2.5),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
         decoration: BoxDecoration(
           //color: Colors.black,
           boxShadow: const [
@@ -40,7 +40,7 @@ class EstimationQuestionBox extends StatelessWidget {
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontFamily: 'Signika',
-            fontSize: 22.5,
+            fontSize: 22,
           ),
         ),
       ),

@@ -55,7 +55,7 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
         ShowUpAnimation(
           delayStart: Duration(
               milliseconds:
-                  widget.gameProvider.guessingPageIndex == 0 ? 3500 : 3000),
+                  widget.gameProvider.guessingPageIndex == 0 ? 4500 : 2000),
           curve: Curves.easeIn,
           //animationDuration: ,
           child: Container(
@@ -81,7 +81,7 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
         ShowUpAnimation(
           delayStart: Duration(
               milliseconds:
-                  widget.gameProvider.guessingPageIndex == 0 ? 4500 : 4000),
+                  widget.gameProvider.guessingPageIndex == 0 ? 5500 : 3000),
           curve: Curves.easeIn,
           child: GuessingAnswerRow(
             answer1: guessQuestionsList[currentPage].answers[0],
@@ -98,7 +98,7 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
         ShowUpAnimation(
           delayStart: Duration(
               milliseconds:
-                  widget.gameProvider.guessingPageIndex == 0 ? 5500 : 5000),
+                  widget.gameProvider.guessingPageIndex == 0 ? 6500 : 4000),
           curve: Curves.easeIn,
           child: GuessingAnswerRow(
             answer1: guessQuestionsList[currentPage].answers[2],
@@ -115,7 +115,7 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
         ShowUpAnimation(
           delayStart: Duration(
               milliseconds:
-                  widget.gameProvider.guessingPageIndex == 0 ? 6500 : 6000),
+                  widget.gameProvider.guessingPageIndex == 0 ? 7500 : 5000),
           curve: Curves.easeIn,
           child: GuessingBottomTimer(revealAnswers, shouldRevealAnswers),
         ),

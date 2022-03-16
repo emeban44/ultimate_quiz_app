@@ -13,7 +13,7 @@ class SortByQuestionBox extends StatelessWidget {
         Provider.of<GameProvider>(context, listen: false);
     return ShowUpAnimation(
       delayStart: Duration(
-          milliseconds: gameProvider.sortByPageIndex == 0 ? 3200 : 1600),
+          milliseconds: gameProvider.sortByPageIndex == 0 ? 3200 : 600),
       animationDuration: const Duration(seconds: 1),
       curve: Curves.linear,
       child: ConstrainedBox(

@@ -28,7 +28,7 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
         if (percentCounter < 5) {
           percentCounter++;
         }
-        if (countdown == 0 || timer.tick == 6) {
+        if (countdown == -1 || timer.tick == 6) {
           timer.cancel();
           shouldRevealTruth = true;
           widget.revealEverything();
@@ -44,8 +44,8 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
   void initState() {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
-    Future.delayed(
-            Duration(seconds: gameProvider.guessingPageIndex == 0 ? 7 : 7))
+    Future.delayed(Duration(
+            milliseconds: gameProvider.guessingPageIndex == 0 ? 7850 : 5400))
         .whenComplete(() => startTimer(gameProvider));
     super.initState();
   }
@@ -101,7 +101,7 @@ class _GuessingBottomTimerState extends State<GuessingBottomTimer> {
                 percent: 1 - percentCounter * 0.2,
                 center: Text(
                   countdown.toString(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'Acme',
                     fontSize: 30,
                   ),

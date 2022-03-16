@@ -55,8 +55,8 @@ class _BottomTimerState extends State<BottomTimer> {
   void initState() {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
-    Future.delayed(
-            Duration(seconds: gameProvider.oddOneOutPageIndex != 0 ? 6 : 7))
+    Future.delayed(Duration(
+            milliseconds: gameProvider.oddOneOutPageIndex != 0 ? 5200 : 6400))
         .whenComplete(() => startTimer());
     super.initState();
   }
@@ -116,7 +116,8 @@ class _BottomTimerState extends State<BottomTimer> {
               alignment: Alignment.center,
               child: ShowUpAnimation(
                 delayStart: Duration(
-                    seconds: gameProvider.oddOneOutPageIndex != 0 ? 5 : 6),
+                    milliseconds:
+                        gameProvider.oddOneOutPageIndex != 0 ? 4750 : 6000),
                 curve: Curves.easeIn,
                 child: Text(
                   countdown.toString(),

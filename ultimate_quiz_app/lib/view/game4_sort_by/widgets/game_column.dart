@@ -31,7 +31,7 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
     setState(() {
       shouldReveal = true;
     });
-    if (gameProvider.sortByPageIndex < 1) {
+    if (gameProvider.sortByPageIndex < 2) {
       widget.nextView(gameProvider);
     }
   }
@@ -186,7 +186,7 @@ class _SortByGameColumnState extends State<SortByGameColumn> {
               child: ShowUpAnimation(
                 delayStart: Duration(
                     milliseconds:
-                        gameProvider.sortByPageIndex == 0 ? 5200 : 3600),
+                        gameProvider.sortByPageIndex == 0 ? 5200 : 2600),
                 animationDuration: const Duration(seconds: 1),
                 curve: Curves.linear,
                 offset: 0.1,

@@ -31,8 +31,13 @@ class _EstimationGameViewState extends State<EstimationGameView> {
 
   void nextView(GameProvider gameProvider) {
     Future.delayed(const Duration(seconds: 2)).then((value) {
-      widget.pageController
-          .nextPage(duration: const Duration(seconds: 2), curve: Curves.easeIn);
+      widget.pageController.nextPage(
+          duration: Duration(
+              milliseconds:
+                  gameProvider.estimationPageIndex == 4 ? 1800 : 1000),
+          curve: gameProvider.estimationPageIndex == 4
+              ? Curves.easeInToLinear
+              : Curves.easeIn);
       gameProvider.incrementEstimationIndex();
       gameProvider.game3ResetSelection();
     });
@@ -45,7 +50,7 @@ class _EstimationGameViewState extends State<EstimationGameView> {
     });
     gameProvider.estimationGameTimer?.cancel();
     if (gameProvider.estimationPageIndex < 5) {
-      Future.delayed(const Duration(milliseconds: 5000))
+      Future.delayed(const Duration(milliseconds: 4500))
           .whenComplete(() => nextView(gameProvider));
     }
   }
@@ -110,7 +115,7 @@ class _EstimationGameViewState extends State<EstimationGameView> {
                         top: 5, bottom: 15, right: 25, left: 25),
                     child: Image.asset('assets/images/ko_je_blizi_fit.png'),
                   ),
-                  delayStart: const Duration(milliseconds: 1250),
+                  delayStart: const Duration(milliseconds: 1200),
                   animationDuration: const Duration(seconds: 3),
                   curve: Curves.decelerate,
                   direction: Direction.vertical,

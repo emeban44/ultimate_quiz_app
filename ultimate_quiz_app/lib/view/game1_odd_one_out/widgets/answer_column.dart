@@ -103,7 +103,7 @@ class _OddOneOutAnswerColumnState extends State<OddOneOutAnswerColumn> {
           ShowUpAnimation(
             delayStart: Duration(
                 milliseconds:
-                    gameProvider.oddOneOutPageIndex != 0 ? 3900 : 5200),
+                    gameProvider.oddOneOutPageIndex != 0 ? 3750 : 5200),
             animationDuration: const Duration(seconds: 1),
             curve: Curves.easeIn,
             child: OddOneOutAnswerBox(

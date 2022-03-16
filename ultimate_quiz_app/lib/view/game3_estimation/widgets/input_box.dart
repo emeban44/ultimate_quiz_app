@@ -13,7 +13,7 @@ class EstimationInputBox extends StatelessWidget {
         Provider.of<GameProvider>(context, listen: false);
     return ShowUpAnimation(
       delayStart: Duration(
-          milliseconds: gameProvider.estimationPageIndex == 0 ? 4500 : 3000),
+          milliseconds: gameProvider.estimationPageIndex == 0 ? 4500 : 2000),
       curve: Curves.linear,
       //animationDuration: const Duration(milliseconds: 2000),
       child: Container(

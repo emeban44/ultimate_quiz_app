@@ -20,8 +20,12 @@ class GuessingGameView extends StatefulWidget {
 class _GuessingGameViewState extends State<GuessingGameView> {
   void nextView(GameProvider gameProvider) {
     Future.delayed(const Duration(seconds: 2)).then((value) {
-      widget.pageController
-          .nextPage(duration: const Duration(seconds: 2), curve: Curves.easeIn);
+      widget.pageController.nextPage(
+          duration: Duration(
+              milliseconds: gameProvider.guessingPageIndex == 4 ? 1750 : 1000),
+          curve: gameProvider.guessingPageIndex == 4
+              ? Curves.easeInToLinear
+              : Curves.easeIn);
       gameProvider.incrementGuessingPageIndex();
       gameProvider.game2ResetSelection();
     });
@@ -42,7 +46,7 @@ class _GuessingGameViewState extends State<GuessingGameView> {
                     top: 5, bottom: 15, right: 25, left: 25),
                 child: Image.asset('assets/images/pogadjanje_fix.png'),
               ),
-              delayStart: const Duration(milliseconds: 500),
+              delayStart: const Duration(milliseconds: 1100),
               animationDuration: const Duration(seconds: 3),
               curve: Curves.decelerate,
               direction: Direction.vertical,

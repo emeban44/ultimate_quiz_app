@@ -16,14 +16,17 @@ class GeneralKnowledgeCategoryRow extends StatelessWidget {
       offset: -1,
       delayStart: Duration(milliseconds: 4000),
       animationDuration: Duration(seconds: 2),
-      child: Container(
-        margin: const EdgeInsets.only(top: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            GeneralKnowledgeCategoryBox(category1),
-            GeneralKnowledgeCategoryBox(category2),
-          ],
+      child: Opacity(
+        opacity: 0.5,
+        child: Container(
+          margin: const EdgeInsets.only(top: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GeneralKnowledgeCategoryBox(category1),
+              GeneralKnowledgeCategoryBox(category2),
+            ],
+          ),
         ),
       ),
     );
