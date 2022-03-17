@@ -14,7 +14,7 @@ class SortByGameView extends StatefulWidget {
 
 class _SortByGameViewState extends State<SortByGameView> {
   void nextView(GameProvider gameProvider) {
-    Future.delayed(const Duration(seconds: 13)).then((value) {
+    Future.delayed(const Duration(milliseconds: 13500)).then((value) {
       widget._pageController.nextPage(
           duration: Duration(
               milliseconds: gameProvider.sortByPageIndex == 1 ? 1750 : 1000),

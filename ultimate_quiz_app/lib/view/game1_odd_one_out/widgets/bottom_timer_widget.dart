@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
@@ -15,6 +16,7 @@ class BottomTimer extends StatefulWidget {
 
 class _BottomTimerState extends State<BottomTimer> {
   int countdown = 7;
+  int percentCounter = 0;
   bool shouldRevealExplanation = false;
   Timer? timer;
 
@@ -25,6 +27,9 @@ class _BottomTimerState extends State<BottomTimer> {
         Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         countdown--;
+        if (percentCounter < 7) {
+          percentCounter++;
+        }
         if (countdown == -1 || timer.tick == 8) {
           timer.cancel();
           shouldRevealExplanation = true;
@@ -119,12 +124,19 @@ class _BottomTimerState extends State<BottomTimer> {
                     milliseconds:
                         gameProvider.oddOneOutPageIndex != 0 ? 4750 : 6000),
                 curve: Curves.easeIn,
-                child: Text(
-                  countdown.toString(),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 40,
-                    fontFamily: 'Acme',
+                child: CircularPercentIndicator(
+                  radius: 50,
+                  progressColor: Colors.pink.shade900,
+                  backgroundColor: Colors.transparent,
+                  lineWidth: 3,
+                  percent: 1 - percentCounter * 0.142,
+                  center: Text(
+                    countdown.toString(),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 32,
+                      fontFamily: 'Acme',
+                    ),
                   ),
                 ),
               ),

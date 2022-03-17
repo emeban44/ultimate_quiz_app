@@ -7,7 +7,7 @@ class EstimationAddPoints extends StatelessWidget {
     return ShowUpAnimation(
       curve: Curves.easeOut,
       animationDuration: const Duration(seconds: 1),
-      delayStart: const Duration(milliseconds: 8000),
+      delayStart: const Duration(milliseconds: 5000),
       child: Container(
         margin: const EdgeInsets.only(top: 20),
         child: const Text(
