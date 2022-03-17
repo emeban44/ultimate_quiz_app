@@ -11,7 +11,7 @@ class FirebaseImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ShowUpAnimation(
       delayStart: Duration(
-          milliseconds: gameProvider.guessingPageIndex == 0 ? 2650 : 0),
+          milliseconds: gameProvider.guessingPageIndex == 0 ? 2500 : 0),
       animationDuration: const Duration(seconds: 2),
       curve: Curves.easeIn,
       offset: 0.1,

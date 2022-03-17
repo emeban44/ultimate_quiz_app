@@ -55,7 +55,8 @@ class GameProvider extends ChangeNotifier {
   int generalKnowledgeQuestionIndex = 0;
   int game5SelectedAnswer = 10;
   bool game5ShouldDisableSelection = true;
-  Timer? generalKnowledgeByGameTimer;
+  Timer? generalKnowledgeCategoryTimer;
+  Timer? generalKnowledgeQuestionTimer;
   List<SortByQuestion> generalKnowledgeQuestions = [];
 
   Future<void> fetchOddOneOutQuestions() async {

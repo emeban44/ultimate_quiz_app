@@ -14,6 +14,7 @@ class _EstimationConfirmButtonState extends State<EstimationConfirmButton> {
   bool isClicked = false;
 
   void toggleClicked(GameProvider gameProvider) {
+    FocusManager.instance.primaryFocus?.unfocus();
     setState(() {
       isClicked = !isClicked;
     });
@@ -44,7 +45,7 @@ class _EstimationConfirmButtonState extends State<EstimationConfirmButton> {
               style: OutlinedButton.styleFrom(
                   primary: Colors.black,
                   backgroundColor: Colors.black,
-                  side: const BorderSide(color: Colors.white, width: 0.5),
+                  side: const BorderSide(color: Colors.white, width: 0.65),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(7.5))),
               // primary: Colors.black,
