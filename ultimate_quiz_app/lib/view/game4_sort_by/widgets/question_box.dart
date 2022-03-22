@@ -8,7 +8,6 @@ class SortByQuestionBox extends StatelessWidget {
   final String question;
   @override
   Widget build(BuildContext context) {
-    print(question.length);
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     return ShowUpAnimation(

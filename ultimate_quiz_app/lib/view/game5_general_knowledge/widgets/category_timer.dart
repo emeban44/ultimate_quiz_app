@@ -24,7 +24,7 @@ class _GeneralKnowledgeCategoryTimerState
   //bool didConfirm = false;
   Timer? _timer;
   void startTimer(GameProvider gameProvider) {
-    gameProvider.estimationGameTimer =
+    gameProvider.generalKnowledgeCategoryTimer =
         Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         countdown--;
@@ -36,12 +36,12 @@ class _GeneralKnowledgeCategoryTimerState
           shouldRevealTruth = true;
           //widget.revealEverything();
           widget.confirmAnswer(gameProvider);
-          gameProvider.game3ShouldDisableSelection = true;
+          gameProvider.game5ShouldDisableSelection = true;
         }
       });
     });
-    _timer = gameProvider.estimationGameTimer;
-    gameProvider.game3ShouldDisableSelection = false;
+    _timer = gameProvider.generalKnowledgeCategoryTimer;
+    gameProvider.game5ShouldDisableSelection = false;
   }
 
   @override

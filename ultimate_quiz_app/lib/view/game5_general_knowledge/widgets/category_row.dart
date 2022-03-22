@@ -18,8 +18,8 @@ class GeneralKnowledgeCategoryRow extends StatelessWidget {
       direction: Direction.vertical,
       curve: Curves.elasticInOut,
       offset: -0.5,
-      delayStart: Duration(milliseconds: 2250),
-      animationDuration: Duration(seconds: 5),
+      delayStart: const Duration(milliseconds: 2750),
+      animationDuration: const Duration(seconds: 4),
       child: Container(
         margin: const EdgeInsets.only(top: 20),
         child: Row(

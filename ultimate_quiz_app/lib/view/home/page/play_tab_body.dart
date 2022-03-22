@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ultimate_quiz_app/view/classic/pages/classic_start_page.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/play/play_button.dart';
 import 'package:ultimate_quiz_app/widgets/app_logo_appbar_title.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 class PlayTabBody extends StatelessWidget {
   @override
@@ -51,7 +52,10 @@ class PlayTabBody extends StatelessWidget {
                 PlayButton('CLASSIC', () {
                   Navigator.pushNamed(context, ClassicStartPage.routeName);
                 }),
-                PlayButton('RANKED', () {}),
+                PlayButton('RANKED', () async {
+                  await FirebaseAnalytics.instance
+                      .logEvent(name: 'EMPA PROBAO NESTO');
+                }),
                 PlayButton('MINI IGRE', () {}),
               ],
             ),

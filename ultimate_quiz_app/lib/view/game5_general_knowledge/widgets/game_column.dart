@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/category_box.dart';
@@ -32,6 +33,8 @@ class _GeneralKnowledgeGameColumnState
 
   @override
   Widget build(BuildContext context) {
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
     return Container(
       child: isCategorySelected
           ? Column(
@@ -60,13 +63,16 @@ class _GeneralKnowledgeGameColumnState
                   curve: Curves.decelerate,
                   offset: -0.5,
                   direction: Direction.vertical,
-                  delayStart: Duration(milliseconds: 3000),
-                  animationDuration: Duration(milliseconds: 2000),
+                  delayStart: Duration(
+                      milliseconds: gameProvider.generalKnowledgePageIndex == 0
+                          ? 3500
+                          : 1000),
+                  animationDuration: const Duration(milliseconds: 1000),
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 5),
-                    child: Text(
+                    child: const Text(
                       'PROTIVNIK BIRA:',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'Acme',
                         letterSpacing: 0.5,
                         fontSize: 25,

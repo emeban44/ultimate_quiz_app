@@ -95,8 +95,6 @@ class _EstimationBottomTimerState extends State<EstimationBottomTimer> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.awayPlayerInvalidInput.toString() +
-        widget.homePlayerInvalidInput.toString());
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     final int currentPage = gameProvider.estimationPageIndex;
