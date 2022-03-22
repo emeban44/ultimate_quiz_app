@@ -31,8 +31,9 @@ class _GeneralKnowledgeGameViewState extends State<GeneralKnowledgeGameView> {
         Provider.of<GameProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.transparent,
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(

@@ -10,8 +10,9 @@ class GeneralKnowledgeQuestionBox extends StatelessWidget {
         Provider.of<GameProvider>(context, listen: false);
     return ShowUpAnimation(
       delayStart: const Duration(milliseconds: 1000),
-
-      curve: Curves.linear,
+      animationDuration: const Duration(milliseconds: 1000),
+      curve: Curves.easeIn,
+      offset: 0.1,
       //animationDuration: const Duration(milliseconds: 1000),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 2.5),

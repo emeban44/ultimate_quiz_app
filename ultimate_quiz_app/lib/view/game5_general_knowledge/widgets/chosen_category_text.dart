@@ -6,10 +6,15 @@ class GeneralKnowledgeChosenCategoryText extends StatelessWidget {
   Widget build(BuildContext context) {
     return ShowUpAnimation(
       delayStart: const Duration(milliseconds: 0),
-      offset: -0.5,
+      animationDuration: const Duration(milliseconds: 1000),
+      offset: 0.1,
       direction: Direction.vertical,
+      curve: Curves.easeIn,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 15),
+        decoration: BoxDecoration(
+            color: Colors.black38, borderRadius: BorderRadius.circular(10)),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        margin: const EdgeInsets.only(bottom: 20),
         child: Text(
           'FILMOVI 🍿',
           style: TextStyle(

@@ -12,11 +12,12 @@ class GeneralKnowledgeInputBox extends StatelessWidget {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     return ShowUpAnimation(
-      delayStart: Duration(milliseconds: 2000),
-      curve: Curves.linear,
+      delayStart: const Duration(milliseconds: 2000),
+      animationDuration: const Duration(milliseconds: 1000),
+      curve: Curves.easeIn,
       //animationDuration: const Duration(milliseconds: 2000),
       child: Container(
-        margin: const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 10),
+        margin: const EdgeInsets.only(top: 35, left: 20, right: 20, bottom: 10),
         height: 50,
         alignment: Alignment.center,
         width: double.infinity,

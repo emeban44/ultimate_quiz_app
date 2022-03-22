@@ -6,8 +6,10 @@ import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/category_
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/category_row.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/category_timer.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/chosen_category_text.dart';
+import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/confirm_button.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/input_box.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/question_box.dart';
+import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/question_timer.dart';
 
 class GeneralKnowledgeGameColumn extends StatefulWidget {
   const GeneralKnowledgeGameColumn({Key? key}) : super(key: key);
@@ -42,19 +44,8 @@ class _GeneralKnowledgeGameColumnState
                 GeneralKnowledgeChosenCategoryText(),
                 GeneralKnowledgeQuestionBox(),
                 GeneralKnowledgeInputBox(_inputController),
-                ElevatedButton(
-                  onPressed: () {
-                    FocusManager.instance.primaryFocus?.unfocus();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(7.5),
-                    ),
-                    side: BorderSide(color: Colors.white, width: 0.65),
-                  ),
-                  child: Text('POTVRDI'),
-                ),
+                const GeneralKnowledgeConfirmButton(),
+                GeneralKnowledgeQuestionTimer(confirmAnswer),
               ],
             )
           : Column(

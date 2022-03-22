@@ -13,7 +13,7 @@ class GeneralKnowledgeCategoryBox extends StatelessWidget {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     return ConstrainedBox(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
           minWidth: 150, maxWidth: 150, maxHeight: 40, minHeight: 40),
       child: GestureDetector(
         onTap: () => selectCategory(gameProvider),
