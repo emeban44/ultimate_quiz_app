@@ -15,9 +15,9 @@ class GeneralKnowledgeQuestionBox extends StatelessWidget {
       offset: 0.1,
       //animationDuration: const Duration(milliseconds: 1000),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 2.5),
+        margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
         padding:
-            const EdgeInsets.only(bottom: 12, top: 10, left: 20, right: 20),
+            const EdgeInsets.only(bottom: 12, top: 10, left: 30, right: 30),
         decoration: BoxDecoration(
           //color: Colors.black,
           boxShadow: const [
@@ -37,11 +37,12 @@ class GeneralKnowledgeQuestionBox extends StatelessWidget {
           ),
         ), //width: 250,
         child: Text(
-          'U kojem filmu su zajedno glumili Leonardo DiCaprio i Brad Pitt?',
+          'Za koji film je Leonardo DiCaprio osvojio Oskara 2014. godine?',
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontFamily: 'Signika',
             fontSize: 21,
+            letterSpacing: 0.5,
           ),
         ),
       ),

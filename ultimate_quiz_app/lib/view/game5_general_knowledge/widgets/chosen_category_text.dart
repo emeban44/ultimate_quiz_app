@@ -14,7 +14,7 @@ class GeneralKnowledgeChosenCategoryText extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.black38, borderRadius: BorderRadius.circular(10)),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-        margin: const EdgeInsets.only(bottom: 20),
+        margin: const EdgeInsets.only(bottom: 15),
         child: Text(
           'FILMOVI 🍿',
           style: TextStyle(

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
+import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
 class GeneralKnowledgeConfirmButton extends StatelessWidget {
-  const GeneralKnowledgeConfirmButton({Key? key}) : super(key: key);
-
+  const GeneralKnowledgeConfirmButton(this.revealTruth, {Key? key})
+      : super(key: key);
+  final Function(GameProvider) revealTruth;
   @override
   Widget build(BuildContext context) {
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
     return ShowUpAnimation(
       delayStart: const Duration(milliseconds: 3000),
-
       //animationDuration: const Duration(milliseconds: 1000),
       curve: Curves.linear,
       child: Container(
@@ -16,6 +20,7 @@ class GeneralKnowledgeConfirmButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
+            revealTruth(gameProvider);
           },
           style: ElevatedButton.styleFrom(
             primary: Colors.black,
