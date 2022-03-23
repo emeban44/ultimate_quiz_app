@@ -57,6 +57,7 @@ class _GuessingAnswerColumnState extends State<GuessingAnswerColumn> {
               milliseconds:
                   widget.gameProvider.guessingPageIndex == 0 ? 4500 : 2000),
           curve: Curves.easeIn,
+          offset: 0.03,
           //animationDuration: ,
           child: Container(
             margin: const EdgeInsets.only(bottom: 20),

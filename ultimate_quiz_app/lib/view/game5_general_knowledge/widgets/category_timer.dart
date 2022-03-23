@@ -49,7 +49,8 @@ class _GeneralKnowledgeCategoryTimerState
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     Future.delayed(Duration(
-            milliseconds: gameProvider.estimationPageIndex == 0 ? 6000 : 3500))
+            milliseconds:
+                gameProvider.generalKnowledgePageIndex == 0 ? 6000 : 3500))
         .whenComplete(() => startTimer(gameProvider));
     super.initState();
   }
