@@ -7,11 +7,11 @@ class GeneralKnowledgeResultTitleText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 15),
+      margin: const EdgeInsets.only(top: 10),
       child: Text(
         title,
         textAlign: TextAlign.center,
-        style: const TextStyle(fontFamily: 'Signika', fontSize: 20),
+        style: const TextStyle(fontFamily: 'Signika', fontSize: 19),
       ),
     );
   }

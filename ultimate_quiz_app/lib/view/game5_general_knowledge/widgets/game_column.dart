@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
+import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/add_points.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/answer_box.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/category_box.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/category_row.dart';
@@ -10,6 +11,7 @@ import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/chance_to
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/chosen_category_text.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/confirm_button.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/input_box.dart';
+import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/player_username_result.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/question_box.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/question_timer.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/result_title_text.dart';
@@ -28,6 +30,8 @@ class _GeneralKnowledgeGameColumnState
   bool isOpponentChoosingCategory = false;
   bool isCategorySelected = false;
   bool shouldRevealTruth = false;
+  bool shouldRevealAllTruth = false;
+  bool didOpponentSteal = false;
 
   void selectCategory(GameProvider gameProvider) {
     setState(() {
@@ -57,30 +61,24 @@ class _GeneralKnowledgeGameColumnState
                   Column(
                     children: [
                       const SizedBox(height: 5),
-                      const GeneralKnowledgeResultTitleText('Odgovor:'),
+                      const GeneralKnowledgePlayerUsernameResult(
+                          '@bradpitt:', false),
                       GeneralKnowledgeAnswerBox(
-                          'Once Upon a Time in Hollywood', false),
+                          answer: 'Once Upon a Time in Hollywood',
+                          isCorrect: false,
+                          shouldReveal: shouldRevealAllTruth),
                       const GeneralKnowledgeResultTitleText('Tačan odgovor:'),
-                      GeneralKnowledgeAnswerBox('The Revenant', true),
-                      const GeneralKnowledgeResultTitleText(
-                        'Prilika za napad:',
-                      ),
-                      GeneralKnowledgeAnswerBox('The Revenant', false),
-                      ShowUpAnimation(
-                        curve: Curves.easeOut,
-                        animationDuration: const Duration(seconds: 1),
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 0),
-                          child: const Text(
-                            '+4',
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 30,
-                              fontFamily: 'Acme',
-                            ),
-                          ),
-                        ),
-                      ),
+                      GeneralKnowledgeAnswerBox(
+                          answer: 'The Revenant',
+                          isCorrect: true,
+                          shouldReveal: true),
+                      const GeneralKnowledgePlayerUsernameResult(
+                          '@tomcruise', true),
+                      GeneralKnowledgeAnswerBox(
+                          answer: 'The Revenant',
+                          isCorrect: true,
+                          shouldReveal: shouldRevealAllTruth),
+                      GeneraldKnowledgeAddPoints(didOpponentSteal),
                     ],
                   ),
                 if (!shouldRevealTruth)

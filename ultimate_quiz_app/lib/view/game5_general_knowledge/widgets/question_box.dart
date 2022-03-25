@@ -19,16 +19,16 @@ class GeneralKnowledgeQuestionBox extends StatelessWidget {
         padding:
             const EdgeInsets.only(bottom: 12, top: 10, left: 30, right: 30),
         decoration: BoxDecoration(
-          //color: Colors.black,
+          color: Colors.black,
           boxShadow: const [
             BoxShadow(
               color: Colors.blue,
-              spreadRadius: 2,
-              blurRadius: 5,
+              spreadRadius: 1,
+              blurRadius: 2,
             )
           ],
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.white, width: 0.5),
           gradient: LinearGradient(
             colors: [
               Colors.blue.shade900,
@@ -41,8 +41,8 @@ class GeneralKnowledgeQuestionBox extends StatelessWidget {
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontFamily: 'Signika',
-            fontSize: 21,
-            letterSpacing: 0.5,
+            fontSize: 20,
+            letterSpacing: 0.4,
           ),
         ),
       ),
