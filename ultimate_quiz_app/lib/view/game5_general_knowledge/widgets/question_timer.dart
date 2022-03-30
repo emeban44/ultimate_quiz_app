@@ -55,6 +55,7 @@ class _GeneralKnowledgeQuestionTimerState
 
   @override
   void dispose() {
+    print('question timer disposed');
     _timer?.cancel();
     super.dispose();
   }

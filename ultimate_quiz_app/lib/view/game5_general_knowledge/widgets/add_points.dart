@@ -9,13 +9,13 @@ class GeneraldKnowledgeAddPoints extends StatelessWidget {
   Widget build(BuildContext context) {
     return ShowUpAnimation(
       curve: Curves.easeOut,
-      animationDuration: const Duration(seconds: 1),
+      delayStart: Duration(milliseconds: didOpponentSteal ? 4500 : 2500),
       child: Container(
         margin: const EdgeInsets.only(top: 0),
         child: Text(
           didOpponentSteal ? 'Protivnik +4' : '+4',
           style: TextStyle(
-            color: Colors.greenAccent.shade400,
+            color: Colors.greenAccent.shade700,
             fontSize: 25,
             fontFamily: 'Acme',
           ),

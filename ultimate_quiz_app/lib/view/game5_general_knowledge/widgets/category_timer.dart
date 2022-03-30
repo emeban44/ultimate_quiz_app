@@ -31,7 +31,7 @@ class _GeneralKnowledgeCategoryTimerState
         if (percentCounter < 7) {
           percentCounter++;
         }
-        if (countdown == 0 || timer.tick == 10) {
+        if (countdown == 0 || timer.tick == 7) {
           timer.cancel();
           shouldRevealTruth = true;
           //widget.revealEverything();
@@ -57,6 +57,7 @@ class _GeneralKnowledgeCategoryTimerState
 
   @override
   void dispose() {
+    print('category timer disposed');
     _timer?.cancel();
     super.dispose();
   }

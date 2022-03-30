@@ -20,19 +20,20 @@ class GeneralKnowledgeCategoryBox extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7.5),
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Colors.blue.shade900,
-                Colors.pink.shade900,
-              ]),
-              borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: Colors.white),
-              boxShadow: const [
-                BoxShadow(
-                  spreadRadius: 2,
-                  blurRadius: 2,
-                  color: Colors.blue,
-                ),
-              ]),
+            gradient: LinearGradient(colors: [
+              Colors.blue.shade900.withOpacity(1),
+              Colors.pink.shade900.withOpacity(1),
+            ]),
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Colors.white),
+            boxShadow: const [
+              BoxShadow(
+                spreadRadius: 2,
+                blurRadius: 2,
+                color: Colors.blue,
+              ),
+            ],
+          ),
           child: FittedBox(
               child: Text(
             category,

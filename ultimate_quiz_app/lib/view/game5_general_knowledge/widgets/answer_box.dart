@@ -53,7 +53,7 @@ class GeneralKnowledgeAnswerBox extends StatelessWidget {
                     border: Border.all(color: Colors.white),
                     gradient: LinearGradient(
                       colors: [
-                        Colors.redAccent.shade200,
+                        Colors.redAccent.shade700,
                         Colors.redAccent.shade400,
                       ],
                     ),

@@ -32,6 +32,7 @@ class _GeneralKnowledgeGameColumnState
   bool shouldRevealTruth = false;
   bool shouldRevealAllTruth = false;
   bool didOpponentSteal = false;
+  bool attackChance = true;
 
   void selectCategory(GameProvider gameProvider) {
     setState(() {
@@ -42,6 +43,12 @@ class _GeneralKnowledgeGameColumnState
   void revealTruth(GameProvider gameProvider) {
     setState(() {
       shouldRevealTruth = true;
+    });
+  }
+
+  void revealAllTruth(GameProvider gameProvider) {
+    setState(() {
+      shouldRevealAllTruth = true;
     });
   }
 
@@ -61,23 +68,53 @@ class _GeneralKnowledgeGameColumnState
                   Column(
                     children: [
                       const SizedBox(height: 5),
-                      const GeneralKnowledgePlayerUsernameResult(
-                          '@bradpitt:', false),
-                      GeneralKnowledgeAnswerBox(
-                          answer: 'Once Upon a Time in Hollywood',
-                          isCorrect: false,
-                          shouldReveal: shouldRevealAllTruth),
-                      const GeneralKnowledgeResultTitleText('Tačan odgovor:'),
-                      GeneralKnowledgeAnswerBox(
-                          answer: 'The Revenant',
-                          isCorrect: true,
-                          shouldReveal: true),
-                      const GeneralKnowledgePlayerUsernameResult(
-                          '@tomcruise', true),
-                      GeneralKnowledgeAnswerBox(
-                          answer: 'The Revenant',
-                          isCorrect: true,
-                          shouldReveal: shouldRevealAllTruth),
+                      ShowUpAnimation(
+                        delayStart: const Duration(milliseconds: 500),
+                        curve: Curves.easeIn,
+                        child: Column(
+                          children: [
+                            GeneralKnowledgePlayerUsernameResult(
+                                'emeban :', false),
+                            GeneralKnowledgeAnswerBox(
+                                answer: 'Once Upon a Time in Hollywood',
+                                isCorrect: false,
+                                shouldReveal: shouldRevealAllTruth),
+                          ],
+                        ),
+                      ),
+                      ShowUpAnimation(
+                        delayStart: const Duration(milliseconds: 1500),
+                        curve: Curves.easeIn,
+                        child: Column(
+                          children: [
+                            const GeneralKnowledgeResultTitleText(
+                                'Tačan odgovor:'),
+                            GeneralKnowledgeAnswerBox(
+                                answer: 'The Revenant',
+                                isCorrect: true,
+                                shouldReveal: true),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      if (attackChance)
+                        ShowUpAnimation(
+                          delayStart: const Duration(milliseconds: 2500),
+                          curve: Curves.easeIn,
+                          child: Column(
+                            children: [
+                              GeneralKnowledgePlayerUsernameResult(
+                                  'drolesarajevo', true),
+                              GestureDetector(
+                                onTap: () => revealAllTruth(gameProvider),
+                                child: GeneralKnowledgeAnswerBox(
+                                    answer: 'The Revenant',
+                                    isCorrect: true,
+                                    shouldReveal: shouldRevealAllTruth),
+                              ),
+                            ],
+                          ),
+                        ),
                       GeneraldKnowledgeAddPoints(didOpponentSteal),
                     ],
                   ),
@@ -103,7 +140,7 @@ class _GeneralKnowledgeGameColumnState
                           : 1000),
                   animationDuration: const Duration(milliseconds: 1000),
                   child: Container(
-                    margin: const EdgeInsets.only(bottom: 5),
+                    margin: const EdgeInsets.only(top: 12.5, bottom: 5),
                     child: const Text(
                       'PROTIVNIK BIRA:',
                       style: TextStyle(

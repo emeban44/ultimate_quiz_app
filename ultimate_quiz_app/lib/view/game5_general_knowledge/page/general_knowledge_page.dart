@@ -31,7 +31,7 @@ class _GeneralKnowledgeGameViewState extends State<GeneralKnowledgeGameView> {
         Provider.of<GameProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.transparent,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         child: Container(
@@ -44,7 +44,7 @@ class _GeneralKnowledgeGameViewState extends State<GeneralKnowledgeGameView> {
                   child: ShowUpAnimation(
                     child: Container(
                       margin: const EdgeInsets.only(
-                          top: 5, bottom: 15, right: 25, left: 25),
+                          top: 5, bottom: 5, right: 25, left: 25),
                       child: Image.asset('assets/images/opce_znanje_fit.png'),
                     ),
                     delayStart: const Duration(milliseconds: 1250),
@@ -58,7 +58,7 @@ class _GeneralKnowledgeGameViewState extends State<GeneralKnowledgeGameView> {
                   //onTap: () => nextView(),
                   child: Container(
                     margin: const EdgeInsets.only(
-                        top: 5, bottom: 15, right: 25, left: 25),
+                        top: 5, bottom: 5, right: 25, left: 25),
                     child: Image.asset('assets/images/opce_znanje_fit.png'),
                   ),
                 ),
