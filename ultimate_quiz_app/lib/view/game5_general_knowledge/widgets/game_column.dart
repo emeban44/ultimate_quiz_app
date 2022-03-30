@@ -45,7 +45,7 @@ class _GeneralKnowledgeGameColumnState
     setState(() {
       shouldRevealTruth = true;
     });
-    Future.delayed(const Duration(milliseconds: 3500))
+    Future.delayed(const Duration(milliseconds: 3000))
         .then((value) => revealAllTruth(gameProvider));
   }
 
@@ -54,7 +54,7 @@ class _GeneralKnowledgeGameColumnState
       shouldRevealAllTruth = true;
     });
     // reveal attack truth if needed
-    Future.delayed(const Duration(milliseconds: 2500))
+    Future.delayed(const Duration(milliseconds: 2000))
         .then((value) => revealAttackTruthIfNeeded(gameProvider));
   }
 
@@ -115,7 +115,7 @@ class _GeneralKnowledgeGameColumnState
                       const SizedBox(height: 5),
                       if (attackChance)
                         ShowUpAnimation(
-                          delayStart: const Duration(milliseconds: 4500),
+                          delayStart: const Duration(milliseconds: 3500),
                           curve: Curves.linear,
                           offset: 0.05,
                           child: Column(

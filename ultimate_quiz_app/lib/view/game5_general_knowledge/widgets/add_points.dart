@@ -9,7 +9,7 @@ class GeneraldKnowledgeAddPoints extends StatelessWidget {
   Widget build(BuildContext context) {
     return ShowUpAnimation(
       curve: Curves.easeOut,
-      delayStart: Duration(milliseconds: didOpponentSteal ? 6500 : 3500),
+      delayStart: Duration(milliseconds: didOpponentSteal ? 6000 : 3000),
       child: Container(
         margin: const EdgeInsets.only(top: 0),
         child: Text(
