@@ -31,7 +31,8 @@ class _GeneralKnowledgeGameColumnState
   bool isCategorySelected = false;
   bool shouldRevealTruth = false;
   bool shouldRevealAllTruth = false;
-  bool didOpponentSteal = false;
+  bool shouldRevealAttackTrue = false;
+  bool didOpponentSteal = true;
   bool attackChance = true;
 
   void selectCategory(GameProvider gameProvider) {
@@ -44,15 +45,28 @@ class _GeneralKnowledgeGameColumnState
     setState(() {
       shouldRevealTruth = true;
     });
+    Future.delayed(const Duration(milliseconds: 3500))
+        .then((value) => revealAllTruth(gameProvider));
   }
 
   void revealAllTruth(GameProvider gameProvider) {
     setState(() {
       shouldRevealAllTruth = true;
     });
+    // reveal attack truth if needed
+    Future.delayed(const Duration(milliseconds: 2500))
+        .then((value) => revealAttackTruthIfNeeded(gameProvider));
   }
 
-  void confirmAnswer(GameProvider gameProvider) {}
+  void revealAttackTruthIfNeeded(GameProvider gameProvider) {
+    setState(() {
+      shouldRevealAttackTrue = true;
+    });
+  }
+
+  void confirmAnswer(GameProvider gameProvider) {
+    revealTruth(gameProvider);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +84,8 @@ class _GeneralKnowledgeGameColumnState
                       const SizedBox(height: 5),
                       ShowUpAnimation(
                         delayStart: const Duration(milliseconds: 500),
-                        curve: Curves.easeIn,
+                        curve: Curves.linear,
+                        offset: 0.05,
                         child: Column(
                           children: [
                             GeneralKnowledgePlayerUsernameResult(
@@ -84,7 +99,8 @@ class _GeneralKnowledgeGameColumnState
                       ),
                       ShowUpAnimation(
                         delayStart: const Duration(milliseconds: 1500),
-                        curve: Curves.easeIn,
+                        curve: Curves.linear,
+                        offset: 0.05,
                         child: Column(
                           children: [
                             const GeneralKnowledgeResultTitleText(
@@ -99,8 +115,9 @@ class _GeneralKnowledgeGameColumnState
                       const SizedBox(height: 5),
                       if (attackChance)
                         ShowUpAnimation(
-                          delayStart: const Duration(milliseconds: 2500),
-                          curve: Curves.easeIn,
+                          delayStart: const Duration(milliseconds: 4500),
+                          curve: Curves.linear,
+                          offset: 0.05,
                           child: Column(
                             children: [
                               GeneralKnowledgePlayerUsernameResult(
@@ -110,7 +127,7 @@ class _GeneralKnowledgeGameColumnState
                                 child: GeneralKnowledgeAnswerBox(
                                     answer: 'The Revenant',
                                     isCorrect: true,
-                                    shouldReveal: shouldRevealAllTruth),
+                                    shouldReveal: shouldRevealAttackTrue),
                               ),
                             ],
                           ),
