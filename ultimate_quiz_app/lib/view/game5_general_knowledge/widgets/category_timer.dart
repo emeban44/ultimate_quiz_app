@@ -33,9 +33,9 @@ class _GeneralKnowledgeCategoryTimerState
         }
         if (countdown == 0 || timer.tick == 7) {
           timer.cancel();
-          shouldRevealTruth = true;
+          //shouldRevealTruth = true;
           //widget.revealEverything();
-          widget.confirmAnswer(gameProvider);
+          //widget.confirmAnswer(gameProvider);
           gameProvider.game5ShouldDisableSelection = true;
         }
       });
@@ -50,7 +50,7 @@ class _GeneralKnowledgeCategoryTimerState
         Provider.of<GameProvider>(context, listen: false);
     Future.delayed(Duration(
             milliseconds:
-                gameProvider.generalKnowledgePageIndex == 0 ? 6000 : 3500))
+                gameProvider.generalKnowledgePageIndex == 0 ? 5000 : 2500))
         .whenComplete(() => startTimer(gameProvider));
     super.initState();
   }
@@ -69,7 +69,7 @@ class _GeneralKnowledgeCategoryTimerState
     return ShowUpAnimation(
       delayStart: Duration(
           milliseconds:
-              gameProvider.generalKnowledgePageIndex == 0 ? 5500 : 3000),
+              gameProvider.generalKnowledgePageIndex == 0 ? 4500 : 2000),
       curve: Curves.linear,
       child: Container(
         margin: const EdgeInsets.only(top: 60, bottom: 10),

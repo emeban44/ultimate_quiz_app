@@ -58,6 +58,26 @@ class GameProvider extends ChangeNotifier {
   Timer? generalKnowledgeCategoryTimer;
   Timer? generalKnowledgeQuestionTimer;
   List<SortByQuestion> generalKnowledgeQuestions = [];
+  //List<GeneralKnowledgeQuestion> generalKnowledgeQuestions1 = [];
+  bool areYouChoosing = true;
+  bool areYouAttacking = false;
+  bool shouldRevealAttack = true;
+  Map<String, bool> generalKnowledgeCategorySelection = {
+    'filmovi': false,
+    'muzika': false,
+    'geografija': false,
+    'historija': false,
+    'sport': false,
+    'tehnologija': false,
+    'umjetnost': false,
+    'književnost': false,
+    'biologija': false,
+    'nauka': false,
+  };
+  List<String> generalKnowledgeCategories = [];
+  String? selectedCategory;
+  String game5YourAnswer = '';
+  String game5OpponentAnswer = '';
 
   Future<void> fetchOddOneOutQuestions() async {
     final List<OddOneOutQuestion> responseList = [];
@@ -309,11 +329,14 @@ class GameProvider extends ChangeNotifier {
 
   void incrementGeneralKnowledgeIndex() {
     generalKnowledgePageIndex++;
+    areYouChoosing = !areYouChoosing;
     notifyListeners();
   }
 
   void game5ResetSelection() {
     game5SelectedAnswer = 10;
+    game5YourAnswer = '';
+    game5OpponentAnswer = '';
     notifyListeners();
   }
 
@@ -326,6 +349,7 @@ class GameProvider extends ChangeNotifier {
     estimationQuestionIndex = 0;
     sortByPageIndex = 0;
     sortByQuestionIndex = 0;
+    generalKnowledgePageIndex = 0;
     game1ResetSelection();
     game2ResetSelection();
     game3ResetSelection();

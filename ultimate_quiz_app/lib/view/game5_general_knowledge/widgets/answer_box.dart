@@ -12,6 +12,7 @@ class GeneralKnowledgeAnswerBox extends StatelessWidget {
   final bool shouldReveal;
   @override
   Widget build(BuildContext context) {
+    print(answer);
     return ConstrainedBox(
       constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width - 70,
@@ -69,16 +70,13 @@ class GeneralKnowledgeAnswerBox extends StatelessWidget {
                     ],
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(color: Colors.white, width: 0.6),
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.black26,
-                        Colors.black38,
-                      ],
+                    gradient: const LinearGradient(
+                      colors: [Colors.black26, Colors.black38],
                     ),
                   ),
         child: FittedBox(
           child: Text(
-            answer,
+            answer.isEmpty ? ' - ' : answer,
             style: const TextStyle(
               fontFamily: 'Signika',
               fontSize: 23,

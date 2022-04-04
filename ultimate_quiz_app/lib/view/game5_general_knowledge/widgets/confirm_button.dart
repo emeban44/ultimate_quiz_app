@@ -4,9 +4,11 @@ import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
 class GeneralKnowledgeConfirmButton extends StatelessWidget {
-  const GeneralKnowledgeConfirmButton(this.revealTruth, {Key? key})
+  const GeneralKnowledgeConfirmButton(this.revealTruth, this.confirmAnswer,
+      {Key? key})
       : super(key: key);
   final Function(GameProvider) revealTruth;
+  final Function(GameProvider) confirmAnswer;
   @override
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
@@ -20,7 +22,8 @@ class GeneralKnowledgeConfirmButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
-            revealTruth(gameProvider);
+            //revealTruth(gameProvider);
+            confirmAnswer(gameProvider);
           },
           style: ElevatedButton.styleFrom(
             primary: Colors.black,

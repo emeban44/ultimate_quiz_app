@@ -83,7 +83,12 @@ class OddOneOutPage extends StatelessWidget {
                     reverse: false,
                     // onPageChanged: (value) => ,
                     children: [
-                      //GeneralKnowledgeGameView(_pageController),
+                      GeneralKnowledgeGameView(_pageController),
+                      GeneralKnowledgeGameView(_pageController),
+                      GeneralKnowledgeGameView(_pageController),
+                      GeneralKnowledgeGameView(_pageController),
+                      GeneralKnowledgeGameView(_pageController),
+                      GeneralKnowledgeGameView(_pageController),
                       OddOneOutGameView(nextPage, _pageController, 0),
                       OddOneOutGameView(nextPage, _pageController, 1),
                       OddOneOutGameView(nextPage, _pageController, 2),

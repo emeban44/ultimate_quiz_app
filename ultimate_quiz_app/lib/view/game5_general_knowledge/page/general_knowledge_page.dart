@@ -17,9 +17,9 @@ class GeneralKnowledgeGameView extends StatefulWidget {
 
 class _GeneralKnowledgeGameViewState extends State<GeneralKnowledgeGameView> {
   void nextView(GameProvider gameProvider) {
-    Future.delayed(const Duration(seconds: 14)).then((value) {
+    Future.delayed(const Duration(seconds: 4)).then((value) {
       widget._pageController
-          .nextPage(duration: const Duration(seconds: 2), curve: Curves.easeIn);
+          .nextPage(duration: const Duration(seconds: 1), curve: Curves.easeIn);
       gameProvider.incrementGeneralKnowledgeIndex();
       gameProvider.game5ResetSelection();
     });
@@ -62,7 +62,7 @@ class _GeneralKnowledgeGameViewState extends State<GeneralKnowledgeGameView> {
                     child: Image.asset('assets/images/opce_znanje_fit.png'),
                   ),
                 ),
-              const GeneralKnowledgeGameColumn(),
+              GeneralKnowledgeGameColumn(nextView),
             ],
           ),
         ),

@@ -12,13 +12,28 @@ class GeneralKnowledgeCategoryBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
+    final String categoryText =
+        category.substring(0, category.length - 3).toLowerCase();
     return ConstrainedBox(
       constraints: const BoxConstraints(
           minWidth: 150, maxWidth: 150, maxHeight: 40, minHeight: 40),
       child: GestureDetector(
-        onTap: () => selectCategory(gameProvider),
+        onTap: () {
+          if (gameProvider.areYouChoosing == false) {
+            return;
+          }
+          selectCategory(gameProvider);
+          gameProvider.generalKnowledgeCategorySelection[categoryText] = true;
+          gameProvider.selectedCategory = category;
+        },
         child: Opacity(
-          opacity: 0.45,
+          opacity:
+              gameProvider.generalKnowledgeCategorySelection[categoryText] ==
+                      true
+                  ? 0.45
+                  : gameProvider.areYouChoosing == false
+                      ? 0.45
+                      : 1,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7.5),
             decoration: BoxDecoration(

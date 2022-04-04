@@ -3,26 +3,27 @@ import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
-class GeneralKnowledgeChosenCategoryText extends StatelessWidget {
-  const GeneralKnowledgeChosenCategoryText({Key? key}) : super(key: key);
+class GeneralKnowledgeChooseText extends StatelessWidget {
+  const GeneralKnowledgeChooseText({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
     return ShowUpAnimation(
-      delayStart: const Duration(milliseconds: 0),
-      animationDuration: const Duration(milliseconds: 1000),
-      offset: 0.1,
+      curve: Curves.decelerate,
+      offset: -0.2,
       direction: Direction.vertical,
-      curve: Curves.easeIn,
+      delayStart: Duration(
+          milliseconds:
+              gameProvider.generalKnowledgePageIndex == 0 ? 3500 : 1000),
+      animationDuration: const Duration(milliseconds: 1000),
       child: Container(
-        decoration: BoxDecoration(
-            color: Colors.black38, borderRadius: BorderRadius.circular(10)),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-        margin: const EdgeInsets.only(bottom: 15),
+        margin: const EdgeInsets.only(top: 12.5, bottom: 5),
         child: Text(
-          gameProvider.selectedCategory!,
+          gameProvider.areYouChoosing
+              ? 'ODABERI KATEGORIJU:'
+              : 'PROTIVNIK BIRA:',
           style: const TextStyle(
             fontFamily: 'Acme',
             letterSpacing: 0.5,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
@@ -14,12 +15,16 @@ class GeneralKnowledgeCategoryRow extends StatelessWidget {
   final Function(GameProvider) selectCategory;
   @override
   Widget build(BuildContext context) {
+    final GameProvider gameProvider =
+        Provider.of<GameProvider>(context, listen: false);
     return ShowUpAnimation(
       direction: Direction.vertical,
-      curve: Curves.elasticInOut,
-      offset: -0.5,
-      delayStart: const Duration(milliseconds: 2850),
-      animationDuration: const Duration(seconds: 4),
+      curve: Curves.linear,
+      offset: 0.1,
+      delayStart: Duration(
+          milliseconds:
+              gameProvider.generalKnowledgePageIndex == 0 ? 3500 : 1000),
+      animationDuration: const Duration(seconds: 1),
       child: Container(
         margin: const EdgeInsets.only(top: 20),
         child: Row(

@@ -32,6 +32,7 @@ class GeneralKnowledgeInputBox extends StatelessWidget {
         child: TextFormField(
           maxLines: 1,
           maxLength: 35,
+          autocorrect: false,
           controller: controller,
           textAlign: TextAlign.center,
           textCapitalization: TextCapitalization.words,

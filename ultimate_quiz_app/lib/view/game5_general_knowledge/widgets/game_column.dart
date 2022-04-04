@@ -8,6 +8,7 @@ import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/category_
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/category_row.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/category_timer.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/chance_to_steal_points_text.dart';
+import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/choose_text.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/chosen_category_text.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/confirm_button.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/input_box.dart';
@@ -17,8 +18,8 @@ import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/question_
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/result_title_text.dart';
 
 class GeneralKnowledgeGameColumn extends StatefulWidget {
-  const GeneralKnowledgeGameColumn({Key? key}) : super(key: key);
-
+  const GeneralKnowledgeGameColumn(this.nextPage, {Key? key}) : super(key: key);
+  final Function(GameProvider) nextPage;
   @override
   State<GeneralKnowledgeGameColumn> createState() =>
       _GeneralKnowledgeGameColumnState();
@@ -54,17 +55,23 @@ class _GeneralKnowledgeGameColumnState
       shouldRevealAllTruth = true;
     });
     // reveal attack truth if needed
-    Future.delayed(const Duration(milliseconds: 2000))
-        .then((value) => revealAttackTruthIfNeeded(gameProvider));
+    if (gameProvider.shouldRevealAttack) {
+      Future.delayed(const Duration(milliseconds: 2000))
+          .then((value) => revealAttackTruthIfNeeded(gameProvider));
+    } else {
+      widget.nextPage(gameProvider);
+    }
   }
 
   void revealAttackTruthIfNeeded(GameProvider gameProvider) {
     setState(() {
       shouldRevealAttackTrue = true;
     });
+    widget.nextPage(gameProvider);
   }
 
   void confirmAnswer(GameProvider gameProvider) {
+    gameProvider.game5YourAnswer = _inputController.text;
     revealTruth(gameProvider);
   }
 
@@ -76,7 +83,7 @@ class _GeneralKnowledgeGameColumnState
       child: isCategorySelected
           ? Column(
               children: [
-                GeneralKnowledgeChosenCategoryText(),
+                const GeneralKnowledgeChosenCategoryText(),
                 GeneralKnowledgeQuestionBox(),
                 if (shouldRevealTruth)
                   Column(
@@ -91,7 +98,9 @@ class _GeneralKnowledgeGameColumnState
                             GeneralKnowledgePlayerUsernameResult(
                                 'emeban :', false),
                             GeneralKnowledgeAnswerBox(
-                                answer: 'Once Upon a Time in Hollywood',
+                                answer: gameProvider.areYouChoosing == true
+                                    ? gameProvider.game5YourAnswer
+                                    : gameProvider.game5OpponentAnswer,
                                 isCorrect: false,
                                 shouldReveal: shouldRevealAllTruth),
                           ],
@@ -122,13 +131,12 @@ class _GeneralKnowledgeGameColumnState
                             children: [
                               GeneralKnowledgePlayerUsernameResult(
                                   'drolesarajevo', true),
-                              GestureDetector(
-                                onTap: () => revealAllTruth(gameProvider),
-                                child: GeneralKnowledgeAnswerBox(
-                                    answer: 'The Revenant',
-                                    isCorrect: true,
-                                    shouldReveal: shouldRevealAttackTrue),
-                              ),
+                              GeneralKnowledgeAnswerBox(
+                                  answer: gameProvider.areYouChoosing == false
+                                      ? gameProvider.game5YourAnswer
+                                      : gameProvider.game5OpponentAnswer,
+                                  isCorrect: true,
+                                  shouldReveal: shouldRevealAttackTrue),
                             ],
                           ),
                         ),
@@ -138,36 +146,16 @@ class _GeneralKnowledgeGameColumnState
                 if (!shouldRevealTruth)
                   GeneralKnowledgeInputBox(_inputController),
                 if (!shouldRevealTruth)
-                  GeneralKnowledgeConfirmButton(revealTruth),
+                  GeneralKnowledgeConfirmButton(revealTruth, confirmAnswer),
                 if (!shouldRevealTruth)
                   GeneralKnowledgeQuestionTimer(confirmAnswer),
-                if (!shouldRevealTruth)
+                if (!shouldRevealTruth && gameProvider.areYouChoosing == false)
                   const GeneralKnowledgeChanceToStealPoints(),
               ],
             )
           : Column(
               children: [
-                ShowUpAnimation(
-                  curve: Curves.decelerate,
-                  offset: -0.5,
-                  direction: Direction.vertical,
-                  delayStart: Duration(
-                      milliseconds: gameProvider.generalKnowledgePageIndex == 0
-                          ? 3500
-                          : 1000),
-                  animationDuration: const Duration(milliseconds: 1000),
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 12.5, bottom: 5),
-                    child: const Text(
-                      'PROTIVNIK BIRA:',
-                      style: TextStyle(
-                        fontFamily: 'Acme',
-                        letterSpacing: 0.5,
-                        fontSize: 25,
-                      ),
-                    ),
-                  ),
-                ),
+                const GeneralKnowledgeChooseText(),
                 GeneralKnowledgeCategoryRow(
                     'FILMOVI 🍿', 'GEOGRAFIJA 🌍', selectCategory),
                 GeneralKnowledgeCategoryRow(
