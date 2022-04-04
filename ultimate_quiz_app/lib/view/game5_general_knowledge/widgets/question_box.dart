@@ -37,7 +37,7 @@ class GeneralKnowledgeQuestionBox extends StatelessWidget {
           ),
         ), //width: 250,
         child: Text(
-          'Za koji film je Leonardo DiCaprio osvojio Oskara 2014. godine?',
+          gameProvider.game5SelectedQuestion!.question!,
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontFamily: 'Signika',

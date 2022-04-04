@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ultimate_quiz_app/models/estimation_question.dart';
+import 'package:ultimate_quiz_app/models/general_knowledge_question.dart';
 import 'package:ultimate_quiz_app/models/guess_question.dart';
 import 'package:ultimate_quiz_app/models/odd_one_out_question.dart';
 import 'package:ultimate_quiz_app/models/sort_by_question.dart';
@@ -57,8 +58,70 @@ class GameProvider extends ChangeNotifier {
   bool game5ShouldDisableSelection = true;
   Timer? generalKnowledgeCategoryTimer;
   Timer? generalKnowledgeQuestionTimer;
-  List<SortByQuestion> generalKnowledgeQuestions = [];
-  //List<GeneralKnowledgeQuestion> generalKnowledgeQuestions1 = [];
+  //List<SortByQuestion> generalKnowledgeQuestions = [];
+  List<GeneralKnowledgeQuestion> generalKnowledgeQuestions = [
+    GeneralKnowledgeQuestion(
+      category: 'filmovi',
+      acceptedAnswers: ['Revenant'],
+      correctAnswer: 'The Revenant',
+      question: 'Za koji film je Leonardo DiCaprio dobio Oskara 2016. godine?',
+    ),
+    GeneralKnowledgeQuestion(
+      category: 'historija',
+      acceptedAnswers: ['Napoleon'],
+      correctAnswer: 'Napoleon Bonaparte',
+      question: 'Koji vladar je imao kompleks niskog rasta?',
+    ),
+    GeneralKnowledgeQuestion(
+      category: 'muzika',
+      acceptedAnswers: ['Astroworld'],
+      correctAnswer: 'Astroworld',
+      question:
+          'Naziv rekordnog albuma kojeg je izbacio Travis Scott 2018. godine?',
+    ),
+    GeneralKnowledgeQuestion(
+      category: 'biologija',
+      acceptedAnswers: ['Čarls Darvin'],
+      correctAnswer: 'Charles Darwin',
+      question: 'Ko je osnovao teoriju evolucije?',
+    ),
+    GeneralKnowledgeQuestion(
+      category: 'tehnologija',
+      acceptedAnswers: ['Mark Zukerberg'],
+      correctAnswer: 'Mark Zuckerberg',
+      question: 'Kako se zove osnivač Facebook-a?',
+    ),
+    GeneralKnowledgeQuestion(
+      category: 'geografija',
+      acceptedAnswers: ['Mogadisu'],
+      correctAnswer: 'Mogadišu',
+      question: 'Glavni grad Somalije?',
+    ),
+    GeneralKnowledgeQuestion(
+      category: 'književnost',
+      acceptedAnswers: ['Jadnici'],
+      correctAnswer: 'Jadnici',
+      question: 'Kako se zvao prvi roman koji je napisao Dostojevski?',
+    ),
+    GeneralKnowledgeQuestion(
+      category: 'umjetnost',
+      acceptedAnswers: ['Dali'],
+      correctAnswer: 'Salvador Dali',
+      question: 'Koji poznati umjetnik je imao želju upoznati Sigmunda Freuda?',
+    ),
+    GeneralKnowledgeQuestion(
+      category: 'sport',
+      acceptedAnswers: ['Alcaraz'],
+      correctAnswer: 'Carlos Alcaraz',
+      question: 'Najmlađi osvajač ATP Miamia u historiji je?',
+    ),
+    GeneralKnowledgeQuestion(
+      category: 'nauka',
+      acceptedAnswers: ['om'],
+      correctAnswer: 'Om',
+      question: 'Naziv mjerne jedinice za otpor je?',
+    ),
+  ];
   bool areYouChoosing = true;
   bool areYouAttacking = false;
   bool shouldRevealAttack = true;
@@ -76,6 +139,7 @@ class GameProvider extends ChangeNotifier {
   };
   List<String> generalKnowledgeCategories = [];
   String? selectedCategory;
+  GeneralKnowledgeQuestion? game5SelectedQuestion;
   String game5YourAnswer = '';
   String game5OpponentAnswer = '';
 

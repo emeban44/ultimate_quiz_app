@@ -115,7 +115,8 @@ class _GeneralKnowledgeGameColumnState
                             const GeneralKnowledgeResultTitleText(
                                 'Tačan odgovor:'),
                             GeneralKnowledgeAnswerBox(
-                                answer: 'The Revenant',
+                                answer: gameProvider
+                                    .game5SelectedQuestion!.correctAnswer!,
                                 isCorrect: true,
                                 shouldReveal: true),
                           ],
@@ -161,7 +162,7 @@ class _GeneralKnowledgeGameColumnState
                 GeneralKnowledgeCategoryRow(
                     'MUZIKA 🎶', 'NAUKA 💡', selectCategory),
                 GeneralKnowledgeCategoryRow(
-                    'HISTORIJA ⏳', 'BIOLOGIJA 🦠', selectCategory),
+                    'HISTORIJA ⌛️', 'BIOLOGIJA 🦠', selectCategory),
                 GeneralKnowledgeCategoryRow(
                     'SPORT 🎾', 'KNJIŽEVNOST 📖', selectCategory),
                 GeneralKnowledgeCategoryRow(

@@ -19,12 +19,17 @@ class GeneralKnowledgeCategoryBox extends StatelessWidget {
           minWidth: 150, maxWidth: 150, maxHeight: 40, minHeight: 40),
       child: GestureDetector(
         onTap: () {
-          if (gameProvider.areYouChoosing == false) {
+          if (gameProvider.areYouChoosing == false ||
+              gameProvider.generalKnowledgeCategorySelection[categoryText] ==
+                  true) {
             return;
           }
           selectCategory(gameProvider);
           gameProvider.generalKnowledgeCategorySelection[categoryText] = true;
           gameProvider.selectedCategory = category;
+          gameProvider.game5SelectedQuestion = gameProvider
+              .generalKnowledgeQuestions
+              .firstWhere((element) => element.category == categoryText);
         },
         child: Opacity(
           opacity:
