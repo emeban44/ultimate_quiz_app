@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
+import 'package:ultimate_quiz_app/utils/category_emojis.dart';
 
 class GeneralKnowledgeCategoryBox extends StatelessWidget {
   const GeneralKnowledgeCategoryBox(this.category, this.selectCategory,
@@ -20,21 +21,20 @@ class GeneralKnowledgeCategoryBox extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           if (gameProvider.areYouChoosing == false ||
-              gameProvider.generalKnowledgeCategorySelection[categoryText] ==
+              gameProvider.generalKnowledgeCategorySelection[category] ==
                   true) {
             return;
           }
           selectCategory(gameProvider);
-          gameProvider.generalKnowledgeCategorySelection[categoryText] = true;
+          gameProvider.generalKnowledgeCategorySelection[category] = true;
           gameProvider.selectedCategory = category;
           gameProvider.game5SelectedQuestion = gameProvider
               .generalKnowledgeQuestions
-              .firstWhere((element) => element.category == categoryText);
+              .firstWhere((element) => element.category == category);
         },
         child: Opacity(
           opacity:
-              gameProvider.generalKnowledgeCategorySelection[categoryText] ==
-                      true
+              gameProvider.generalKnowledgeCategorySelection[category] == true
                   ? 0.45
                   : gameProvider.areYouChoosing == false
                       ? 0.45
@@ -58,7 +58,7 @@ class GeneralKnowledgeCategoryBox extends StatelessWidget {
             ),
             child: FittedBox(
                 child: Text(
-              category,
+              getCategoryEmojiTitle(category),
               style: const TextStyle(
                   fontFamily: 'Signika', fontWeight: FontWeight.bold),
             )),

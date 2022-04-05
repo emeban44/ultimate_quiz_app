@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
+import 'package:ultimate_quiz_app/utils/category_emojis.dart';
 
 class GeneralKnowledgeChosenCategoryText extends StatelessWidget {
   const GeneralKnowledgeChosenCategoryText({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class GeneralKnowledgeChosenCategoryText extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         margin: const EdgeInsets.only(bottom: 15),
         child: Text(
-          gameProvider.selectedCategory!,
+          getCategoryEmojiTitle(gameProvider.selectedCategory!),
           style: const TextStyle(
             fontFamily: 'Acme',
             letterSpacing: 0.5,

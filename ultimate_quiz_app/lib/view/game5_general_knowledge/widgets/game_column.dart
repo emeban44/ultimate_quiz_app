@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
+import 'package:ultimate_quiz_app/utils/category_emojis.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/add_points.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/answer_box.dart';
 import 'package:ultimate_quiz_app/view/game5_general_knowledge/widgets/category_box.dart';
@@ -37,6 +40,28 @@ class _GeneralKnowledgeGameColumnState
   bool attackChance = true;
 
   void selectCategory(GameProvider gameProvider) {
+    setState(() {
+      isCategorySelected = true;
+    });
+  }
+
+  void selectRandomCategory(GameProvider gameProvider) {
+    Map<String, bool> availableCategories = {};
+    gameProvider.generalKnowledgeCategorySelection.forEach((key, value) {
+      availableCategories.putIfAbsent(key, () => value);
+    });
+
+    availableCategories.removeWhere((key, value) => value == true);
+
+    List<String> keys = availableCategories.keys.toList();
+    int randomCategoryIndex = Random().nextInt(keys.length);
+
+    gameProvider.generalKnowledgeCategorySelection[keys[randomCategoryIndex]] =
+        true;
+    gameProvider.selectedCategory = keys[randomCategoryIndex];
+    gameProvider.game5SelectedQuestion = gameProvider.generalKnowledgeQuestions
+        .firstWhere((element) => element.category == keys[randomCategoryIndex]);
+
     setState(() {
       isCategorySelected = true;
     });
@@ -158,16 +183,15 @@ class _GeneralKnowledgeGameColumnState
               children: [
                 const GeneralKnowledgeChooseText(),
                 GeneralKnowledgeCategoryRow(
-                    'FILMOVI 🍿', 'GEOGRAFIJA 🌍', selectCategory),
+                    'filmovi', 'geografija', selectCategory),
+                GeneralKnowledgeCategoryRow('muzika', 'nauka', selectCategory),
                 GeneralKnowledgeCategoryRow(
-                    'MUZIKA 🎶', 'NAUKA 💡', selectCategory),
+                    'historija', 'biologija', selectCategory),
                 GeneralKnowledgeCategoryRow(
-                    'HISTORIJA ⌛️', 'BIOLOGIJA 🦠', selectCategory),
+                    'sport', 'književnost', selectCategory),
                 GeneralKnowledgeCategoryRow(
-                    'SPORT 🎾', 'KNJIŽEVNOST 📖', selectCategory),
-                GeneralKnowledgeCategoryRow(
-                    'TEHNOLOGIJA 🖥', 'UMJETNOST 🎨', selectCategory),
-                GeneralKnowledgeCategoryTimer(confirmAnswer),
+                    'tehnologija', 'umjetnost', selectCategory),
+                GeneralKnowledgeCategoryTimer(selectRandomCategory),
               ],
             ),
     );

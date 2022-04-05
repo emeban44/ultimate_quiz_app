@@ -7,9 +7,9 @@ import 'package:show_up_animation/show_up_animation.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 
 class GeneralKnowledgeCategoryTimer extends StatefulWidget {
-  const GeneralKnowledgeCategoryTimer(this.confirmAnswer, {Key? key})
+  const GeneralKnowledgeCategoryTimer(this.selectRandomCategory, {Key? key})
       : super(key: key);
-  final Function(GameProvider) confirmAnswer;
+  final Function(GameProvider) selectRandomCategory;
   @override
   _GeneralKnowledgeCategoryTimerState createState() =>
       _GeneralKnowledgeCategoryTimerState();
@@ -35,7 +35,7 @@ class _GeneralKnowledgeCategoryTimerState
           timer.cancel();
           //shouldRevealTruth = true;
           //widget.revealEverything();
-          //widget.confirmAnswer(gameProvider);
+          widget.selectRandomCategory(gameProvider);
           gameProvider.game5ShouldDisableSelection = true;
         }
       });
