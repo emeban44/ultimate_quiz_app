@@ -12,6 +12,10 @@ import 'package:ultimate_quiz_app/models/odd_one_out_question.dart';
 import 'package:ultimate_quiz_app/models/sort_by_question.dart';
 
 class GameProvider extends ChangeNotifier {
+  // PLAYER INFO
+  String yourUsername = 'emeban';
+  String opponentUsername = 'drolesarajevo';
+
   //ODD ONE OUT - GAME 1
   int oddOneOutPageIndex = 0;
   int oddOneOutQuestionIndex = 0;
@@ -19,10 +23,6 @@ class GameProvider extends ChangeNotifier {
   bool game1ShouldDisableSelection = true;
   List<OddOneOutQuestion> oddOneOutQuestions = [];
   Timer? oddOneOutTimer;
-
-  // void startOddOneOutTimer() {
-  //   oddOneOutTimer = Timer.periodic(const Duration(seconds: 5), (timer) {});
-  // }
 
   //GUESSING - GAME 2
   int guessingPageIndex = 0;
@@ -141,7 +141,7 @@ class GameProvider extends ChangeNotifier {
   String? selectedCategory;
   GeneralKnowledgeQuestion? game5SelectedQuestion;
   String game5YourAnswer = '';
-  String game5OpponentAnswer = '';
+  String game5OpponentAnswer = 'Alcaraz';
 
   Future<void> fetchOddOneOutQuestions() async {
     final List<OddOneOutQuestion> responseList = [];
@@ -400,8 +400,25 @@ class GameProvider extends ChangeNotifier {
   void game5ResetSelection() {
     game5SelectedAnswer = 10;
     game5YourAnswer = '';
-    game5OpponentAnswer = '';
+    //game5OpponentAnswer = 'Alcaraz';
     notifyListeners();
+  }
+
+  bool isGame5AnswerCorrect(String answer) {
+    bool isCorrect = false;
+    final String correctAnswer = generalKnowledgeQuestions
+        .firstWhere((element) => element.category == selectedCategory)
+        .correctAnswer!;
+    final List<String> acceptedAnswers = generalKnowledgeQuestions
+        .firstWhere((element) => selectedCategory == element.category)
+        .acceptedAnswers!;
+    if (answer == correctAnswer) {
+      isCorrect = true;
+    }
+    if (acceptedAnswers.contains(answer)) {
+      isCorrect = true;
+    }
+    return isCorrect;
   }
 
   void resetCounters() {

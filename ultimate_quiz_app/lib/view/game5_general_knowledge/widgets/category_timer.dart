@@ -31,7 +31,7 @@ class _GeneralKnowledgeCategoryTimerState
         if (percentCounter < 7) {
           percentCounter++;
         }
-        if (countdown == 0 || timer.tick == 7) {
+        if (countdown == -1 || timer.tick == 8) {
           timer.cancel();
           //shouldRevealTruth = true;
           //widget.revealEverything();

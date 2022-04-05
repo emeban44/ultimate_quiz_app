@@ -17,7 +17,7 @@ class GeneralKnowledgeGameView extends StatefulWidget {
 
 class _GeneralKnowledgeGameViewState extends State<GeneralKnowledgeGameView> {
   void nextView(GameProvider gameProvider) {
-    Future.delayed(const Duration(seconds: 4)).then((value) {
+    Future.delayed(const Duration(seconds: 3)).then((value) {
       widget._pageController
           .nextPage(duration: const Duration(seconds: 1), curve: Curves.easeIn);
       gameProvider.incrementGeneralKnowledgeIndex();

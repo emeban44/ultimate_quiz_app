@@ -12,7 +12,6 @@ class GeneralKnowledgeAnswerBox extends StatelessWidget {
   final bool shouldReveal;
   @override
   Widget build(BuildContext context) {
-    print(answer);
     return ConstrainedBox(
       constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width - 70,

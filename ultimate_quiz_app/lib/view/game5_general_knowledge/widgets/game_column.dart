@@ -36,8 +36,9 @@ class _GeneralKnowledgeGameColumnState
   bool shouldRevealTruth = false;
   bool shouldRevealAllTruth = false;
   bool shouldRevealAttackTrue = false;
-  bool didOpponentSteal = true;
-  bool attackChance = true;
+  bool didSteal = false;
+  bool didOpponentSteal = false;
+  bool attackChance = false;
 
   void selectCategory(GameProvider gameProvider) {
     setState(() {
@@ -76,12 +77,20 @@ class _GeneralKnowledgeGameColumnState
   }
 
   void revealAllTruth(GameProvider gameProvider) {
+    if (gameProvider.areYouChoosing &&
+        !gameProvider.isGame5AnswerCorrect(gameProvider.game5YourAnswer)) {
+      attackChance = true;
+    }
+    if (!gameProvider.areYouChoosing &&
+        !gameProvider.isGame5AnswerCorrect(gameProvider.game5OpponentAnswer)) {
+      attackChance = true;
+    }
     setState(() {
       shouldRevealAllTruth = true;
     });
     // reveal attack truth if needed
-    if (gameProvider.shouldRevealAttack) {
-      Future.delayed(const Duration(milliseconds: 2000))
+    if (attackChance) {
+      Future.delayed(const Duration(milliseconds: 1500))
           .then((value) => revealAttackTruthIfNeeded(gameProvider));
     } else {
       widget.nextPage(gameProvider);
@@ -89,6 +98,17 @@ class _GeneralKnowledgeGameColumnState
   }
 
   void revealAttackTruthIfNeeded(GameProvider gameProvider) {
+    if (!gameProvider.isGame5AnswerCorrect(gameProvider.game5YourAnswer) &&
+        gameProvider.isGame5AnswerCorrect(gameProvider.game5OpponentAnswer) &&
+        gameProvider.areYouChoosing) {
+      didSteal = true;
+      didOpponentSteal = true;
+    } else if (!gameProvider
+            .isGame5AnswerCorrect(gameProvider.game5OpponentAnswer) &&
+        gameProvider.isGame5AnswerCorrect(gameProvider.game5YourAnswer) &&
+        !gameProvider.areYouChoosing) {
+      didSteal = true;
+    }
     setState(() {
       shouldRevealAttackTrue = true;
     });
@@ -121,12 +141,18 @@ class _GeneralKnowledgeGameColumnState
                         child: Column(
                           children: [
                             GeneralKnowledgePlayerUsernameResult(
-                                'emeban :', false),
+                                gameProvider.areYouChoosing == true
+                                    ? gameProvider.yourUsername + ' :'
+                                    : gameProvider.opponentUsername + ' :',
+                                false),
                             GeneralKnowledgeAnswerBox(
                                 answer: gameProvider.areYouChoosing == true
                                     ? gameProvider.game5YourAnswer
                                     : gameProvider.game5OpponentAnswer,
-                                isCorrect: false,
+                                isCorrect: gameProvider.isGame5AnswerCorrect(
+                                    gameProvider.areYouChoosing == true
+                                        ? gameProvider.game5YourAnswer
+                                        : gameProvider.game5OpponentAnswer),
                                 shouldReveal: shouldRevealAllTruth),
                           ],
                         ),
@@ -150,23 +176,45 @@ class _GeneralKnowledgeGameColumnState
                       const SizedBox(height: 5),
                       if (attackChance)
                         ShowUpAnimation(
-                          delayStart: const Duration(milliseconds: 3500),
+                          delayStart: const Duration(milliseconds: 0),
                           curve: Curves.linear,
                           offset: 0.05,
                           child: Column(
                             children: [
                               GeneralKnowledgePlayerUsernameResult(
-                                  'drolesarajevo', true),
+                                  gameProvider.areYouChoosing == false
+                                      ? gameProvider.yourUsername + ' :'
+                                      : gameProvider.opponentUsername + ' :',
+                                  true),
                               GeneralKnowledgeAnswerBox(
                                   answer: gameProvider.areYouChoosing == false
                                       ? gameProvider.game5YourAnswer
                                       : gameProvider.game5OpponentAnswer,
-                                  isCorrect: true,
+                                  isCorrect: gameProvider.isGame5AnswerCorrect(
+                                      gameProvider.areYouChoosing == false
+                                          ? gameProvider.game5YourAnswer
+                                          : gameProvider.game5OpponentAnswer),
                                   shouldReveal: shouldRevealAttackTrue),
                             ],
                           ),
                         ),
-                      GeneraldKnowledgeAddPoints(didOpponentSteal),
+                      if (attackChance && didOpponentSteal)
+                        GeneraldKnowledgeAddPoints(didOpponentSteal)
+                      else if (shouldRevealTruth &&
+                          gameProvider.isGame5AnswerCorrect(
+                              gameProvider.game5YourAnswer) &&
+                          gameProvider.areYouChoosing)
+                        const GeneraldKnowledgeAddPoints(false)
+                      else if (shouldRevealTruth &&
+                          gameProvider.isGame5AnswerCorrect(
+                              gameProvider.game5YourAnswer) &&
+                          !gameProvider.isGame5AnswerCorrect(
+                              gameProvider.game5OpponentAnswer) &&
+                          !gameProvider.areYouChoosing)
+                        const GeneraldKnowledgeAddPoints(
+                          false,
+                          didYouSteal: true,
+                        ),
                     ],
                   ),
                 if (!shouldRevealTruth)

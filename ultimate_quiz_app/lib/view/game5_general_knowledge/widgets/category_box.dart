@@ -13,8 +13,6 @@ class GeneralKnowledgeCategoryBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final GameProvider gameProvider =
         Provider.of<GameProvider>(context, listen: false);
-    final String categoryText =
-        category.substring(0, category.length - 3).toLowerCase();
     return ConstrainedBox(
       constraints: const BoxConstraints(
           minWidth: 150, maxWidth: 150, maxHeight: 40, minHeight: 40),

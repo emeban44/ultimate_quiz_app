@@ -31,7 +31,7 @@ class _GeneralKnowledgeQuestionTimerState
         if (percentCounter < 25) {
           percentCounter++;
         }
-        if (countdown == 0 || timer.tick == 25) {
+        if (countdown == -1 || timer.tick == 26) {
           timer.cancel();
           shouldRevealTruth = true;
           //widget.revealEverything();
