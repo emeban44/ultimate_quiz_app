@@ -60,9 +60,11 @@ class _GeneralKnowledgeGameColumnState
     gameProvider.generalKnowledgeCategorySelection[keys[randomCategoryIndex]] =
         true;
     gameProvider.selectedCategory = keys[randomCategoryIndex];
+    // gameProvider.game5SelectedQuestion = gameProvider.generalKnowledgeQuestions
+    //     .firstWhere((element) => element.category == keys[randomCategoryIndex]);
     gameProvider.game5SelectedQuestion = gameProvider.generalKnowledgeQuestions
-        .firstWhere((element) => element.category == keys[randomCategoryIndex]);
-
+        .firstWhere((element) => element.category == 'sport');
+    gameProvider.selectedCategory = 'sport';
     setState(() {
       isCategorySelected = true;
     });
@@ -93,7 +95,7 @@ class _GeneralKnowledgeGameColumnState
       Future.delayed(const Duration(milliseconds: 1500))
           .then((value) => revealAttackTruthIfNeeded(gameProvider));
     } else {
-      widget.nextPage(gameProvider);
+      //widget.nextPage(gameProvider);
     }
   }
 
@@ -112,7 +114,7 @@ class _GeneralKnowledgeGameColumnState
     setState(() {
       shouldRevealAttackTrue = true;
     });
-    widget.nextPage(gameProvider);
+    // widget.nextPage(gameProvider);
   }
 
   void confirmAnswer(GameProvider gameProvider) {
@@ -200,6 +202,14 @@ class _GeneralKnowledgeGameColumnState
                         ),
                       if (attackChance && didOpponentSteal)
                         GeneraldKnowledgeAddPoints(didOpponentSteal)
+                      else if (shouldRevealTruth &&
+                          gameProvider.isGame5AnswerCorrect(
+                              gameProvider.game5OpponentAnswer) &&
+                          !gameProvider.areYouChoosing)
+                        const GeneraldKnowledgeAddPoints(
+                          false,
+                          didOpponentWinRegular: true,
+                        )
                       else if (shouldRevealTruth &&
                           gameProvider.isGame5AnswerCorrect(
                               gameProvider.game5YourAnswer) &&
