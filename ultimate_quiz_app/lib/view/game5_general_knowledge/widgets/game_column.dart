@@ -60,11 +60,9 @@ class _GeneralKnowledgeGameColumnState
     gameProvider.generalKnowledgeCategorySelection[keys[randomCategoryIndex]] =
         true;
     gameProvider.selectedCategory = keys[randomCategoryIndex];
-    // gameProvider.game5SelectedQuestion = gameProvider.generalKnowledgeQuestions
-    //     .firstWhere((element) => element.category == keys[randomCategoryIndex]);
     gameProvider.game5SelectedQuestion = gameProvider.generalKnowledgeQuestions
-        .firstWhere((element) => element.category == 'sport');
-    gameProvider.selectedCategory = 'sport';
+        .firstWhere((element) => element.category == keys[randomCategoryIndex]);
+
     setState(() {
       isCategorySelected = true;
     });
@@ -95,7 +93,7 @@ class _GeneralKnowledgeGameColumnState
       Future.delayed(const Duration(milliseconds: 1500))
           .then((value) => revealAttackTruthIfNeeded(gameProvider));
     } else {
-      //widget.nextPage(gameProvider);
+      widget.nextPage(gameProvider);
     }
   }
 
@@ -114,7 +112,7 @@ class _GeneralKnowledgeGameColumnState
     setState(() {
       shouldRevealAttackTrue = true;
     });
-    // widget.nextPage(gameProvider);
+    widget.nextPage(gameProvider);
   }
 
   void confirmAnswer(GameProvider gameProvider) {

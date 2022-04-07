@@ -44,73 +44,75 @@ class OddOneOutPage extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Scaffold(
-          backgroundColor: Colors.black54,
-          body: Container(
-            //padding: const EdgeInsets.only(top: 60, left: 25, right: 25),
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                      left: 25, right: 25, top: 60, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      PlayerScoreBox(
-                          imageURL:
-                              'https://d19p4plxg0u3gz.cloudfront.net/22485164-82a1-11ec-9502-3a30aa7aa275/original.jpeg',
-                          isHomePlayer: true,
-                          score: 30,
-                          username: '@bradpitt'),
-                      const Text(
-                        'vs',
-                        style: TextStyle(fontFamily: 'Acme'),
-                      ),
-                      PlayerScoreBox(
-                          imageURL:
-                              'https://celebrity.fm/wp-content/uploads/2021/08/What-is-Tom-Cruise-worth-29-732x549.jpg',
-                          isHomePlayer: false,
-                          score: 25,
-                          username: '@tomcruise'),
-                    ],
+        child: WillPopScope(
+          onWillPop: () async => false,
+          child: Scaffold(
+            backgroundColor: Colors.black54,
+            body: Container(
+              //padding: const EdgeInsets.only(top: 60, left: 25, right: 25),
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                        left: 25, right: 25, top: 60, bottom: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        PlayerScoreBox(
+                            imageURL:
+                                'https://d19p4plxg0u3gz.cloudfront.net/22485164-82a1-11ec-9502-3a30aa7aa275/original.jpeg',
+                            isHomePlayer: true,
+                            score: 30,
+                            username: '@bradpitt'),
+                        const Text(
+                          'vs',
+                          style: TextStyle(fontFamily: 'Acme'),
+                        ),
+                        PlayerScoreBox(
+                            imageURL:
+                                'https://celebrity.fm/wp-content/uploads/2021/08/What-is-Tom-Cruise-worth-29-732x549.jpg',
+                            isHomePlayer: false,
+                            score: 25,
+                            username: '@tomcruise'),
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: PageView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: _pageController,
-                    restorationId: 'game',
-                    reverse: false,
-                    // onPageChanged: (value) => ,
-                    children: [
-                      GeneralKnowledgeGameView(_pageController),
-                      GeneralKnowledgeGameView(_pageController),
-                      GeneralKnowledgeGameView(_pageController),
-                      GeneralKnowledgeGameView(_pageController),
-                      GeneralKnowledgeGameView(_pageController),
-                      GeneralKnowledgeGameView(_pageController),
-                      OddOneOutGameView(nextPage, _pageController, 0),
-                      OddOneOutGameView(nextPage, _pageController, 1),
-                      OddOneOutGameView(nextPage, _pageController, 2),
-                      OddOneOutGameView(nextPage, _pageController, 3),
-                      OddOneOutGameView(nextPage, _pageController, 4),
-                      GuessingGameView(pageController: _pageController),
-                      GuessingGameView(pageController: _pageController),
-                      GuessingGameView(pageController: _pageController),
-                      GuessingGameView(pageController: _pageController),
-                      GuessingGameView(pageController: _pageController),
-                      EstimationGameView(pageController: _pageController),
-                      EstimationGameView(pageController: _pageController),
-                      EstimationGameView(pageController: _pageController),
-                      EstimationGameView(pageController: _pageController),
-                      EstimationGameView(pageController: _pageController),
-                      SortByGameView(_pageController),
-                      SortByGameView(_pageController),
-                      GeneralKnowledgeGameView(_pageController),
-                    ],
+                  Expanded(
+                    child: PageView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: _pageController,
+                      restorationId: 'game',
+                      reverse: false,
+                      // onPageChanged: (value) => ,
+                      children: [
+                        OddOneOutGameView(nextPage, _pageController, 0),
+                        OddOneOutGameView(nextPage, _pageController, 1),
+                        OddOneOutGameView(nextPage, _pageController, 2),
+                        OddOneOutGameView(nextPage, _pageController, 3),
+                        OddOneOutGameView(nextPage, _pageController, 4),
+                        GuessingGameView(pageController: _pageController),
+                        GuessingGameView(pageController: _pageController),
+                        GuessingGameView(pageController: _pageController),
+                        GuessingGameView(pageController: _pageController),
+                        GuessingGameView(pageController: _pageController),
+                        EstimationGameView(pageController: _pageController),
+                        EstimationGameView(pageController: _pageController),
+                        EstimationGameView(pageController: _pageController),
+                        EstimationGameView(pageController: _pageController),
+                        EstimationGameView(pageController: _pageController),
+                        SortByGameView(_pageController),
+                        SortByGameView(_pageController),
+                        GeneralKnowledgeGameView(_pageController),
+                        GeneralKnowledgeGameView(_pageController),
+                        GeneralKnowledgeGameView(_pageController),
+                        GeneralKnowledgeGameView(_pageController),
+                        GeneralKnowledgeGameView(_pageController),
+                        GeneralKnowledgeGameView(_pageController),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

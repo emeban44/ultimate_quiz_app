@@ -9,6 +9,7 @@ import 'package:ultimate_quiz_app/view/home/page/profile_tab_body.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/bottom_nav_bar.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/home_drawer.dart';
 import 'package:ultimate_quiz_app/view/splash/splash_screen.dart';
+import 'package:ultimate_quiz_app/widgets/loader_dialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,6 +19,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    final AuthProvider authProvider =
+        Provider.of<AuthProvider>(context, listen: false);
+    Future<void>(() {
+      showLoaderDialog(context);
+    });
+    fetchAllRequiredData(authProvider).whenComplete(() {
+      Navigator.pop(context);
+    });
+    super.initState();
+  }
+
+  Future<void> fetchAllRequiredData(AuthProvider authProvider) async {
+    await Future.wait([authProvider.fetchUserData()]);
+  }
+
   final List<Widget> _pages = [
     HomeTabBody(),
     PlayTabBody(),
@@ -67,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () async {
                   await authProvider.logoutUser();
                 },
-                icon: Icon(Icons.settings))
+                icon: const Icon(Icons.settings))
           ],
         ),
         //body: _pages[_selectedPageIndex],

@@ -22,10 +22,10 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _loginKey = GlobalKey<FormState>();
 
   final TextEditingController _email =
-      TextEditingController(text: 'emeban.97@gmail.com');
+      TextEditingController(text: 'haris.mehovic@gmail.com');
   final TextEditingController _username = TextEditingController();
   final TextEditingController _password =
-      TextEditingController(text: "12345678");
+      TextEditingController(text: "sarajevo1");
   final TextEditingController _confirmPass = TextEditingController();
 
   bool didClickLogin = false;
@@ -86,11 +86,12 @@ class _LoginPageState extends State<LoginPage> {
                         if (isSignUp)
                           MainButton(
                               buttonTitle: 'REGISTRUJ SE',
-                              onPress: () => tryRegisterUser(authProvider))
+                              onPress: () async =>
+                                  tryRegisterUser(authProvider))
                         else
                           MainButton(
                             buttonTitle: 'PRIJAVI SE',
-                            onPress: () => tryLoginUser(authProvider),
+                            onPress: () async => tryLoginUser(authProvider),
                           ),
                         if (isSignUp)
                           SecondaryButton(
@@ -131,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
           });
       try {
         await authProvider
-            .registerUser(_email.text, _password.text)
+            .registerUser(_email.text, _password.text, _username.text)
             .whenComplete(() => Navigator.pop(context));
       } on FirebaseAuthException catch (error) {
         log(error.message!);

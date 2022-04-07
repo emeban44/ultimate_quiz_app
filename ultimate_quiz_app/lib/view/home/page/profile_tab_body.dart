@@ -2,6 +2,8 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/providers/auth_provider.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_avatar.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_rank_widget.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_username.dart';
@@ -53,6 +55,8 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthProvider authProvider =
+        Provider.of<AuthProvider>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
       child: Column(
@@ -77,7 +81,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ProfileUsername('@biom237'),
+                        ProfileUsername('@${authProvider.username}'),
                         GestureDetector(
                           onTap: () => showRankSystem(context),
                           child: ProfileRankWidget(

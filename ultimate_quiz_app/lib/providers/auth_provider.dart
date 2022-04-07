@@ -1,12 +1,16 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AuthProvider extends ChangeNotifier {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<void> registerUser(String email, String password) async {
+  String? username;
+
+  Future<void> registerUser(
+      String email, String password, String username) async {
     try {
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -14,7 +18,25 @@ class AuthProvider extends ChangeNotifier {
         log(value.toString());
         sendEmailVerification(auth.currentUser!);
       });
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(auth.currentUser?.uid)
+          .set({'username': username});
     } on FirebaseAuthException {
+      rethrow;
+    }
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      final userResponse = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(auth.currentUser?.uid)
+          .get();
+      log(userResponse.data().toString());
+      username = userResponse.data()?['username'];
+      notifyListeners();
+    } on FirebaseException {
       rethrow;
     }
   }

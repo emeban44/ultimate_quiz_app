@@ -13,3 +13,13 @@ class LoaderDialog extends StatelessWidget {
     );
   }
 }
+
+void showLoaderDialog(BuildContext context,
+    {bool isBarrierDismissible = false}) {
+  showDialog(
+      context: context,
+      barrierDismissible: isBarrierDismissible,
+      builder: (context) {
+        return LoaderDialog();
+      });
+}
