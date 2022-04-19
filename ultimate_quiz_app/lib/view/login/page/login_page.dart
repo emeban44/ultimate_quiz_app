@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
       showDialog(
           context: context,
           builder: (context) {
-            return LoaderDialog();
+            return const LoaderDialog();
           });
       try {
         await authProvider
@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
       showDialog(
           context: context,
           builder: (context) {
-            return LoaderDialog();
+            return const LoaderDialog();
           });
       try {
         await authProvider
@@ -198,6 +198,7 @@ class _LoginPageState extends State<LoginPage> {
         onChange: didClickLogin
             ? (promjena) {
                 _loginKey.currentState!.validate();
+                return null;
               }
             : null,
         validation: (username) {

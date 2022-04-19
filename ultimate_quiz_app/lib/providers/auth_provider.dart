@@ -3,11 +3,13 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ultimate_quiz_app/models/user_profile.dart';
 
 class AuthProvider extends ChangeNotifier {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   String? username;
+  UserProfile? userProfile;
 
   Future<void> registerUser(
       String email, String password, String username) async {
@@ -34,7 +36,10 @@ class AuthProvider extends ChangeNotifier {
           .doc(auth.currentUser?.uid)
           .get();
       log(userResponse.data().toString());
-      username = userResponse.data()?['username'];
+      final UserProfile userProfileResponse =
+          UserProfile.fromJson(userResponse.data());
+      print(userProfileResponse.username! + 'img');
+      userProfile = userProfileResponse;
       notifyListeners();
     } on FirebaseException {
       rethrow;

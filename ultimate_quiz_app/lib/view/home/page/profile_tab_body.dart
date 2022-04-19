@@ -81,7 +81,8 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ProfileUsername('@${authProvider.username}'),
+                        ProfileUsername(
+                            '@${authProvider.userProfile?.username}'),
                         GestureDetector(
                           onTap: () => showRankSystem(context),
                           child: ProfileRankWidget(
