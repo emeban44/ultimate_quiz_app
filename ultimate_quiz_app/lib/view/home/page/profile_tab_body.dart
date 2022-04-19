@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -23,18 +24,24 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
 
   Uint8List? imageBytes;
 
-  void selectImage(AuthProvider authProvider) async {
+  void selectImage(AuthProvider authProvider, BuildContext context) async {
     final ImagePicker _picker = ImagePicker();
     final XFile? file = await _picker.pickImage(source: ImageSource.gallery);
 
     if (file != null) {
-      final Uint8List bytes = await file.readAsBytes();
-      print(file.path);
-      await authProvider.uploadProfileImage(file.path);
-      setState(() {
-        didTakePicture = true;
-        imageBytes = bytes;
-      });
+      try {
+        Future<void>(() {
+          showLoaderDialogWithText(context, text: 'Učitavanje...');
+        });
+        await authProvider
+            .uploadProfileImage(file.path)
+            .whenComplete(() => Navigator.pop(context));
+        setState(() {
+          didTakePicture = true;
+        });
+      } on FirebaseException catch (error) {
+        showErrorDialog(context, error: error.message!);
+      }
     }
   }
 
@@ -72,7 +79,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
-                  onTap: () => selectImage(authProvider),
+                  onTap: () => selectImage(authProvider, context),
                   child: ProfileAvatar(didTakePicture, imageBytes,
                       isInTestPhase: true),
                 ),

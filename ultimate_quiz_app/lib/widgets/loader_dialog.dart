@@ -22,6 +22,25 @@ void showLoaderDialog(BuildContext context,
       context: context,
       barrierDismissible: isBarrierDismissible,
       builder: (context) {
-        return LoaderDialog();
+        return const LoaderDialog();
+      });
+}
+
+void showLoaderDialogWithText(BuildContext context,
+    {bool isBarrierDismissible = false, required String text}) {
+  showDialog(
+      context: context,
+      barrierDismissible: isBarrierDismissible,
+      builder: (context) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const LoaderDialog(),
+            Text(
+              text,
+              style: const TextStyle(fontFamily: 'Signika', fontSize: 17.5),
+            ),
+          ],
+        );
       });
 }

@@ -56,7 +56,15 @@ class AuthProvider extends ChangeNotifier {
           .ref()
           .child(storagePath)
           //.child('profilne/drole')
-          .putFile(File(filePath));
+          .putFile(File(filePath))
+          .then((p0) async {
+        final String imageCloudPath = await p0.ref.getDownloadURL();
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(auth.currentUser!.uid)
+            .update({'image_url': imageCloudPath});
+        userProfile!.imageURL = imageCloudPath;
+      });
     } on FirebaseException {
       rethrow;
     }

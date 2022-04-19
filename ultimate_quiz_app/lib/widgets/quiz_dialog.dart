@@ -52,3 +52,13 @@ class QuizErrorDialog extends StatelessWidget {
     );
   }
 }
+
+void showErrorDialog(BuildContext context,
+    {bool isBarrierDismissible = false, required String error}) {
+  showDialog(
+      context: context,
+      barrierDismissible: isBarrierDismissible,
+      builder: (context) {
+        return QuizErrorDialog(error);
+      });
+}
