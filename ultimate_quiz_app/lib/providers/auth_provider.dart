@@ -1,8 +1,11 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ultimate_quiz_app/models/user_profile.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -41,6 +44,19 @@ class AuthProvider extends ChangeNotifier {
       print(userProfileResponse.username! + 'img');
       userProfile = userProfileResponse;
       notifyListeners();
+    } on FirebaseException {
+      rethrow;
+    }
+  }
+
+  Future<void> uploadProfileImage(String filePath) async {
+    try {
+      final String storagePath = 'profilne/${userProfile!.username!}';
+      await FirebaseStorage.instance
+          .ref()
+          .child(storagePath)
+          //.child('profilne/drole')
+          .putFile(File(filePath));
     } on FirebaseException {
       rethrow;
     }

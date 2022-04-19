@@ -23,12 +23,14 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
 
   Uint8List? imageBytes;
 
-  void selectImage() async {
+  void selectImage(AuthProvider authProvider) async {
     final ImagePicker _picker = ImagePicker();
-    final XFile? file = await _picker.pickImage(source: ImageSource.camera);
+    final XFile? file = await _picker.pickImage(source: ImageSource.gallery);
 
     if (file != null) {
       final Uint8List bytes = await file.readAsBytes();
+      print(file.path);
+      await authProvider.uploadProfileImage(file.path);
       setState(() {
         didTakePicture = true;
         imageBytes = bytes;
@@ -70,7 +72,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
-                  onTap: selectImage,
+                  onTap: () => selectImage(authProvider),
                   child: ProfileAvatar(didTakePicture, imageBytes,
                       isInTestPhase: true),
                 ),
