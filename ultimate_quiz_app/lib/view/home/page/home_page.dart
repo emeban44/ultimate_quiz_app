@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/main.dart';
 import 'package:ultimate_quiz_app/providers/auth_provider.dart';
+import 'package:ultimate_quiz_app/utils/shared_preferences.dart';
 import 'package:ultimate_quiz_app/view/home/page/home_tab_body.dart';
 import 'package:ultimate_quiz_app/view/home/page/play_tab_body.dart';
 import 'package:ultimate_quiz_app/view/home/page/profile_tab_body.dart';
@@ -23,9 +26,12 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     final AuthProvider authProvider =
         Provider.of<AuthProvider>(context, listen: false);
-    Future<void>(() {
-      showLoaderDialog(context);
-    });
+    if (sharedPrefs.getAuthenticated!) {
+      print('...loading home page...');
+      Future<void>(() {
+        showLoaderDialog(context);
+      });
+    }
     fetchAllRequiredData(authProvider).whenComplete(() {
       Navigator.pop(context);
     });
@@ -33,7 +39,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchAllRequiredData(AuthProvider authProvider) async {
-    await Future.wait([authProvider.fetchUserData()]);
+    try {
+      await Future.wait([authProvider.fetchUserData()]);
+      sharedPrefs.setAuthenticated(true);
+    } on FirebaseException catch (error) {
+      log(error.message!);
+    }
   }
 
   final List<Widget> _pages = [

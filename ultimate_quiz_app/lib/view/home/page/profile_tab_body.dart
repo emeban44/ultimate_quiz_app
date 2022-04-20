@@ -9,6 +9,7 @@ import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_avatar.dart'
 import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_rank_widget.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_username.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/profile/rank_system_dialog.dart';
+import 'package:ultimate_quiz_app/view/home/widgets/profile/select_image_dialog.dart';
 import 'package:ultimate_quiz_app/widgets/loader_dialog.dart';
 import 'package:ultimate_quiz_app/widgets/quiz_dialog.dart';
 
@@ -27,7 +28,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
   void selectImage(AuthProvider authProvider, BuildContext context) async {
     final ImagePicker _picker = ImagePicker();
     final XFile? file = await _picker.pickImage(source: ImageSource.gallery);
-
+    // showImagePickerDialog(context);
     if (file != null) {
       try {
         Future<void>(() {

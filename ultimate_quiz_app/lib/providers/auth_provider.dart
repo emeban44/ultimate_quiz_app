@@ -13,6 +13,7 @@ class AuthProvider extends ChangeNotifier {
 
   String? username;
   UserProfile? userProfile;
+  bool isAuthenticated = false;
 
   Future<void> registerUser(
       String email, String password, String username) async {

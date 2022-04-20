@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/main.dart';
 import 'package:ultimate_quiz_app/providers/auth_provider.dart';
 import 'package:ultimate_quiz_app/view/login/widgets/forgot_password_button.dart';
 import 'package:ultimate_quiz_app/view/login/widgets/hig_logo.dart';
@@ -43,7 +44,16 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void initState() {
+    final AuthProvider authProvider =
+        Provider.of<AuthProvider>(context, listen: false);
+    sharedPrefs.setAuthenticated(false);
+    super.initState();
+  }
+
+  @override
   void dispose() {
+    //Navigator.pop(context);
     super.dispose();
   }
 
@@ -133,7 +143,12 @@ class _LoginPageState extends State<LoginPage> {
       try {
         await authProvider
             .registerUser(_email.text, _password.text, _username.text)
-            .whenComplete(() => Navigator.pop(context));
+            .whenComplete(() {
+          // if (mounted) {
+          Navigator.of(context, rootNavigator: true).pop();
+          // }
+          //Navigator.pop(context);
+        });
       } on FirebaseAuthException catch (error) {
         log(error.message!);
         showDialog(
@@ -161,7 +176,9 @@ class _LoginPageState extends State<LoginPage> {
         await authProvider
             .loginUser(_email.text, _password.text)
             .whenComplete(() {
-          Navigator.pop(context);
+          // Navigator.of(context, rootNavigator: true).pop();
+
+          //Navigator.pop(context);
         });
       } on FirebaseAuthException catch (error) {
         log(error.message!);

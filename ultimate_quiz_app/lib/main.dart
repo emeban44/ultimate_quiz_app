@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:ultimate_quiz_app/providers/auth_provider.dart';
 import 'package:ultimate_quiz_app/routes/route_generator.dart';
 import 'package:ultimate_quiz_app/theme/theme_data.dart';
+import 'package:ultimate_quiz_app/utils/shared_preferences.dart';
 import 'package:ultimate_quiz_app/view/game1_odd_one_out/page/odd_one_out_page.dart';
 import 'package:ultimate_quiz_app/view/game_page_view/pages/games_page_view.dart';
 import 'package:ultimate_quiz_app/view/home/page/home_page.dart';
@@ -13,9 +14,10 @@ import 'package:ultimate_quiz_app/view/login/page/login_page.dart';
 
 import 'view/splash/splash_screen.dart';
 
+final sharedPrefs = SharedPrefs();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await sharedPrefs.init();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarBrightness: Brightness.dark,
     statusBarIconBrightness: Brightness.dark,
