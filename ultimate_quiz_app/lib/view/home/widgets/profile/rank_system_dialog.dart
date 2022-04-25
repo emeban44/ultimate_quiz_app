@@ -3,16 +3,26 @@ import 'package:ultimate_quiz_app/view/home/widgets/profile/dialog_rank_box.dart
 import 'package:ultimate_quiz_app/view/home/widgets/profile/rank_icon_text_row.dart';
 
 class RankSystemDialog extends StatelessWidget {
+  const RankSystemDialog({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       insetPadding: const EdgeInsets.symmetric(horizontal: 22.5),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         height: MediaQuery.of(context).size.height - 200,
         padding: const EdgeInsets.all(10),
         width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.blue.shade50, Colors.blue.shade100],
+          ),
+        ),
         //width: 200,
         child: SingleChildScrollView(
           physics: const ClampingScrollPhysics(),

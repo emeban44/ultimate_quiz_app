@@ -25,11 +25,14 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
 
   Uint8List? imageBytes;
 
-  void selectImage(AuthProvider authProvider, BuildContext context) async {
+  void selectImage(AuthProvider authProvider, bool isCamera) async {
+    //Navigator.pop(context);
     final ImagePicker _picker = ImagePicker();
-    final XFile? file = await _picker.pickImage(source: ImageSource.gallery);
-    // showImagePickerDialog(context);
+    final XFile? file = await _picker.pickImage(
+        source: isCamera ? ImageSource.camera : ImageSource.gallery);
+    //showImagePickerDialog(context, authProvider);
     if (file != null) {
+      Navigator.pop(context);
       try {
         Future<void>(() {
           showLoaderDialogWithText(context, text: 'Učitavanje...');
@@ -80,7 +83,9 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
-                  onTap: () => selectImage(authProvider, context),
+                  //onTap: () => selectImage(authProvider, context,),
+                  onTap: () =>
+                      showImagePickerDialog(context, authProvider, selectImage),
                   child: ProfileAvatar(didTakePicture, imageBytes,
                       isInTestPhase: true),
                 ),

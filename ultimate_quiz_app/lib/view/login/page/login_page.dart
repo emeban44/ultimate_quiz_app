@@ -145,12 +145,13 @@ class _LoginPageState extends State<LoginPage> {
             .registerUser(_email.text, _password.text, _username.text)
             .whenComplete(() {
           // if (mounted) {
-          Navigator.of(context, rootNavigator: true).pop();
+          //Navigator.of(context, rootNavigator: true).pop();
           // }
           //Navigator.pop(context);
         });
       } on FirebaseAuthException catch (error) {
         log(error.message!);
+        Navigator.pop(context);
         showDialog(
           context: context,
           builder: (context) => QuizErrorDialog(error.message!),
@@ -182,6 +183,7 @@ class _LoginPageState extends State<LoginPage> {
         });
       } on FirebaseAuthException catch (error) {
         log(error.message!);
+        Navigator.pop(context);
         showDialog(
           context: context,
           builder: (context) => QuizErrorDialog(error.message!),
