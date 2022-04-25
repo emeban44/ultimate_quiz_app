@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProfileUsername extends StatelessWidget {
-  ProfileUsername(this.username, {this.gameStartLobby = false});
+  const ProfileUsername(this.username, {Key? key, this.gameStartLobby = false})
+      : super(key: key);
   final String username;
   final bool gameStartLobby;
   @override
@@ -16,7 +17,7 @@ class ProfileUsername extends StatelessWidget {
       child: Text(
         username,
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontFamily: 'Acme',
           fontWeight: FontWeight.w500,

@@ -62,10 +62,12 @@ class PlayerScoreBox extends StatelessWidget {
                       borderRadius: BorderRadius.circular(1000),
                       child: CachedNetworkImage(
                         imageUrl: imageURL,
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.cover,
+                        errorWidget: (context, value, error) =>
+                            Image.asset('assets/images/home_center_play.jpg'),
                         filterQuality: FilterQuality.high,
                         placeholder: (context, url) =>
-                            Image.asset('assets/images/strucnjak.png'),
+                            Image.asset('assets/images/home_center_play.jpg'),
                       ),
                     ),
                   ),

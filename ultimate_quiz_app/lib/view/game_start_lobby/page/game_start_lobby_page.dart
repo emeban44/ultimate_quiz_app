@@ -14,6 +14,8 @@ import 'package:ultimate_quiz_app/widgets/loader_dialog.dart';
 class GameStartLobbyPage extends StatefulWidget {
   static const String routeName = '/game-start-lobby';
 
+  const GameStartLobbyPage({Key? key}) : super(key: key);
+
   @override
   State<GameStartLobbyPage> createState() => _GameStartLobbyPageState();
 }

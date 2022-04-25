@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ultimate_quiz_app/providers/auth_provider.dart';
 import 'package:ultimate_quiz_app/view/home/page/profile_tab_body.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_avatar.dart';
 import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_rank_widget.dart';
@@ -7,6 +9,8 @@ import 'package:ultimate_quiz_app/view/home/widgets/profile/profile_username.dar
 class PlayerLobbyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final AuthProvider authProvider =
+        Provider.of<AuthProvider>(context, listen: false);
     return Container(
       child: Column(
         children: [
@@ -18,7 +22,7 @@ class PlayerLobbyCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 75,
                   width: 75,
                   child: ProfileAvatar(
@@ -34,7 +38,9 @@ class PlayerLobbyCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ProfileUsername('@biom237', gameStartLobby: true),
+                        ProfileUsername(
+                            '@' + authProvider.userProfile!.username!,
+                            gameStartLobby: true),
                         GestureDetector(
                           onTap: () => showRankSystem(context),
                           child: Container(

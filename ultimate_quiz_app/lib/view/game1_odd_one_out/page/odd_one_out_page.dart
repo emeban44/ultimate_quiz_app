@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
+import 'package:ultimate_quiz_app/providers/auth_provider.dart';
 import 'package:ultimate_quiz_app/providers/game_provider.dart';
 import 'package:ultimate_quiz_app/view/game1_odd_one_out/page/odd_one_out_game_view.dart';
 import 'package:ultimate_quiz_app/view/game2_guessing/pages/guessing_game_view.dart';
@@ -34,6 +36,8 @@ class OddOneOutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthProvider authProvider =
+        Provider.of<AuthProvider>(context, listen: false);
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -59,11 +63,11 @@ class OddOneOutPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         PlayerScoreBox(
-                            imageURL:
-                                'https://d19p4plxg0u3gz.cloudfront.net/22485164-82a1-11ec-9502-3a30aa7aa275/original.jpeg',
-                            isHomePlayer: true,
-                            score: 30,
-                            username: '@bradpitt'),
+                          imageURL: authProvider.userProfile!.imageURL!,
+                          isHomePlayer: true,
+                          score: 30,
+                          username: '@' + authProvider.userProfile!.username!,
+                        ),
                         const Text(
                           'vs',
                           style: TextStyle(fontFamily: 'Acme'),
