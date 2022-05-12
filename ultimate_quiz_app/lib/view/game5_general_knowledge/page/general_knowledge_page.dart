@@ -51,6 +51,7 @@ class _GeneralKnowledgeGameViewState extends State<GeneralKnowledgeGameView> {
                     animationDuration: const Duration(seconds: 3),
                     curve: Curves.decelerate,
                     direction: Direction.vertical,
+                    
                   ),
                 )
               else

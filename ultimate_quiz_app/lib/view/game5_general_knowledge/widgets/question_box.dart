@@ -6,8 +6,7 @@ import 'package:ultimate_quiz_app/providers/game_provider.dart';
 class GeneralKnowledgeQuestionBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final GameProvider gameProvider =
-        Provider.of<GameProvider>(context, listen: false);
+    final GameProvider gameProvider = Provider.of<GameProvider>(context, listen: false);
     return ShowUpAnimation(
       delayStart: const Duration(milliseconds: 1000),
       animationDuration: const Duration(milliseconds: 1000),
@@ -16,8 +15,7 @@ class GeneralKnowledgeQuestionBox extends StatelessWidget {
       //animationDuration: const Duration(milliseconds: 1000),
       child: Container(
         margin: const EdgeInsets.only(left: 30, right: 30, bottom: 0),
-        padding:
-            const EdgeInsets.only(bottom: 12, top: 10, left: 30, right: 30),
+        padding: const EdgeInsets.only(bottom: 10, top: 10, left: 30, right: 30),
         decoration: BoxDecoration(
           color: Colors.black,
           boxShadow: const [

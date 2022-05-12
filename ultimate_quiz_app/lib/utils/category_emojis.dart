@@ -9,7 +9,7 @@ String getCategoryEmojiTitle(String category) {
     case 'biologija':
       return 'BIOLOGIJA 🦠';
     case 'književnost':
-      return 'KNJIŽEVNOST 📖';
+      return 'KNJIZEVNOST 📖';
     case 'umjetnost':
       return 'UMJETNOST 🎨';
     case 'sport':
