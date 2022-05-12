@@ -27,17 +27,11 @@ class PlayTabBody extends StatelessWidget {
                 ),
                 RichText(
                   text: TextSpan(
-                    style: TextStyle(fontFamily: 'Retrolight', fontSize: 17),
+                    style: const TextStyle(fontFamily: 'Retrolight', fontSize: 17),
                     children: [
-                      TextSpan(
-                          text: 'KO NE ZNA, ',
-                          style: TextStyle(color: Colors.blue.shade300)),
-                      TextSpan(
-                          text: 'ZNAT',
-                          style: TextStyle(color: Colors.pinkAccent.shade100)),
-                      TextSpan(
-                          text: ' CE POSLIJE',
-                          style: TextStyle(color: Colors.greenAccent)),
+                      TextSpan(text: 'KO NE ZNA, ', style: TextStyle(color: Colors.blue.shade300)),
+                      TextSpan(text: 'ZNAT', style: TextStyle(color: Colors.pinkAccent.shade100)),
+                      const TextSpan(text: ' CE POSLIJE', style: TextStyle(color: Colors.greenAccent)),
                     ],
                   ),
                 ),
@@ -53,8 +47,7 @@ class PlayTabBody extends StatelessWidget {
                   Navigator.pushNamed(context, ClassicStartPage.routeName);
                 }),
                 PlayButton('RANKED', () async {
-                  await FirebaseAnalytics.instance
-                      .logEvent(name: 'EMPA PROBAO NESTO');
+                  await FirebaseAnalytics.instance.logEvent(name: 'EMPA PROBAO NESTO');
                 }),
                 PlayButton('MINI IGRE', () {}),
               ],

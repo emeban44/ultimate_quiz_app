@@ -28,8 +28,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
   void selectImage(AuthProvider authProvider, bool isCamera) async {
     //Navigator.pop(context);
     final ImagePicker _picker = ImagePicker();
-    final XFile? file = await _picker.pickImage(
-        source: isCamera ? ImageSource.camera : ImageSource.gallery);
+    final XFile? file = await _picker.pickImage(source: isCamera ? ImageSource.camera : ImageSource.gallery);
     //showImagePickerDialog(context, authProvider);
     if (file != null) {
       Navigator.pop(context);
@@ -37,9 +36,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
         Future<void>(() {
           showLoaderDialogWithText(context, text: 'Učitavanje...');
         });
-        await authProvider
-            .uploadProfileImage(file.path)
-            .whenComplete(() => Navigator.pop(context));
+        await authProvider.uploadProfileImage(file.path).whenComplete(() => Navigator.pop(context));
         setState(() {
           didTakePicture = true;
         });
@@ -68,8 +65,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthProvider authProvider =
-        Provider.of<AuthProvider>(context, listen: false);
+    final AuthProvider authProvider = Provider.of<AuthProvider>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
       child: Column(
@@ -84,10 +80,8 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
               children: [
                 GestureDetector(
                   //onTap: () => selectImage(authProvider, context,),
-                  onTap: () =>
-                      showImagePickerDialog(context, authProvider, selectImage),
-                  child: ProfileAvatar(didTakePicture, imageBytes,
-                      isInTestPhase: true),
+                  onTap: () => showImagePickerDialog(context, authProvider, selectImage),
+                  child: ProfileAvatar(didTakePicture, imageBytes, isInTestPhase: true),
                 ),
                 Expanded(
                   child: Padding(
@@ -96,12 +90,10 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ProfileUsername(
-                            '@${authProvider.userProfile?.username}'),
+                        ProfileUsername('@${authProvider.userProfile?.username}'),
                         GestureDetector(
                           onTap: () => showRankSystem(context),
-                          child: ProfileRankWidget(
-                              rank: 'platinum', rankLevel: '1'),
+                          child: ProfileRankWidget(rank: 'platinum', rankLevel: '1'),
                         ),
                       ],
                     ),
@@ -118,8 +110,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
                 _statRowWidget(stat: '123 🏆', title: 'Broj pobjeda:'),
                 _statRowWidget(title: 'Procenat pobjeda:', stat: '57/💯'),
                 _statRowWidget(title: 'Broj vezanih pobjeda:', stat: '7 🔥'),
-                _statRowWidget(
-                    title: 'Favorit kategorija:', stat: 'Filmovi 🎬'),
+                _statRowWidget(title: 'Favorit kategorija:', stat: 'Filmovi 🎬'),
               ],
             ),
           ),
@@ -136,6 +127,14 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(12),
       border: Border.all(color: Colors.white, width: 0.6),
+      boxShadow: <BoxShadow>[
+        BoxShadow(
+          color: Colors.blue.shade900,
+          blurRadius: 5,
+          spreadRadius: 1,
+          offset: Offset(0, 0),
+        )
+      ],
       gradient: LinearGradient(colors: [
         Colors.pink.shade900,
         Colors.blue.shade900,
@@ -176,10 +175,7 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
           _statTitle(title),
           Row(
             children: [
-              if (title == 'Favorit kategorija:')
-                _actualStat(stat, true)
-              else
-                _actualStat(stat),
+              if (title == 'Favorit kategorija:') _actualStat(stat, true) else _actualStat(stat),
               // Icon(
               //   Icons.accessibility_sharp,
               //   color: Colors.yellow.shade700,
@@ -193,8 +189,5 @@ class _ProfileTabBodyState extends State<ProfileTabBody> {
 }
 
 void showRankSystem(BuildContext ctx) {
-  showDialog(
-      context: ctx,
-      barrierDismissible: true,
-      builder: (context) => RankSystemDialog());
+  showDialog(context: ctx, barrierDismissible: true, builder: (context) => RankSystemDialog());
 }
